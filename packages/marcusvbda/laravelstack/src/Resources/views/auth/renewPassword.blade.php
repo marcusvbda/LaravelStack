@@ -1,5 +1,5 @@
 @extends("laravelstack::templates.default")
-@section('title',"Login")
+@section('title',"Change your password")
 @section('body')
     <div class="container">
         <div class="d-flex justify-content-center h-100 pt-5">
@@ -9,7 +9,7 @@
                     <div class="card-header">Change your password</div>
                     <div class="card-body">
                         @include("laravelstack::templates.alerts")
-                        <form class="needs-validation" novalidate method="POST" action="{{route('laravelstack.setPassword',['token'=>$token])}}">
+                        <form class="needs-validation" novalidate method="POST" action="{{route('laravelstack.setPassword',['token'=>$token])}}" onsubmit='$(".overlay-loader").show()'>
                             @csrf
                             <div class="form-group">
                                 <input class="form-control @if($errors->has('password')) is-invalid @endif"  placeholder="Password" name="password" type="password" >
@@ -27,7 +27,8 @@
                                     </div>
                                 @endif
                             </div>
-                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Set new password">
+                            <button class="btn btn-lg btn-success btn-block" type="submit">Set new password</button>
+
                         </form>
                     </div>
                 </div>

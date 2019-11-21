@@ -8,7 +8,7 @@
                     <div class="card-header">Sign in</div>
                     <div class="card-body">
                         @include("laravelstack::templates.alerts")
-                        <form class="needs-validation" novalidate method="POST" action="{{route('laravelstack.signin')}}">
+                        <form class="needs-validation" novalidate method="POST" action="{{route('laravelstack.signin')}}" onsubmit='$(".overlay-loader").show()'>
                             @csrf
                             <div class="form-group">
                                 <input class="form-control @if($errors->has('email')) is-invalid @endif" value="{{old('email')}}" placeholder="E-mail" name="email">
@@ -29,7 +29,7 @@
                             <div class="checkbox">
                                 <label><input @if(old("remember")) checked @endif name="remember" type="checkbox" value="Remember Me"> Remember Me</label>
                             </div>
-                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+                            <button class="btn btn-lg btn-success btn-block" type="submit">Login</button>
                         </form>
                         <div class="text-center">Don't have an account ? <a href="{{route('laravelstack.signup')}}">Create your account</a></div>
                         <div class="text-center"><a href="{{route('laravelstack.forgetMyPassword')}}">Forget my password</a></div>

@@ -1,5 +1,5 @@
 @extends("laravelstack::templates.default")
-@section('title',"Login")
+@section('title',"Sign up")
 @section('body')
     <div class="container">
         <div class="d-flex justify-content-center h-100 pt-5">
@@ -9,7 +9,7 @@
                     <div class="card-header">Sign up</div>
                     <div class="card-body">
                         @include("laravelstack::templates.alerts")
-                        <form class="needs-validation" novalidate method="POST" action="{{route('laravelstack.createUser')}}">
+                        <form class="needs-validation" novalidate method="POST" action="{{route('laravelstack.createUser')}}" onsubmit='$(".overlay-loader").show()'>
                             @csrf
                             <div class="form-group">
                                  <input class="form-control @if($errors->has('name')) is-invalid @endif" value="{{old('name')}}" placeholder="Name" name="name" type="text">
@@ -43,7 +43,7 @@
                                     </div>
                                 @endif
                             </div>
-                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Create account">
+                            <button class="btn btn-lg btn-success btn-block" type="submit">Create account</button>
                         </form>
                     </div>
                 </div>
