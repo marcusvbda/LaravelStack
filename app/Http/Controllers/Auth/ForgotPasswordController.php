@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\SendMail;
+use App\Services\Messages;
 use App\User;
 use Auth;
 
@@ -23,12 +24,12 @@ class ForgotPasswordController extends Controller
         $link = route("auth.forgot_my_password.renew", ["token" => $user->recovery_token]);
         $appName = Config("app.name");
         $html = "
-            <p>Hello {$user->name},</p>
-            <p>Forgot your password ? No problem! </p>
-            <pClick the link below to register a new password.</p>
+            <p>Olá {$user->name},</p>
+            <p>Esqueceu sua senha ? Sem problemas! </p>
+            <p>Clique no link abaixo e renove-a</p>
             <a href='{$link}' target='_BLANK'>{$link}</a>
             <p style='margin-top:30px'>Thank you, {$appName}";
-        SendMail::to($user->email, "Renew your password", $html);
+        SendMail::to($user->email, "Renove sua senha", $html);
         $user->save();
     }
 
@@ -40,7 +41,8 @@ class ForgotPasswordController extends Controller
         ]);
         $user = User::where("email", $request["email"])->first();
         $this->sendRecoveryEmail($user);
-        return redirect(route("auth.login.index"))->with(['type' => "success", 'message' => "An email has been sent, check your inbox"])->withInput(["email" => $user->email]);
+        Messages::send("success", "Um email com o processidemento de renovação de senha foi enviado, verifique seu inbox");
+        return ["success" => true, "route" => route("auth.login.index")];
     }
 
     public function renewPassword($token)
@@ -61,6 +63,7 @@ class ForgotPasswordController extends Controller
         $user->recovery_token = null;
         $user->password = bcrypt($request["password"]);
         $user->save();
-        return redirect(route("auth.login.index"))->with(['type' => "success", 'message' => "Your password was changed succesfully !!"])->withInput(["email" => $user->email]);
+        Messages::send("success", "Sua senha foi alterada com sucesso !!");
+        return ["success" => true, "route" => route("auth.login.index")];
     }
 }

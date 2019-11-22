@@ -1,29 +1,16 @@
 @extends("templates.default")
-@section('title',"Forget my password")
+@section('title',"Esqueci a senha")
 @section('body')
-    <div class="container">
-        <div class="d-flex justify-content-center h-100 pt-5">
-            <div class="col-md-5 col-sm-12">
-                <div>Go back to <a href="{{route('auth.login.index')}}">Login</a></div>
-                <div class="card">
-                    <div class="card-header">Forget my password</div>
-                    <div class="card-body">
-                        @include("templates.alerts")
-                        <form class="needs-validation" novalidate method="POST" action="{{route('auth.forgot_my_password.reset')}}" onsubmit='$(".overlay-loader").show()'>
-                            @csrf
-                            <div class="form-group">
-                                <input class="form-control @if($errors->has('email')) is-invalid @endif" value="{{old('email')}}" placeholder="E-mail" name="email">
-                                @if ($errors->has('email'))
-                                    <div class="invalid-feedback">
-                                        {{ $errors->first('email') }}
-                                    </div>
-                                @endif
-                            </div>
-                            <button class="btn btn-lg btn-success btn-block" type="submit">Reset my password</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+<div class="login-page">
+    <div class="row h-100">
+        <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-center left-side">
+            <p class="text-white font-weight-medium text-center flex-grow align-self-end d-none d-lg-block">Copyright © {{date("Y")}}  Todos os direitos reservados.</p>
+        </div>
+        <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-center right-side pr-0">
+            <form-forgotpassword>
+                <template slot="alerts">@include("templates.alerts")</template>
+            </form-forgotpassword>
         </div>
     </div>
+</div>
 @endsection

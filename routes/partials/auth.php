@@ -11,8 +11,8 @@ Route::group(['prefix' => "auth"], function () {
     });
     Route::group(['prefix' => "forgot_my_password"], function () {
         Route::get('', 'Auth\ForgotPasswordController@index')->name("auth.forgot_my_password.index");
-        Route::post('reset_password', 'Auth\ForgotPasswordController@resetPassword')->name("auth.forgot_my_password.reset");
+        Route::post('', 'Auth\ForgotPasswordController@resetPassword')->name("auth.forgot_my_password.reset");
         Route::get('{token}/renew_password', 'Auth\ForgotPasswordController@renewPassword')->name("auth.forgot_my_password.renew");
-        Route::post('{token}/set_password', 'Auth\ForgotPasswordController@setPassword')->name("auth.forgot_my_password.set");
+        Route::post('{token}/renew_password', 'Auth\ForgotPasswordController@setPassword')->name("auth.forgot_my_password.set");
     });
 });

@@ -36,7 +36,7 @@
                             <a href="forgot_my_password">Esqueceu a Senha ?</a>
                         </div>
                     </div>
-                    <button class="btn btn-lg btn-primary btn-block mt-4 mb-2" type="submit">Login</button>
+                    <button class="btn btn-primary btn-block mt-4 mb-2" type="submit">Login</button>
                     <div class="text-center">Não possui cadastro ?<a href="signup" class="ml-2">Cadastre-se</a></div>
                 </form>
             </div>
@@ -52,7 +52,7 @@ export default {
             frm : {
                 email : null,
                 password : null,
-                remember : false
+                remember : true
             }
         }
     },

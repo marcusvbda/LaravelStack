@@ -3,10 +3,13 @@
     .left-side {
         background-color:$primary;
         color:white;
-        background-size: cover;
         &.signup {
             background: url("/assets/images/auth/register-bg.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
         }
         background: url("/assets/images/auth/login-bg.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 }

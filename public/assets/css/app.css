@@ -10007,12 +10007,15 @@ a.text-dark:hover, a.text-dark:focus {
 .login-page .left-side {
   background-color: #3e194b;
   color: white;
-  background-size: cover;
   background: url("/assets/images/auth/login-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .login-page .left-side.signup {
   background: url("/assets/images/auth/register-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 body {
