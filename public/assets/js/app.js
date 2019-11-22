@@ -72109,7 +72109,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center" }, [
       _vm._v("Voltar para a página de "),
-      _c("a", { staticClass: "ml-2", attrs: { href: "login" } }, [
+      _c("a", { staticClass: "link ml-2", attrs: { href: "login" } }, [
         _vm._v("Login")
       ])
     ])
@@ -72182,7 +72182,7 @@ var render = function() {
                   staticClass: "mb-3",
                   attrs: {
                     label: "<b>E-mail</b>",
-                    prepend: "<i class='el-icon-user text-primary'></i>",
+                    prepend: "<i class='text-primary'>@</i>",
                     type: "email",
                     placeholder: "Digite aqui seu email ...",
                     errors: _vm.errors.email ? _vm.errors.email : false
@@ -72270,7 +72270,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-6 col-sm-12 pr-0 text-right" }, [
-      _c("a", { attrs: { href: "forgot_my_password" } }, [
+      _c("a", { staticClass: "link", attrs: { href: "forgot_my_password" } }, [
         _vm._v("Esqueceu a Senha ?")
       ])
     ])
@@ -72281,7 +72281,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center" }, [
       _vm._v("Não possui cadastro ?"),
-      _c("a", { staticClass: "ml-2", attrs: { href: "signup" } }, [
+      _c("a", { staticClass: "link ml-2", attrs: { href: "signup" } }, [
         _vm._v("Cadastre-se")
       ])
     ])
@@ -72423,7 +72423,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center" }, [
       _vm._v("Voltar ao"),
-      _c("a", { staticClass: "ml-2", attrs: { href: "login" } }, [
+      _c("a", { staticClass: "link ml-2", attrs: { href: "login" } }, [
         _vm._v("Login")
       ])
     ])
@@ -72600,7 +72600,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center" }, [
       _vm._v("Já possui cadastro ?"),
-      _c("a", { staticClass: "ml-2", attrs: { href: "login" } }, [
+      _c("a", { staticClass: "link ml-2", attrs: { href: "login" } }, [
         _vm._v("Login")
       ])
     ])

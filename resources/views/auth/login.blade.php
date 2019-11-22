@@ -6,10 +6,12 @@
         <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-center left-side">
             <p class="text-white font-weight-medium text-center flex-grow align-self-end d-none d-lg-block">Copyright © {{date("Y")}}  Todos os direitos reservados.</p>
         </div>
-        <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-center right-side pr-0">
-            <form-login>
-                <template slot="alerts">@include("templates.alerts")</template>
-            </form-login>
+        <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-center right-side">
+            <div class="row d-flex justify-content-center w-100">
+                <form-login>
+                    <template slot="alerts">@include("templates.alerts")</template>
+                </form-login>
+            </div>
         </div>
     </div>
 </div>

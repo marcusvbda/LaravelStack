@@ -26,7 +26,7 @@
                         :errors="errors.password_confirmation ? errors.password_confirmation : false"
                     />
                     <button class="btn btn-primary btn-block mt-4 mb-4" type="submit">Definir nova senha</button>
-                    <div class="text-center">Voltar ao<a href="login" class="ml-2">Login</a></div>
+                    <div class="text-center">Voltar ao<a href="login" class="link ml-2">Login</a></div>
                 </form>
             </div>
         </div>

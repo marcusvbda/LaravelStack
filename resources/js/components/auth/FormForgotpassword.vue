@@ -18,7 +18,7 @@
                         :errors="errors.email ? errors.email : false"
                     />
                     <button class="btn btn-primary btn-block mt-4 mb-2" type="submit">Enviar email de renovação de senha</button>
-                    <div class="text-center">Voltar para a página de <a href="login" class="ml-2">Login</a></div>
+                    <div class="text-center">Voltar para a página de <a href="login" class="link ml-2">Login</a></div>
                 </form>
             </div>
         </div>

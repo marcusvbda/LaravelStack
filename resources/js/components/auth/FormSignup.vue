@@ -41,7 +41,7 @@
                         :errors="errors.password_confirmation ? errors.password_confirmation : false"
                     />
                     <button class="btn btn-primary btn-block mt-4 mb-4" type="submit">Cadastrar-se</button>
-                    <div class="text-center">Já possui cadastro ?<a href="login" class="ml-2">Login</a></div>
+                    <div class="text-center">Já possui cadastro ?<a href="login" class="link ml-2">Login</a></div>
                 </form>
             </div>
         </div>
