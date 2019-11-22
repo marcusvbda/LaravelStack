@@ -13,7 +13,7 @@ class ForgotPasswordController extends Controller
     public function index()
     {
         Auth::logout();
-        return view("auth.forgetMyPassword");
+        return view("auth.forgotMyPassword");
     }
 
     private function sendRecoveryEmail($user)

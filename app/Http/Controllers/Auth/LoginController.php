@@ -25,7 +25,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials, (@$request['remember'] ? true : false))) {
             if (!Auth::user()->email_verified_at) {
-                return redirect(route("signin"))->with(['type' => "danger", 'message' => "<b class='mr-2'>Warning !</b>Unverified account, please check your email inbox!"])->withInput($request->only("email", "remember"));
+                return ["success" => false, "message" => ["type" => "error", "text" => "Conta não verificada, por favor acesse seu email e clique no link de confirmação"]];
             }
             Messages::send("success", "<b class='mr-2'>Bem-Vindo");
             return ["success" => true, "route" => route("admin.home")];

@@ -1,9 +1,12 @@
 .login-page {
-    overflow: hidden;
+    overflow-x: hidden;
     .left-side {
         background-color:$primary;
         color:white;
-        background: url("/assets/images/auth/login-bg.jpg");
         background-size: cover;
+        &.signup {
+            background: url("/assets/images/auth/register-bg.jpg");
+        }
+        background: url("/assets/images/auth/login-bg.jpg");
     }
 }

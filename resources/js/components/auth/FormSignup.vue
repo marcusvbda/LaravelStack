@@ -5,13 +5,20 @@
                 <div class="brand-logo">
                     <img src="/assets/images/logo.svg" alt="logo">
                 </div>
-                <h4>Bem-Vindo de Volta!</h4>
-                <h6 class="font-weight-light">Fico Feliz em ve-lo novamente!</h6>
+                <h4>Novo por aqui?</h4>
+                <h6 class="font-weight-light">Cadastre-se agora e junte-se a nós!</h6>
                 <slot name="alerts"></slot>
                 <form class="needs-validation mt-4" novalidate v-on:submit.prevent="submit" >
                     <v-input class="mb-3" 
-                        :label="`<b>E-mail</b>`" 
+                        :label="`<b>Nome</b>`" 
                         :prepend="`<i class='el-icon-user text-primary'></i>`" 
+                        v-model="frm.name" 
+                        placeholder="Digite aqui seu nome ..." 
+                        :errors="errors.name ? errors.name : false"
+                    />
+                    <v-input class="mb-3" 
+                        :label="`<b>E-mail</b>`" 
+                        :prepend="`<i class='text-primary'>@</i>`" 
                         type="email" 
                         v-model="frm.email" 
                         placeholder="Digite aqui seu email ..." 
@@ -25,19 +32,16 @@
                         placeholder="Digite aqui sua senha ..." 
                         :errors="errors.password ? errors.password : false"
                     />
-                    <div class="d-flex flex-row flex-wrap">
-                        <div class="col-md-6 col-sm-12 pl-0">
-                            <el-switch
-                                v-model="frm.remember"
-                                active-text="Manter-me Logado">
-                            </el-switch>
-                        </div>
-                        <div class="col-md-6 col-sm-12 pr-0 text-right">
-                            <a href="forgot_my_password">Esqueceu a Senha ?</a>
-                        </div>
-                    </div>
-                    <button class="btn btn-lg btn-primary btn-block mt-4 mb-2" type="submit">Login</button>
-                    <div class="text-center">Não possui cadastro ?<a href="signup" class="ml-2">Cadastre-se</a></div>
+                    <v-input class="mb-3" 
+                        :label="`<b>Confirme sua senha</b>`"
+                        :prepend="`<i class='el-icon-lock text-primary'></i>`" 
+                        type="password" 
+                        v-model="frm.password_confirmation" 
+                        placeholder="Digite aqui novamente sua senha ..." 
+                        :errors="errors.password_confirmation ? errors.password_confirmation : false"
+                    />
+                    <button class="btn btn-lg btn-primary btn-block mt-4 mb-4" type="submit">Cadastrar-se</button>
+                    <div class="text-center">Já possui cadastro ?<a href="login" class="ml-2">Login</a></div>
                 </form>
             </div>
         </div>
@@ -50,9 +54,10 @@ export default {
             loading : false,
             errors : {},
             frm : {
+                name : null,
                 email : null,
                 password : null,
-                remember : false
+                password_confirmation : null
             }
         }
     },

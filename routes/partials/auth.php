@@ -6,7 +6,7 @@ Route::group(['prefix' => "auth"], function () {
     });
     Route::group(['prefix' => "signup"], function () {
         Route::get('', 'Auth\RegisterController@index')->name("auth.signup.index");
-        Route::post('store', 'Auth\RegisterController@store')->name("auth.signup.store");
+        Route::post('', 'Auth\RegisterController@store')->name("auth.signup.store");
         Route::get('{token}/confirm_account', 'Auth\RegisterController@confirmAccount')->name("auth.signup.confirm");
     });
     Route::group(['prefix' => "forgot_my_password"], function () {
