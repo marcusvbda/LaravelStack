@@ -20,7 +20,7 @@ class ForgotPasswordController extends Controller
     {
         Auth::logout();
         $user->recovery_token = md5($user->created_at . "_" . $user->id);
-        $link = route("auth.forget_my_password.renew", ["token" => $user->recovery_token]);
+        $link = route("auth.forgot_my_password.renew", ["token" => $user->recovery_token]);
         $appName = Config("app.name");
         $html = "
             <p>Hello {$user->name},</p>

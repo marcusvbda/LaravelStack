@@ -14,9 +14,8 @@ mix.autoload({
 });
 mix.js('resources/js/app.js', 'public/assets/js/app.js')
     .sass('resources/sass/app.scss', 'public/assets/css')
-    .extract(
-        [
-            'jquery',
-            'vue',
-        ]
+    .extract([
+        'jquery',
+        'vue',
+    ]
     );

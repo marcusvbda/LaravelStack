@@ -9,7 +9,7 @@
                     <div class="card-header">Change your password</div>
                     <div class="card-body">
                         @include("templates.alerts")
-                        <form class="needs-validation" novalidate method="POST" action="{{route('auth.forget_my_password.set',['token'=>$token])}}" onsubmit='$(".overlay-loader").show()'>
+                        <form class="needs-validation" novalidate method="POST" action="{{route('auth.forgot_my_password.set',['token'=>$token])}}" onsubmit='$(".overlay-loader").show()'>
                             @csrf
                             <div class="form-group">
                                 <input class="form-control @if($errors->has('password')) is-invalid @endif"  placeholder="Password" name="password" type="password" >

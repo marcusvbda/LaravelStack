@@ -1,0 +1,25 @@
+@import 'loginPage';
+body {
+    background-color:$bgColor;
+}
+.el-switch{
+    .el-switch__label{
+        span {
+            margin-top: 2px;
+        }
+        &.is-active {
+            color: $primary;
+        }
+    }
+    &.is-checked{
+        .el-switch__core {
+            border-color: $primary;
+            background-color:$primary;
+        }
+    }
+}
+a {
+    color:$primary;
+    text-decoration: underline;
+}
+

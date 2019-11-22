@@ -5,15 +5,16 @@
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<meta name="root-url" content="{{ url('') }}">
 		<link rel="stylesheet" href="{{ mix('assets/css/app.css') }}">
+		<link rel="icon" type="image/png" href="{{ URL::asset('/assets/images/favicon.png') }}" />
 		<title>@yield("title")</title>
 	</head>
 	<body>
 		<div id="app">
-			{{-- @include("templates.loader") --}}
 			@yield("body")
 		</div>
 		<script src="{{ mix('/assets/js/manifest.js')}}"></script>
 		<script src="{{ mix('/assets/js/vendor.js')}}"></script>
 		<script src="{{ mix('/assets/js/app.js') }}"></script>
+		@yield("scripts")
 	</body>
 </html>

@@ -9,7 +9,7 @@
                     <div class="card-header">Forget my password</div>
                     <div class="card-body">
                         @include("templates.alerts")
-                        <form class="needs-validation" novalidate method="POST" action="{{route('auth.forget_my_password.reset')}}" onsubmit='$(".overlay-loader").show()'>
+                        <form class="needs-validation" novalidate method="POST" action="{{route('auth.forgot_my_password.reset')}}" onsubmit='$(".overlay-loader").show()'>
                             @csrf
                             <div class="form-group">
                                 <input class="form-control @if($errors->has('email')) is-invalid @endif" value="{{old('email')}}" placeholder="E-mail" name="email">
