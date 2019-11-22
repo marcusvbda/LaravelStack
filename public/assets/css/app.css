@@ -10000,6 +10000,10 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 
+.login-page {
+  overflow: hidden;
+}
+
 .login-page .left-side {
   background-color: #3e194b;
   color: white;
