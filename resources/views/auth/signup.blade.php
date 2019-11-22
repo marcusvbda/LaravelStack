@@ -1,15 +1,15 @@
-@extends("laravelstack::templates.default")
+@extends("templates.default")
 @section('title',"Sign up")
 @section('body')
     <div class="container">
         <div class="d-flex justify-content-center h-100 pt-5">
             <div class="col-md-5 col-sm-12">
-                <div>Go back to <a href="{{route('laravelstack.login')}}">Login</a></div>
+                <div>Go back to <a href="{{route('auth.login.index')}}">Login</a></div>
                 <div class="card">
                     <div class="card-header">Sign up</div>
                     <div class="card-body">
-                        @include("laravelstack::templates.alerts")
-                        <form class="needs-validation" novalidate method="POST" action="{{route('laravelstack.createUser')}}" onsubmit='$(".overlay-loader").show()'>
+                        @include("templates.alerts")
+                        <form class="needs-validation" novalidate method="POST" action="{{route('auth.signup.store')}}" onsubmit='$(".overlay-loader").show()'>
                             @csrf
                             <div class="form-group">
                                  <input class="form-control @if($errors->has('name')) is-invalid @endif" value="{{old('name')}}" placeholder="Name" name="name" type="text">

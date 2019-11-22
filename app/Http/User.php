@@ -2,9 +2,13 @@
 
 namespace App;
 
-use marcusvbda\laravelstack\Models\User as _User;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class User extends _User
+class User extends Authenticatable implements MustVerifyEmail
 {
-    // 
+    use SoftDeletes, Notifiable;
+    public $guarded = ['id'];
 }

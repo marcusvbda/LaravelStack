@@ -1,4 +1,4 @@
-@extends("laravelstack::templates.default")
+@extends("templates.default")
 @section('title',"Home")
 @section('body')
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,7 +18,7 @@
                         Dropdown link
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{{route('laravelstack.login')}}">Logout</a>
+                        <a class="dropdown-item" href="{{route('auth.login.index')}}">Logout</a>
                     </div>
                 </li>
             </ul>

@@ -1,14 +1,13 @@
 <?php
 
-namespace marcusvbda\laravelstack\Http\Controllers;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Auth;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view("laravelstack::home");
+        return view("admin.home");
     }
 }

@@ -6,7 +6,7 @@
 		<title>@yield("title")</title>
 	</head>
 	<body>
-		@include("laravelstack::templates.loader")
+		@include("templates.loader")
 		@yield("body")
 		<script src="{{asset('laravelstack/bootstrap/js/jquery-3.3.1.slim.min.js')}}" ></script>
 		<script src="{{asset('laravelstack/bootstrap/js/popper.min.js')}}"></script>

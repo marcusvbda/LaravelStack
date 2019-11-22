@@ -1,6 +1,6 @@
 <?php
 
-namespace marcusvbda\laravelstack\Services;
+namespace App\Services;
 
 use Mail;
 

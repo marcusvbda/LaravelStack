@@ -3,70 +3,72 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Services\SendMail;
 use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Auth;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
-    use RegistersUsers;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function index()
     {
-        $this->middleware('guest');
+        Auth::logout();
+        return view("auth.signup");
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    public function store(Request $request)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        Auth::logout();
+        $this->validate($request, [
+            'name'     => 'required',
+            'email'    => 'required|email|unique:users',
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required',
         ]);
+        $data = $request->except(["_token", "password_confirmation"]);
+        $data["password"] = bcrypt($data["password"]);
+        $user = User::create($data);
+        $this->sendConfirmationEmail($user);
+        return redirect(route("auth.login.index"))->with(['type' => "success", 'message' => "<b  class='mr-2'>Thank you</b>User created succesfully, check your email and confirm it to access !!"])->withInput(["email" => $user->email]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
+    private function sendConfirmationEmail($user)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        Auth::logout();
+        $user->confirmation_token = md5($user->created_at . "_" . $user->id);
+        $link = route("auth.signup.confirm", ["token" => $user->confirmation_token]);
+        $appName = Config("app.name");
+        $html = "
+            <p>Hello {$user->name},</p>
+            <p>Thank you for sign up. Your account has been created and it is pending verification.</p>
+            <p>To activate it, please click in the link below</p>
+            <a href='{$link}' target='_BLANK'>{$link}</a>
+            <p style='margin-top:30px'>Thank you, {$appName}";
+        SendMail::to($user->email, "Confirm your account", $html);
+        $user->save();
+    }
+
+    public function confirmAccount($token)
+    {
+        Auth::logout();
+        $user = User::where("confirmation_token", $token)->firstOrFail();
+        $user->confirmation_token = null;
+        $user->email_verified_at = date("Y-m-d H:i:s");
+        $user->save();
+        return redirect(route("auth.login.index"))->with(['type' => "success", 'message' => "<b  class='mr-2'>Thank you</b>Your account was successfully activated !!"])->withInput(["email" => $user->email]);
+    }
+
+    public function setPassword($token, Request $request)
+    {
+        Auth::logout();
+        $this->validate($request, [
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required',
         ]);
+        $user = User::where("recovery_token", $token)->firstOrFail();
+        $user->recovery_token = null;
+        $user->password = bcrypt($request["password"]);
+        $user->save();
+        return redirect(route("laravelstack.login"))->with(['type' => "success", 'message' => "Your password was changed succesfully !!"])->withInput(["email" => $user->email]);
     }
 }

@@ -1,4 +1,4 @@
-@extends("laravelstack::templates.default")
+@extends("templates.default")
 @section('title',"Login")
 @section('body')
     <div class="container">
@@ -7,8 +7,8 @@
                 <div class="card">
                     <div class="card-header">Sign in</div>
                     <div class="card-body">
-                        @include("laravelstack::templates.alerts")
-                        <form class="needs-validation" novalidate method="POST" action="{{route('laravelstack.signin')}}" onsubmit='$(".overlay-loader").show()'>
+                        @include("templates.alerts")
+                        <form class="needs-validation" novalidate method="POST" action="{{route('auth.signin.post')}}" onsubmit='$(".overlay-loader").show()'>
                             @csrf
                             <div class="form-group">
                                 <input class="form-control @if($errors->has('email')) is-invalid @endif" value="{{old('email')}}" placeholder="E-mail" name="email">
@@ -31,8 +31,8 @@
                             </div>
                             <button class="btn btn-lg btn-success btn-block" type="submit">Login</button>
                         </form>
-                        <div class="text-center">Don't have an account ? <a href="{{route('laravelstack.signup')}}">Create your account</a></div>
-                        <div class="text-center"><a href="{{route('laravelstack.forgetMyPassword')}}">Forget my password</a></div>
+                        <div class="text-center">Don't have an account ? <a href="{{route('auth.signup.index')}}">Create your account</a></div>
+                        <div class="text-center"><a href="{{route('auth.forget_my_password.index')}}">Forget my password</a></div>
                     </div>
                 </div>
             </div>
