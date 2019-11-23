@@ -72214,27 +72214,33 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "d-flex flex-row flex-wrap" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col-md-6 col-sm-12 pl-0" },
-                    [
-                      _c("el-switch", {
-                        attrs: { "active-text": "Manter-me Logado" },
-                        model: {
-                          value: _vm.frm.remember,
-                          callback: function($$v) {
-                            _vm.$set(_vm.frm, "remember", $$v)
-                          },
-                          expression: "frm.remember"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _vm._m(1)
-                ]),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "d-flex flex-row flex-wrap justify-content-between align-items-center"
+                  },
+                  [
+                    _c(
+                      "div",
+                      [
+                        _c("el-switch", {
+                          attrs: { "active-text": "Manter-me Logado" },
+                          model: {
+                            value: _vm.frm.remember,
+                            callback: function($$v) {
+                              _vm.$set(_vm.frm, "remember", $$v)
+                            },
+                            expression: "frm.remember"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm._m(1)
+                  ]
+                ),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -72269,7 +72275,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6 col-sm-12 pr-0 text-right" }, [
+    return _c("div", [
       _c("a", { staticClass: "link", attrs: { href: "forgot_my_password" } }, [
         _vm._v("Esqueceu a Senha ?")
       ])

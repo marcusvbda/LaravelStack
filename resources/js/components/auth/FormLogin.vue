@@ -25,14 +25,14 @@
                         placeholder="Digite aqui sua senha ..." 
                         :errors="errors.password ? errors.password : false"
                     />
-                    <div class="d-flex flex-row flex-wrap">
-                        <div class="col-md-6 col-sm-12 pl-0">
+                    <div class="d-flex flex-row flex-wrap justify-content-between align-items-center">
+                        <div>
                             <el-switch
                                 v-model="frm.remember"
                                 active-text="Manter-me Logado">
                             </el-switch>
                         </div>
-                        <div class="col-md-6 col-sm-12 pr-0 text-right">
+                        <div>
                             <a class="link" href="forgot_my_password">Esqueceu a Senha ?</a>
                         </div>
                     </div>

@@ -1,26 +1,7 @@
 @extends("templates.default")
 @section('title',"Dashboard")
 @section('body')
-    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between align-items-center">
-        <a class="navbar-brand" href="{{route('admin.home')}}">
-            <img src="{{asset('assets/images/logo.svg')}}">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" onclick="$('#sidebar').toggleClass('active')">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <b>{{Auth::user()->email}}</b>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{{route('auth.login.index')}}">Logout</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    @include('templates.navbar')
     <div class="container-fluid page-body-wrapper">
         @include("templates.sidebar")
         <div class="main-panel w-100">

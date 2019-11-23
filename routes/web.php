@@ -17,5 +17,6 @@ Route::group(['prefix' => "admin"], function () {
     require "partials/auth.php";
     Route::group(['middleware' => 'auth'], function () {
         Route::get('', 'HomeController@index')->name("admin.home");
+        require "partials/account.php";
     });
 });

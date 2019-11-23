@@ -24,10 +24,11 @@ class LoginController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials, (@$request['remember'] ? true : false))) {
-            if (!Auth::user()->email_verified_at) {
+            $user = Auth::user();
+            if (!$user->email_verified_at) {
                 return ["success" => false, "message" => ["type" => "error", "text" => "Conta não verificada, por favor acesse seu email e clique no link de confirmação"]];
             }
-            Messages::send("success", "<b class='mr-2'>Bem-Vindo");
+            Messages::send("success", "<b class='mr-2'>Bem-Vindo " . $user->name);
             return ["success" => true, "route" => route("admin.home")];
         }
         return ["success" => false, "message" => ["type" => "error", "text" => "Credenciais de acesso incorretas, verifique ..."]];
