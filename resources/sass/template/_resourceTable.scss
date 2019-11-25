@@ -1,0 +1,24 @@
+.resource-table{
+    .link-sortable {
+        color: black;
+        text-decoration: unset;
+        .sort-icon {
+            opacity: .5;
+            &.active {
+                opacity: 1;
+            }
+        }
+    }
+}
+.dropdown-menu {
+    &.filter {
+        right: -5px;
+        width: 500px;
+        left :unset;
+    }
+}
+
+
+.withFilter {
+    border : 1px solid $primary;
+}

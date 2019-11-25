@@ -74,4 +74,22 @@ class RegisterController extends Controller
         $user->save();
         return redirect(route("laravelstack.login"))->with(['type' => "success", 'message' => "Sua senha foi alterada com sucesso !!"]);
     }
+
+    public function profile(User $user)
+    {
+        $user = Auth::user()->only(["name", "email"]);
+        return view("admin.account.index", compact("user"));
+    }
+
+    public function editProfile(Request $request)
+    {
+        $this->validate($request, [
+            'name'    => 'required'
+        ]);
+        $user = Auth::user();
+        $data = $request->all();
+        $user->name = $data["name"];
+        $user->save();
+        return ["success" => true];
+    }
 }

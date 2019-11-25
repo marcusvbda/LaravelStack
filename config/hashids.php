@@ -12,7 +12,7 @@
 declare(strict_types=1);
 
 return [
-    /*
+	/*
     |--------------------------------------------------------------------------
     | Default Connection Name
     |--------------------------------------------------------------------------
@@ -23,9 +23,9 @@ return [
     |
     */
 
-    'default' => 'main',
+	'default' => 'main',
 
-    /*
+	/*
     |--------------------------------------------------------------------------
     | Hashids Connections
     |--------------------------------------------------------------------------
@@ -36,36 +36,10 @@ return [
     |
     */
 
-    'connections' => [
-        'main' => [
-            'salt' => 'otimizemeadmin',
-            'length' => '24',
-        ],
-
-        'alternative' => [
-            'salt' => 'otimizemeharder',
-            'length' => '48',
-        ],
-
-        'Sku' => [
-            'salt' => 'otimizesku',
-            'length' => '16',
-          ],
-
-          'sku' => [
-            'salt' => 'otimizesku',
-            'length' => '16',
-          ],
-
-        'Product' => [
-            'salt' => 'otimizeproduct',
-            'length' => '8',
-          ],
-
-        'Reseller' => [
-            'salt' => 'otimizereseller',
-            'length' => '16'
-          ], 
-
-    ],
+	'connections' => [
+		'main' => [
+			'salt' => 'otimizemeadmin',
+			'length' => '8',
+		],
+	],
 ];
