@@ -20,8 +20,8 @@
                     @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{{route('admin.account.index',['user'=>$user->code])}}">Minha Conta</a>
-                    <a class="dropdown-item" href="{{route('auth.login.index')}}">Logout</a>
+                    <a class="dropdown-item" href="{{route('admin.account.profile')}}"><span class="el-icon-user mr-2 text-primary font-weight-bolder"></span>Minha Conta</a>
+                    <a class="dropdown-item" href="{{route('auth.login.index')}}"><span class="el-icon-close mr-2 text-primary font-weight-bolder"></span>Logout</a>
                 </div>
             </li>
         </ul>

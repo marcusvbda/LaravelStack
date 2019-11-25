@@ -1,6 +1,6 @@
 @extends("templates.admin")
-@section('title',"Home")
+@section('title',"Profile")
 @section('content')
 @include("templates.alerts")
-<h1>ACCOUNT {{$user->name}}</h1>
+<form-profile :user="{{json_encode($user)}}"></form-profile>
 @endsection

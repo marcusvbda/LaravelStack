@@ -6,7 +6,7 @@
 		<meta name="root-url" content="{{ url('') }}">
 		<link rel="stylesheet" href="{{ mix('assets/css/app.css') }}">
 		<link rel="icon" type="image/png" href="{{ URL::asset('/assets/images/favicon.png') }}" />
-		<title>@yield("title")</title>
+		<title>{{config("app.name")}} - @yield("title")</title>
 	</head>
 	<body>
 		<div id="app">

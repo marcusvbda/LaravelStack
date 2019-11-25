@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
-use App\Services\Messages;
 
 class LoginController extends Controller
 {
@@ -28,7 +27,6 @@ class LoginController extends Controller
             if (!$user->email_verified_at) {
                 return ["success" => false, "message" => ["type" => "error", "text" => "Conta não verificada, por favor acesse seu email e clique no link de confirmação"]];
             }
-            Messages::send("success", "<b class='mr-2'>Bem-Vindo " . $user->name);
             return ["success" => true, "route" => route("admin.home")];
         }
         return ["success" => false, "message" => ["type" => "error", "text" => "Credenciais de acesso incorretas, verifique ..."]];

@@ -110,7 +110,7 @@ body {
         flex-direction: column;
         .content-wrapper {
             background: #f1f2f7;
-            padding: 0.5rem;
+            padding: 2.5rem 2.5rem;
             width: 100%;
             -webkit-flex-grow: 1;
             flex-grow: 1;
@@ -145,3 +145,14 @@ body {
         color: white !important;
     }
 }
+
+@media (max-width: 768px) {
+    .el-message-box {
+      width: 95%;
+    }
+    .btn  {
+      &.btn-sm-block {
+        width:100%;
+      }
+    }
+  }
