@@ -19,7 +19,7 @@
                 <ul class="nav flex-column sub-menu">
                     @foreach($resources as $resource)
                         <li class="nav-item @if(Menu::ResourceIsActive($resource->id)) active @endif">
-                            <a class="nav-link my-0" href="{{$resource->route}}">{!! $resource->icon !!} {{$resource->plural_title}}</a>
+                            <a class="nav-link my-0" href="{{$resource->route()}}">{!! $resource->icon() !!} {{$resource->singularLabel()}}</a>
                         </li>
                     @endforeach
                 </ul>

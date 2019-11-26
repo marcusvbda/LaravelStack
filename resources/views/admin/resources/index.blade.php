@@ -1,13 +1,13 @@
 @extends("templates.admin")
-@section('title',$resource->title)
+@section('title',$resource->label())
 @section('content')
 @include("templates.alerts")
 <div class="row">
     <div class="col-12">
         <div class="d-flex flex-row justify-content-between mb-3">
-            <h4>{!! @$resource->icon !!} {{$resource->plural_title}}</h4>
+            <h4>{!! @$resource->icon !!} {{$resource->label()}}</h4>
             <button class="btn btn-primary btn-sm-block">
-                <span class="el-icon-plus mr-2"></span>Cadastrar {{$resource->title}}
+                <span class="el-icon-plus mr-2"></span>Cadastrar {{$resource->label()}}
             </button>
         </div>
         <div class="card">
@@ -21,7 +21,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>Resultados encontrados : {{ $data->total() }}</div>
                     <div class="float-right">
-                        {{ $data->appends(request()->query())->links() }}
+                        {!! $pagination !!}
                     </div>
                 </div>
             </div>

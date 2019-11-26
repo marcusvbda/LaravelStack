@@ -12,7 +12,8 @@ class ResourceController extends Controller
     {
         $resource = ResourcesHelpers::find($resource);
         $data = $this->getPaginatedData($resource, $request);
-        return view("admin.resources.index", compact("resource", "data"));
+        $pagination = $data->appends(request()->query())->links();
+        return view("admin.resources.index", compact("resource", "data", "pagination", "page"));
     }
 
     private function getPaginatedData($resource, Request $request)
@@ -22,7 +23,7 @@ class ResourceController extends Controller
         $orderType = @$query["order_type"] ? $query["order_type"] : "desc";
         $perPage = @$query["per_page"] ? $query["per_page"] : 10;
         $data = $resource->model->orderBy($orderBy, $orderType);
-        foreach ($resource->filters as $key => $value) {
+        foreach ($resource->filters() as $key => $value) {
             $filter_value = @$query[$key] ? @$query[$key] : "";
             $data = $data->where($key, "like", "%" . $filter_value . "%");
         }

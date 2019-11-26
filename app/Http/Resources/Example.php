@@ -2,19 +2,41 @@
 
 namespace App\Http\Resources;
 
+use App\vStack\Resource;
+
 class Example extends Resource
 {
-    public $model        = "App\Models\Example";
-    public $title        = "Exemplo"; //optional
-    public $plural_title = "Exemplos"; //optional
-    public $icon         = "<b class='el-icon-s-help mr-2'></b>"; //optional
-    public $table        = [
-        "code" => ["label" => "Código", "size" => "10%", "sortable" => false],
-        "name" => ["label" => "Nome"],
-        "created_at" => ["label" => "Data de Criação", "size" => "20%"],
-    ];
+    public $model = "App\Models\Example";
 
-    public $filters        = [
-        "name" => ["label" => "Nome", "type" => "text", "placeholder" => "Filter por nome ..."],
-    ];
+    public function singularLabel()
+    {
+        return "Exemplo";
+    }
+
+    public function label()
+    {
+        return "Exemplos";
+    }
+
+    public function icon()
+    {
+        return "<b class='el-icon-s-help mr-2'></b>";
+    }
+
+    public function table()
+    {
+        return [
+            "code" => ["label" => "Código", "size" => "10%", "sortable" => false],
+            "name" => ["label" => "Nome"],
+            "relation->name" => ["label" => "Relacionamento", "sortable" => true, "sortble_index" => "example_relation_id"],
+            "created_at" => ["label" => "Data de Criação", "size" => "20%"],
+        ];
+    }
+
+    public function filters()
+    {
+        return [
+            "name" => ["label" => "Nome", "type" => "text", "placeholder" => "Filter por nome ..."],
+        ];
+    }
 }

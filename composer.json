@@ -34,7 +34,8 @@
     },
     "autoload": {
         "files": [
-            "app/Helpers/autoload.php"
+            "app\\Helpers\\Menu.php",
+            "app\\vStack\\Helpers\\ResourcesHelpers.php"
         ],
         "psr-4": {
             "App\\": "app/"

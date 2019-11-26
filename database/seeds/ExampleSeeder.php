@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Example;
+use App\Models\{Example, ExampleRelation};
 
 class ExampleSeeder extends Seeder
 {
@@ -12,9 +12,13 @@ class ExampleSeeder extends Seeder
      */
     public function run()
     {
+        ExampleRelation::truncate();
+        for ($i = 1; $i <= 10; $i++) {
+            ExampleRelation::create(["name" => uniqid()]);
+        }
         Example::truncate();
         for ($i = 1; $i <= 1000; $i++) {
-            Example::create(["name" => "lorem ipsum " . $i]);
+            Example::create(["name" => "lorem ipsum " . $i, "example_relation_id" => rand(1, 10)]);
         }
     }
 }

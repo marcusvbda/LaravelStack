@@ -51,7 +51,7 @@ class ResourcesHelpers
         $keys = array_keys($query);
         $qty = 0;
         foreach ($keys as $key) {
-            if (in_array($key, $filters)) $qty++;
+            if (in_array($key, $filters) && @$query[$key]) $qty++;
         }
         return $qty;
     }
