@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Services\SendMail;
-use App\Services\Messages;
+use App\vStack\Services\SendMail;
+use App\vStack\Services\Messages;
 use App\User;
 use Auth;
 

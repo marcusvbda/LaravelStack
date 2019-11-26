@@ -19,6 +19,7 @@ class Example extends Migration
             $table->egine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('name');
+            $table->boolean('active')->default(true);
             $table->unsignedInteger('example_relation_id');
             $table->foreign('example_relation_id')
                 ->references('id')

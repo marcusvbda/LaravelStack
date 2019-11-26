@@ -7,7 +7,6 @@ use App;
 class Resource
 {
     public $model          = "";
-    public $route          = [];
     public $id             = [];
 
     public function __construct()
@@ -49,6 +48,35 @@ class Resource
     private function makeId()
     {
         $aux =  explode("/", $this->route());
-        $this->id = "resource." . $aux[count($aux) - 1];
+        $this->id = $aux[count($aux) - 1];
+    }
+
+    public function canView()
+    {
+        return false;
+    }
+
+    public function canCreate()
+    {
+        return true;
+    }
+
+    public function canUpdate()
+    {
+        return true;
+    }
+
+    public function canDelete()
+    {
+        return true;
+    }
+
+    public function getValidationRule()
+    {
+        $validation_rules = [];
+        foreach ($this->fields() as $field) {
+            $validation_rules[$field->options["field"]] = $field->options["rules"];
+        }
+        return $validation_rules;
     }
 }

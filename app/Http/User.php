@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Http\Traits\hasCode;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use SoftDeletes, Notifiable, hasCode;
+    use SoftDeletes, Notifiable, hasCode, HasRoles;
     public $guarded = ['id'];
     protected $appends = ['code'];
 

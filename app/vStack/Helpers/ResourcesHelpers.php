@@ -28,7 +28,7 @@ class ResourcesHelpers
         $resource = array_filter(
             $resources,
             function ($r) use ($name) {
-                return $r->id == "resource." . $name;
+                return $r->id == $name;
             }
         );
         if (!$resource) abort(404);
@@ -47,12 +47,25 @@ class ResourcesHelpers
 
     static function hasFilter($query, $filters = [])
     {
-        $filters = array_keys($filters);
+
         $keys = array_keys($query);
         $qty = 0;
         foreach ($keys as $key) {
-            if (in_array($key, $filters) && @$query[$key]) $qty++;
+            if (
+                self::findFilter($key, $filters) &&
+                @$query[$key] &&
+                @$query[$key] != "false" &&
+                @$query[$key] != "null"
+            ) $qty++;
         }
         return $qty;
+    }
+
+    static function findFilter($key, $filters)
+    {
+        foreach ($filters as $f) {
+            if ($f->index == $key) return $f;
+        };
+        return false;
     }
 }

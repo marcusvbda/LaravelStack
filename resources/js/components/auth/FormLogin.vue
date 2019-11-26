@@ -27,10 +27,10 @@
                     />
                     <div class="d-flex flex-row flex-wrap justify-content-between align-items-center">
                         <div>
-                            <el-switch
-                                v-model="frm.remember"
-                                active-text="Manter-me Logado">
-                            </el-switch>
+                            <el-checkbox 
+                                class="d-flex align-items-center"
+                                v-model="frm.remember">Manter-me Logado
+                            </el-checkbox>
                         </div>
                         <div>
                             <a class="link" href="forgot_my_password">Esqueceu a Senha ?</a>

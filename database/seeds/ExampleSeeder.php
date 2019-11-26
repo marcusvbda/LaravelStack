@@ -18,7 +18,7 @@ class ExampleSeeder extends Seeder
         }
         Example::truncate();
         for ($i = 1; $i <= 1000; $i++) {
-            Example::create(["name" => "lorem ipsum " . $i, "example_relation_id" => rand(1, 10)]);
+            Example::create(["name" => "lorem ipsum " . $i, "example_relation_id" => rand(1, 10), "active" => (rand(0, 1) === 1)]);
         }
     }
 }

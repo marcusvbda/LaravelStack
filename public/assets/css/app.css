@@ -10035,6 +10035,7 @@ a.text-dark:hover, a.text-dark:focus {
   right: -5px;
   width: 500px;
   left: unset;
+  box-shadow: 10px 10px 33px -5px rgba(0, 0, 0, 0.27);
 }
 
 .withFilter {
@@ -10176,7 +10177,7 @@ body {
 
 .page-body-wrapper .main-panel .content-wrapper {
   background: #f1f2f7;
-  padding: 2.5rem 2.5rem;
+  padding: 1.5rem 2.5rem;
   width: 100%;
   -webkit-box-flex: 1;
           flex-grow: 1;
@@ -10226,4 +10227,8 @@ body {
   -webkit-box-shadow: 6px 3px 12px 0 rgba(0, 0, 0, 0.05);
   -moz-box-shadow: 6px 3px 12px 0 rgba(0, 0, 0, 0.05);
   -ms-box-shadow: 6px 3px 12px 0 rgba(0, 0, 0, 0.05);
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
