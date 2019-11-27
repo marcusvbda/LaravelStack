@@ -11,13 +11,13 @@
                 <form class="needs-validation mt-4" novalidate v-on:submit.prevent="submit" >
                     <v-input class="mb-3" 
                         :label="`<b>E-mail</b>`" 
-                        :prepend="`<i class='el-icon-user text-primary'></i>`" 
+                        :prepend="`<i class='el-icon-user text-secondary'></i>`" 
                         type="email" 
                         v-model="frm.email" 
                         placeholder="Digite aqui seu email ..." 
                         :errors="errors.email ? errors.email : false"
                     />
-                    <button class="btn btn-primary btn-block mt-4 mb-2" type="submit">Enviar email de renovação de senha</button>
+                    <button class="btn btn-secondary btn-block mt-4 mb-2" type="submit">Enviar email de renovação de senha</button>
                     <div class="text-center">Voltar para a página de <a href="login" class="link ml-2">Login</a></div>
                 </form>
             </div>

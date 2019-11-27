@@ -15,7 +15,8 @@ class ExampleFilterByRelation extends Filter
 
     public function __construct()
     {
-        $this->options = ExampleRelation::select(["id as value", "name as label"])->get()->toArray();
+        $this->options = ExampleRelation::select(["id as value", "name as label"])->get();
+        parent::__construct();
     }
 
     public function apply($query, $value)

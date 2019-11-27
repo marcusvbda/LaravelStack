@@ -11,7 +11,7 @@
                 <form class="needs-validation mt-4" novalidate v-on:submit.prevent="submit" >
                     <v-input class="mb-3" 
                         :label="`<b>E-mail</b>`" 
-                        :prepend="`<i class='text-primary'>@</i>`" 
+                        :prepend="`<i class='text-secondary'>@</i>`" 
                         type="email" 
                         v-model="frm.email" 
                         placeholder="Digite aqui seu email ..." 
@@ -19,7 +19,7 @@
                     />
                     <v-input class="mb-3" 
                         :label="`<b>Senha</b>`"
-                        :prepend="`<i class='el-icon-lock text-primary'></i>`" 
+                        :prepend="`<i class='el-icon-lock text-secondary'></i>`" 
                         type="password" 
                         v-model="frm.password" 
                         placeholder="Digite aqui sua senha ..." 
@@ -36,7 +36,7 @@
                             <a class="link" href="forgot_my_password">Esqueceu a Senha ?</a>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-block mt-4 mb-2" type="submit">Login</button>
+                    <button class="btn btn-secondary btn-block mt-4 mb-2" type="submit">Login</button>
                     <div class="text-center">Não possui cadastro ?<a href="signup" class="link ml-2">Cadastre-se</a></div>
                 </form>
             </div>

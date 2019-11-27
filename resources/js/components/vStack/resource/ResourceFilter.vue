@@ -4,7 +4,7 @@
         <li class="nav-item dropdown">
             <button class="nav-link dropdown-toggle d-flex align-items-center btn btn-sm btn-sm-block px-5" v-bind:class="{'btn-primary':data.hasFilter, 'btn-outline-dark':!data.hasFilter}" href="#" id="resourceFilterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="el-icon-more mr-2"></span>
-                <span v-if="data.hasFilter" class="badge badge-light ml-2 mt-1">{{data.hasFilter}}</span>
+                <span v-if="data.hasFilter">{{data.hasFilter}}</span>
             </button>
             <div class="dropdown-menu dropdown-menu-right filter p-0" id="prevent_close_menu" aria-labelledby="resourceFilterDropdown">
                 <table class="table table-striped">
@@ -22,53 +22,11 @@
                                 </el-select>
                             </td>
                         </tr>
-                        <template v-for="(value,key) in data.filters" >
-                            <tr><td><span v-html="value.label"></span></td></tr>
+                        <template v-for="(filter,key) in data.filters" >
+                            <tr><td><span v-html="filter.label"></span></td></tr>
                             <tr>
                                 <td>
-                                    <el-input clearable v-model="filter[value.index]" @change="makeNewRoute" v-if="value.component=='text-filter'" type="text" class="w-100"      :placeholder="value.placeholder ? value.placeholder : ''"
-                                    v-bind:class="{'withFilter' : filter[value.index]}"></el-input>
-                                    <el-select 
-                                        clearable
-                                        class="w-100"
-                                        v-if="value.component=='select-filter'"
-                                        v-model="filter[value.index]" @change="makeNewRoute" 
-                                        filterable :placeholder="value.placeholder ? value.placeholder : ''"
-                                        v-bind:class="{'withFilter' : filter[value.index]}">
-                                        <el-option label="" value=""></el-option>
-                                        <el-option
-                                            v-for="item in value.options"
-                                            :key="item.value"
-                                            :label="item.label"
-                                            :value="item.value">
-                                        </el-option>
-                                    </el-select>
-                                    <el-checkbox 
-                                        class="d-flex align-items-center"
-                                        v-if="value.component=='check-filter'" 
-                                        v-model="filter[value.index]" @change="makeNewRoute" >{{value.text}}
-                                    </el-checkbox>
-                                    <el-date-picker class="w-100"
-                                        clearable
-                                        v-if="value.component=='date-filter'"
-                                        v-model="filter[value.index]" @change="makeNewRoute" 
-                                        type="date"
-                                        :format="'dd/MM/yyyy'"
-                                        value-format="yyyy-MM-dd"
-                                        :placeholder="value.placeholder ? value.placeholder : ''"
-                                        end-placeholder="Data Fim">
-                                    </el-date-picker>
-                                    <el-date-picker class="w-100"
-                                        clearable
-                                        v-if="value.component=='rangedate-filter'"
-                                        v-model="filter[value.index]" @change="makeNewRoute" 
-                                        type="daterange"
-                                        range-separator="-"
-                                        :format="'dd/MM/yyyy'"
-                                        value-format="yyyy-MM-dd"
-                                        :start-placeholder="value.start_placeholder ? value.start_placeholder : ''"
-                                        :end-placeholder="value.end_placeholder ? value.end_placeholder : ''">
-                                    </el-date-picker>
+                                    <v-runtime-template :key="key" :template="filter.view"></v-runtime-template>
                                 </td>
                             </tr>
                         </template>
@@ -80,6 +38,7 @@
 </div>
 </template>
 <script>
+import VRuntimeTemplate from "v-runtime-template"
 export default {
     props :["data"],
     data() {
@@ -88,6 +47,9 @@ export default {
                 per_page : this.data.perpage
             },
         }
+    },
+    components : {
+        "v-runtime-template" : VRuntimeTemplate
     },
     async created() {
         this.initFormFilter()

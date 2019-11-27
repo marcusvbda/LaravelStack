@@ -8,7 +8,7 @@ class Example extends DefaultModel
 {
     protected $table = "example";
 
-    public $appends = ["f_active"];
+    public $appends = ["f_created_at", "f_active", "last_update"];
 
     protected  $casts = [
         "active" => "boolean"
@@ -17,6 +17,16 @@ class Example extends DefaultModel
     public function getFActiveAttribute()
     {
         return $this->active ? '<span class="badge badge-primary">Ativo</span>' : '<span class="badge badge-danger">Inativo</span>';
+    }
+
+    public function getLastUpdateAttribute()
+    {
+        return $this->created_at->diffForHumans();
+    }
+
+    public function getFCreatedAtAttribute()
+    {
+        return $this->created_at->format("d/m/Y - H:i:s");
     }
 
     public function relation()

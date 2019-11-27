@@ -9,13 +9,13 @@
                 ?>
                 @foreach($table as $key=>$value)
                     <?php
-                        $size = @$value['size'] ? $value['size'] : 'auto';
-                        $sortable_index = @$value['sortable_index'] ? $value['sortable_index'] : $key;
+                        $size = isset($value['size']) ? $value['size'] : 'auto';
+                        $sortable_index = isset($value['sortable_index']) ? $value['sortable_index'] : $key;
                     ?>
                     <th width="{{$size}}">
                         <a  @if(@$value["sortable"]!==false) href="{{ResourcesHelpers::sortLink($resource->route(),request()->query(), $sortable_index,$order_type)}}" @endif
                             class="d-flex flex-row align-items-center link-sortable">
-                            <div>{{$value["label"]}}</div>
+                            <div>{{isset($value["label"]) ? @$value["label"] : $value}}</div>
                             @if(@$value["sortable"]!==false)
                                 <div class="ml-auto d-flex flex-row">
                                     <span class="sort-icon el-icon-sort-down @if($order_type=='asc' && $order_by==$sortable_index ) active @endif"></span>
@@ -35,12 +35,12 @@
                         <td>
                             <?php 
                                 $indexes = explode("->",$key);
-                                $value = $row;
+                                $_val = $row;
                                 foreach($indexes as $i) {
-                                    $value = $value->{$i}; 
+                                    $_val = $_val->{$i}; 
                                 }
                             ?>
-                            {!! $value !!}
+                            {!! @$_val ? $_val : $row->{$value} !!}
                         </td>
                     @endforeach
                     <td>

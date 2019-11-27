@@ -5,6 +5,7 @@ namespace App\vStack\Fields;
 class Field
 {
     public $options = [];
+    public $view    = "";
 
     public function processFieldOptions()
     {

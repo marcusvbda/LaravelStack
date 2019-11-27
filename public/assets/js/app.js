@@ -3908,6 +3908,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var v_runtime_template__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! v-runtime-template */ "./node_modules/v-runtime-template/dist/v-runtime-template.es.js");
 
 //
 //
@@ -3932,14 +3933,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
@@ -3948,6 +3942,9 @@ __webpack_require__.r(__webpack_exports__);
       form: {},
       errors: {}
     };
+  },
+  components: {
+    "v-runtime-template": v_runtime_template__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   computed: {
     pageType: function pageType() {
@@ -4059,6 +4056,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var v_runtime_template__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! v-runtime-template */ "./node_modules/v-runtime-template/dist/v-runtime-template.es.js");
 
 //
 //
@@ -4099,48 +4097,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
@@ -4149,6 +4106,9 @@ __webpack_require__.r(__webpack_exports__);
         per_page: this.data.perpage
       }
     };
+  },
+  components: {
+    "v-runtime-template": v_runtime_template__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   created: function created() {
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function created$(_context) {
@@ -72540,6 +72500,21 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/v-runtime-template/dist/v-runtime-template.es.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/v-runtime-template/dist/v-runtime-template.es.js ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var t=function(t,o,e){if(!o.hasOwnProperty(e)){var r=Object.getOwnPropertyDescriptor(t,e);Object.defineProperty(o,e,r)}};/* harmony default export */ __webpack_exports__["default"] = ({props:{template:String,parent:Object,templateProps:{type:Object,default:function(){return{}}}},render:function(o){if(this.template){var e=this.parent||this.$parent,r=e.$data;void 0===r&&(r={});var n=e.$props;void 0===n&&(n={});var a=e.$options;void 0===a&&(a={});var p=a.components;void 0===p&&(p={});var c=a.computed;void 0===c&&(c={});var i=a.methods;void 0===i&&(i={});var s=this.$data;void 0===s&&(s={});var d=this.$props;void 0===d&&(d={});var v=this.$options;void 0===v&&(v={});var f=v.methods;void 0===f&&(f={});var m=v.computed;void 0===m&&(m={});var u=v.components;void 0===u&&(u={});var h={$data:{},$props:{},$options:{},components:{},computed:{},methods:{}};Object.keys(r).forEach(function(t){void 0===s[t]&&(h.$data[t]=r[t])}),Object.keys(n).forEach(function(t){void 0===d[t]&&(h.$props[t]=n[t])}),Object.keys(i).forEach(function(t){void 0===f[t]&&(h.methods[t]=i[t])}),Object.keys(c).forEach(function(t){void 0===m[t]&&(h.computed[t]=c[t])}),Object.keys(p).forEach(function(t){void 0===u[t]&&(h.components[t]=p[t])});var O=Object.keys(h.methods||{}),$=Object.keys(h.$data||{}),b=Object.keys(h.$props||{}),j=Object.keys(this.templateProps),y=$.concat(b).concat(O).concat(j),k=(E=e,P={},O.forEach(function(o){return t(E,P,o)}),P),l=function(o){var e={};return o.forEach(function(o){o&&Object.getOwnPropertyNames(o).forEach(function(r){return t(o,e,r)})}),e}([h.$data,h.$props,k,this.templateProps]);return o({template:this.template||"<div></div>",props:y,computed:h.computed,components:h.components,provide:this.$parent._provided},{props:l})}var E,P}});
+//# sourceMappingURL=v-runtime-template.es.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/account/FormProfile.vue?vue&type=template&id=34346070&scoped=true&":
 /*!**********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/account/FormProfile.vue?vue&type=template&id=34346070&scoped=true& ***!
@@ -72783,7 +72758,7 @@ var render = function() {
                   staticClass: "mb-3",
                   attrs: {
                     label: "<b>E-mail</b>",
-                    prepend: "<i class='el-icon-user text-primary'></i>",
+                    prepend: "<i class='el-icon-user text-secondary'></i>",
                     type: "email",
                     placeholder: "Digite aqui seu email ...",
                     errors: _vm.errors.email ? _vm.errors.email : false
@@ -72800,7 +72775,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-primary btn-block mt-4 mb-2",
+                    staticClass: "btn btn-secondary btn-block mt-4 mb-2",
                     attrs: { type: "submit" }
                   },
                   [_vm._v("Enviar email de renovação de senha")]
@@ -72905,7 +72880,7 @@ var render = function() {
                   staticClass: "mb-3",
                   attrs: {
                     label: "<b>E-mail</b>",
-                    prepend: "<i class='text-primary'>@</i>",
+                    prepend: "<i class='text-secondary'>@</i>",
                     type: "email",
                     placeholder: "Digite aqui seu email ...",
                     errors: _vm.errors.email ? _vm.errors.email : false
@@ -72923,7 +72898,7 @@ var render = function() {
                   staticClass: "mb-3",
                   attrs: {
                     label: "<b>Senha</b>",
-                    prepend: "<i class='el-icon-lock text-primary'></i>",
+                    prepend: "<i class='el-icon-lock text-secondary'></i>",
                     type: "password",
                     placeholder: "Digite aqui sua senha ...",
                     errors: _vm.errors.password ? _vm.errors.password : false
@@ -72972,7 +72947,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-primary btn-block mt-4 mb-2",
+                    staticClass: "btn btn-secondary btn-block mt-4 mb-2",
                     attrs: { type: "submit" }
                   },
                   [_vm._v("Login")]
@@ -73087,7 +73062,7 @@ var render = function() {
                   staticClass: "mb-3",
                   attrs: {
                     label: "<b>Senha</b>",
-                    prepend: "<i class='el-icon-lock text-primary'></i>",
+                    prepend: "<i class='el-icon-lock text-secondary'></i>",
                     type: "password",
                     placeholder: "Digite aqui sua senha ...",
                     errors: _vm.errors.password ? _vm.errors.password : false
@@ -73105,7 +73080,7 @@ var render = function() {
                   staticClass: "mb-3",
                   attrs: {
                     label: "<b>Confirme sua senha</b>",
-                    prepend: "<i class='el-icon-lock text-primary'></i>",
+                    prepend: "<i class='el-icon-lock text-secondary'></i>",
                     type: "password",
                     placeholder: "Digite aqui novamente sua senha ...",
                     errors: _vm.errors.password_confirmation
@@ -73124,7 +73099,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-primary btn-block mt-4 mb-4",
+                    staticClass: "btn btn-secondary btn-block mt-4 mb-4",
                     attrs: { type: "submit" }
                   },
                   [_vm._v("Definir nova senha")]
@@ -73229,7 +73204,7 @@ var render = function() {
                   staticClass: "mb-3",
                   attrs: {
                     label: "<b>Nome</b>",
-                    prepend: "<i class='el-icon-user text-primary'></i>",
+                    prepend: "<i class='el-icon-user text-secondary'></i>",
                     placeholder: "Digite aqui seu nome ...",
                     errors: _vm.errors.name ? _vm.errors.name : false
                   },
@@ -73246,7 +73221,7 @@ var render = function() {
                   staticClass: "mb-3",
                   attrs: {
                     label: "<b>E-mail</b>",
-                    prepend: "<i class='text-primary'>@</i>",
+                    prepend: "<i class='text-secondary'>@</i>",
                     type: "email",
                     placeholder: "Digite aqui seu email ...",
                     errors: _vm.errors.email ? _vm.errors.email : false
@@ -73264,7 +73239,7 @@ var render = function() {
                   staticClass: "mb-3",
                   attrs: {
                     label: "<b>Senha</b>",
-                    prepend: "<i class='el-icon-lock text-primary'></i>",
+                    prepend: "<i class='el-icon-lock text-secondary'></i>",
                     type: "password",
                     placeholder: "Digite aqui sua senha ...",
                     errors: _vm.errors.password ? _vm.errors.password : false
@@ -73282,7 +73257,7 @@ var render = function() {
                   staticClass: "mb-3",
                   attrs: {
                     label: "<b>Confirme sua senha</b>",
-                    prepend: "<i class='el-icon-lock text-primary'></i>",
+                    prepend: "<i class='el-icon-lock text-secondary'></i>",
                     type: "password",
                     placeholder: "Digite aqui novamente sua senha ...",
                     errors: _vm.errors.password_confirmation
@@ -73301,7 +73276,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-primary btn-block mt-4 mb-4",
+                    staticClass: "btn btn-secondary btn-block mt-4 mb-4",
                     attrs: { type: "submit" }
                   },
                   [_vm._v("Cadastrar-se")]
@@ -73538,29 +73513,12 @@ var render = function() {
               "div",
               { staticClass: "col-md-8 col-sm-12" },
               [
-                _vm._l(_vm.data.fields, function(field) {
+                _vm._l(_vm.data.fields, function(field, i) {
                   return [
-                    ["text", "email", "url"].includes(field.options.type)
-                      ? _c("v-input", {
-                          staticClass: "mb-3",
-                          attrs: {
-                            label: field.options.label,
-                            prepend: field.options.prepend,
-                            type: field.options.type,
-                            placeholder: field.options.placeholder,
-                            errors: _vm.errors[field.options.field]
-                              ? _vm.errors[field.options.field]
-                              : false
-                          },
-                          model: {
-                            value: _vm.form[field.options.field],
-                            callback: function($$v) {
-                              _vm.$set(_vm.form, field.options.field, $$v)
-                            },
-                            expression: "form[field.options.field]"
-                          }
-                        })
-                      : _vm._e()
+                    _c("v-runtime-template", {
+                      key: i,
+                      attrs: { template: field.view }
+                    })
                   ]
                 })
               ],
@@ -73716,9 +73674,7 @@ var render = function() {
               _c("span", { staticClass: "el-icon-more mr-2" }),
               _vm._v(" "),
               _vm.data.hasFilter
-                ? _c("span", { staticClass: "badge badge-light ml-2 mt-1" }, [
-                    _vm._v(_vm._s(_vm.data.hasFilter))
-                  ])
+                ? _c("span", [_vm._v(_vm._s(_vm.data.hasFilter))])
                 : _vm._e()
             ]
           ),
@@ -73793,12 +73749,12 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._l(_vm.data.filters, function(value, key) {
+                    _vm._l(_vm.data.filters, function(filter, key) {
                       return [
                         _c("tr", [
                           _c("td", [
                             _c("span", {
-                              domProps: { innerHTML: _vm._s(value.label) }
+                              domProps: { innerHTML: _vm._s(filter.label) }
                             })
                           ])
                         ]),
@@ -73807,146 +73763,10 @@ var render = function() {
                           _c(
                             "td",
                             [
-                              value.component == "text-filter"
-                                ? _c("el-input", {
-                                    staticClass: "w-100",
-                                    class: {
-                                      withFilter: _vm.filter[value.index]
-                                    },
-                                    attrs: {
-                                      clearable: "",
-                                      type: "text",
-                                      placeholder: value.placeholder
-                                        ? value.placeholder
-                                        : ""
-                                    },
-                                    on: { change: _vm.makeNewRoute },
-                                    model: {
-                                      value: _vm.filter[value.index],
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.filter, value.index, $$v)
-                                      },
-                                      expression: "filter[value.index]"
-                                    }
-                                  })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              value.component == "select-filter"
-                                ? _c(
-                                    "el-select",
-                                    {
-                                      staticClass: "w-100",
-                                      class: {
-                                        withFilter: _vm.filter[value.index]
-                                      },
-                                      attrs: {
-                                        clearable: "",
-                                        filterable: "",
-                                        placeholder: value.placeholder
-                                          ? value.placeholder
-                                          : ""
-                                      },
-                                      on: { change: _vm.makeNewRoute },
-                                      model: {
-                                        value: _vm.filter[value.index],
-                                        callback: function($$v) {
-                                          _vm.$set(_vm.filter, value.index, $$v)
-                                        },
-                                        expression: "filter[value.index]"
-                                      }
-                                    },
-                                    [
-                                      _c("el-option", {
-                                        attrs: { label: "", value: "" }
-                                      }),
-                                      _vm._v(" "),
-                                      _vm._l(value.options, function(item) {
-                                        return _c("el-option", {
-                                          key: item.value,
-                                          attrs: {
-                                            label: item.label,
-                                            value: item.value
-                                          }
-                                        })
-                                      })
-                                    ],
-                                    2
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              value.component == "check-filter"
-                                ? _c(
-                                    "el-checkbox",
-                                    {
-                                      staticClass: "d-flex align-items-center",
-                                      on: { change: _vm.makeNewRoute },
-                                      model: {
-                                        value: _vm.filter[value.index],
-                                        callback: function($$v) {
-                                          _vm.$set(_vm.filter, value.index, $$v)
-                                        },
-                                        expression: "filter[value.index]"
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        _vm._s(value.text) +
-                                          "\r\n                                    "
-                                      )
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              value.component == "date-filter"
-                                ? _c("el-date-picker", {
-                                    staticClass: "w-100",
-                                    attrs: {
-                                      clearable: "",
-                                      type: "date",
-                                      format: "dd/MM/yyyy",
-                                      "value-format": "yyyy-MM-dd",
-                                      placeholder: value.placeholder
-                                        ? value.placeholder
-                                        : "",
-                                      "end-placeholder": "Data Fim"
-                                    },
-                                    on: { change: _vm.makeNewRoute },
-                                    model: {
-                                      value: _vm.filter[value.index],
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.filter, value.index, $$v)
-                                      },
-                                      expression: "filter[value.index]"
-                                    }
-                                  })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              value.component == "rangedate-filter"
-                                ? _c("el-date-picker", {
-                                    staticClass: "w-100",
-                                    attrs: {
-                                      clearable: "",
-                                      type: "daterange",
-                                      "range-separator": "-",
-                                      format: "dd/MM/yyyy",
-                                      "value-format": "yyyy-MM-dd",
-                                      "start-placeholder": value.start_placeholder
-                                        ? value.start_placeholder
-                                        : "",
-                                      "end-placeholder": value.end_placeholder
-                                        ? value.end_placeholder
-                                        : ""
-                                    },
-                                    on: { change: _vm.makeNewRoute },
-                                    model: {
-                                      value: _vm.filter[value.index],
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.filter, value.index, $$v)
-                                      },
-                                      expression: "filter[value.index]"
-                                    }
-                                  })
-                                : _vm._e()
+                              _c("v-runtime-template", {
+                                key: key,
+                                attrs: { template: filter.view }
+                              })
                             ],
                             1
                           )
@@ -74015,7 +73835,8 @@ var render = function() {
               expression: "filter"
             }
           ],
-          staticClass: "form-control",
+          staticClass: "form-control filter",
+          class: { withFilter: _vm.filter },
           attrs: { placeholder: "Buscar ...", name: "_", type: "text" },
           domProps: { value: _vm.filter },
           on: {
@@ -74048,11 +73869,7 @@ var staticRenderFns = [
             staticStyle: { border: "unset", "background-color": "transparent" },
             attrs: { type: "submit" }
           },
-          [
-            _c("span", [
-              _c("i", { staticClass: "text-primary el-icon-search" })
-            ])
-          ]
+          [_c("span", [_c("i", { staticClass: "el-icon-search" })])]
         )
       ])
     ])

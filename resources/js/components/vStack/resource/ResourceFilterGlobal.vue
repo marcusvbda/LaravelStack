@@ -1,11 +1,11 @@
 <template>
     <form class="needs-validation mt-4" v-on:submit.prevent="submit" >
         <div class="input-group">
-            <input placeholder="Buscar ..." name="_" type="text" class="form-control" v-model="filter" @change="submit"> 
+            <input placeholder="Buscar ..." name="_" type="text" class="form-control filter" v-model="filter" @change="submit" v-bind:class="{'withFilter':filter}"> 
             <div  class="input-group-append">
                 <span class="input-group-text p-0">
                     <button class="p-2 px-3" type="submit" style="border: unset;background-color: transparent;">
-                        <span><i class="text-primary el-icon-search"></i></span>
+                        <span><i class="el-icon-search"></i></span>
                     </button>
                 </span>
             </div>

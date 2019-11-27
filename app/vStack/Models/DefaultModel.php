@@ -11,9 +11,4 @@ class DefaultModel extends Model
 {
     use hasCode, SoftDeletes;
     public $guarded = ["created_at"];
-
-    public function getCreatedAtAttribute($timestamp)
-    {
-        return Carbon::parse($timestamp)->format('d/m/Y - H:i:s');
-    }
 }

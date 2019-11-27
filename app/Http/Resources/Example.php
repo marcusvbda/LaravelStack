@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use App\vStack\Resource;
 use App\Http\Filters\Example\{ExampleFilterByName, ExampleFilterByRelation, ExampleFilterByActive, ExampleFilterByDate, ExampleFilterByRangeDate};
-use App\vStack\Fields\Text;
+use App\vStack\Fields\{Text, Check};
 use Auth;
 
 class Example extends Resource
@@ -29,10 +29,11 @@ class Example extends Resource
     public function table()
     {
         return [
-            "name" => ["label" => "Nome"],
-            "relation->name" => ["label" => "Relacionamento", "sortable" => true, "sortable_index" => "example_relation_id"],
-            "f_active" => ["label" => "Ativo", "sortable" => true, "sortable_index" => "active"],
-            "created_at" => ["label" => "Data de Criação", "size" => "20%"],
+            "name"                  => ["label" => "Nome", "size" => "30%"],
+            "relation->name"        => ["label" => "Relacionamento", "sortable" => true, "sortable_index" => "example_relation_id"],
+            "f_active"              => ["label" => "Ativo", "sortable" => true, "sortable_index" => "active"],
+            "f_created_at"          => ["label" => "Data de Criação", "sortable_index" => "created_at"],
+            "last_update"           => ["label" => "Ultima atualização", "sortable" => false],
         ];
     }
 
@@ -40,8 +41,11 @@ class Example extends Resource
     {
         return [
             new Text([
-                "label" => "<b>Nome</b>", "field" => "name", "required" => true, "prepend" => "<span class='text-primary'>A</span>",
+                "label" => "<b>Nome</b>", "field" => "name", "required" => true, "prepend" => "A",
                 "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255"
+            ]),
+            new Check([
+                "label" => "<b>Ativo</b>", "field" => "active"
             ])
         ];
     }

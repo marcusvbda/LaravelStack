@@ -4,16 +4,8 @@
             <div class="card-body">
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-8 col-sm-12">
-                        <template v-for="field in data.fields">
-                            <v-input class="mb-3" 
-                                v-if="['text','email','url'].includes(field.options.type)"
-                                :label="field.options.label" 
-                                :prepend="field.options.prepend" 
-                                :type="field.options.type" 
-                                v-model="form[field.options.field]" 
-                                :placeholder="field.options.placeholder" 
-                                :errors="errors[field.options.field] ? errors[field.options.field] : false"
-                            />
+                        <template v-for="(field,i) in data.fields">
+                            <v-runtime-template :key="i" :template="field.view"></v-runtime-template>
                         </template>
                     </div>
                 </div>
@@ -30,6 +22,7 @@
     </div>
 </template>
 <script>
+import VRuntimeTemplate from "v-runtime-template"
 export default {
     props:["data"],
     data() {
@@ -38,6 +31,9 @@ export default {
             form : {},
             errors : {}
         }
+    },
+    components : {
+        "v-runtime-template" : VRuntimeTemplate
     },
     computed : {
         pageType() {

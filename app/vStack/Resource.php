@@ -17,12 +17,12 @@ class Resource
 
     public function singularLabel()
     {
-        return "";
+        return $this->id;
     }
 
     public function label()
     {
-        return "";
+        return $this->id;
     }
 
     public function icon()
@@ -32,10 +32,15 @@ class Resource
 
     public function table()
     {
-        return [];
+        return ["name"];
     }
 
     public function filters()
+    {
+        return [];
+    }
+
+    public function fields()
     {
         return [];
     }
@@ -58,12 +63,12 @@ class Resource
 
     public function canViewList()
     {
-        return false;
+        return true;
     }
 
     public function canView()
     {
-        return false;
+        return true;
     }
 
     public function canCreate()

@@ -11,14 +11,14 @@
                 <form class="needs-validation mt-4" novalidate v-on:submit.prevent="submit" >
                     <v-input class="mb-3" 
                         :label="`<b>Nome</b>`" 
-                        :prepend="`<i class='el-icon-user text-primary'></i>`" 
+                        :prepend="`<i class='el-icon-user text-secondary'></i>`" 
                         v-model="frm.name" 
                         placeholder="Digite aqui seu nome ..." 
                         :errors="errors.name ? errors.name : false"
                     />
                     <v-input class="mb-3" 
                         :label="`<b>E-mail</b>`" 
-                        :prepend="`<i class='text-primary'>@</i>`" 
+                        :prepend="`<i class='text-secondary'>@</i>`" 
                         type="email" 
                         v-model="frm.email" 
                         placeholder="Digite aqui seu email ..." 
@@ -26,7 +26,7 @@
                     />
                     <v-input class="mb-3" 
                         :label="`<b>Senha</b>`"
-                        :prepend="`<i class='el-icon-lock text-primary'></i>`" 
+                        :prepend="`<i class='el-icon-lock text-secondary'></i>`" 
                         type="password" 
                         v-model="frm.password" 
                         placeholder="Digite aqui sua senha ..." 
@@ -34,13 +34,13 @@
                     />
                     <v-input class="mb-3" 
                         :label="`<b>Confirme sua senha</b>`"
-                        :prepend="`<i class='el-icon-lock text-primary'></i>`" 
+                        :prepend="`<i class='el-icon-lock text-secondary'></i>`" 
                         type="password" 
                         v-model="frm.password_confirmation" 
                         placeholder="Digite aqui novamente sua senha ..." 
                         :errors="errors.password_confirmation ? errors.password_confirmation : false"
                     />
-                    <button class="btn btn-primary btn-block mt-4 mb-4" type="submit">Cadastrar-se</button>
+                    <button class="btn btn-secondary btn-block mt-4 mb-4" type="submit">Cadastrar-se</button>
                     <div class="text-center">Já possui cadastro ?<a href="login" class="link ml-2">Login</a></div>
                 </form>
             </div>

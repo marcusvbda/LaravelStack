@@ -26,12 +26,21 @@
 .withFilter {
     border : 1px solid $primary;
 }
+
 .icon_resource {
     font-size: 20px;
     font-weight: 800;
-    color :  #a7a7a7;
+    color :  $secondary;
+    opacity :  .3;
     &:hover {
         transition :.5s;
+        opacity :  1;
         color : $primary;
+    }
+}
+
+.filter {
+    &.withFilter {
+        border : 1px solid $primary;
     }
 }

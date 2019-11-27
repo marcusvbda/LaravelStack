@@ -25,9 +25,9 @@ body {
 }
 
 .sidebar {
-    color : white;
+    color : #d6d6d6;
     min-height: calc(100vh - 56px);
-    background: $primary;
+    background: $secondary;
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     padding: 0;
@@ -58,7 +58,11 @@ body {
                 border-radius: .125rem;
                 margin: .75rem;
                 .menu-title {
-                    color: $secondary;
+                    color: #d6d6d6;
+                    &:hover {
+                        transition :.5s;
+                        color : white;
+                    }
                     display: inline-block;
                     font-size: 0.875rem;
                     line-height: 1;
@@ -69,13 +73,17 @@ body {
                 background: $tertiary;
             }
             .menu-arrow {
-                color: $secondary;
+                color: #d6d6d6;
             }
             .sub-menu {
-                background-color:$primary;
+                background-color:$secondary;
                 .nav-item {
                     .nav-link {
-                        color: $secondary;
+                        color: #d6d6d6;
+                        &:hover {
+                            transition :.5s;
+                            color : white;
+                        }
                         margin-left: 40px;
                         font-size:14px;
                     }
