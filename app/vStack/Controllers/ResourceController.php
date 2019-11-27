@@ -12,7 +12,7 @@ class ResourceController extends Controller
     public function index($resource, Request $request)
     {
         $resource = ResourcesHelpers::find($resource);
-        if (!$resource->canView()) abort(403);
+        if (!$resource->canViewList()) abort(403);
         $data = $this->getPaginatedData($resource, $request);
         return view("admin.vStack.resources.index", compact("resource", "data"));
     }
@@ -25,6 +25,9 @@ class ResourceController extends Controller
         $perPage   = @$data["per_page"] ? $data["per_page"] : 10;
         $query     = $resource->model->orderBy($orderBy, $orderType);
         foreach ($resource->filters() as $filter) $query = $filter->applyFilter($query, $data);
+        foreach ($resource->search() as $search) {
+            $query = $query->where($search, "like", "%" . (@$data["_"] ? $data["_"] : "") . "%");
+        }
         $query = $query->paginate($perPage);
         return $query;
     }

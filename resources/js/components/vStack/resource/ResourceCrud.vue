@@ -21,8 +21,8 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col-12 d-flex justify-content-end d-flex align-items-center">
-                        <a :href="data.list_route" class="mr-3 text-danger link"><b>Cancelar</b></a>
-                        <button class="ml-3 btn btn-primary btn-sm-block" type="sumit">Salvar</button>
+                        <a :href="data.list_route" class="mr-4 text-danger link"><b>Cancelar</b></a>
+                        <button class="ml-3 btn btn-primary btn-sm-block" type="sumit">{{pageType=='CREATE' ? 'Cadastrar' : 'Alterar'}}</button>
                     </div>
                 </div>
             </div>
@@ -39,6 +39,11 @@ export default {
             errors : {}
         }
     },
+    computed : {
+        pageType() {
+            return this.data.id ? "EDIT" : "CREATE"
+        }
+    },
     async created() {
         this.initForm()
     },
@@ -53,16 +58,22 @@ export default {
         },
         submit() {
             this.loading = true
-            this.$http.post(this.data.store_route,this.form).then( res => {
-                let data = res.data
-                if(data.message) this.$message({showClose: true, message : data.message.text,type: data.message.type})
-                if(data.success) return window.location.href=data.route
-                this.loading = false
-            }).catch( er => {
-                let errors = er.response.data.errors
-                this.errors = errors
-                this.loading = false
-            })
+            this.$confirm(`Confirma ${this.data.page_type} ?`, "Confirmação", {
+                confirmButtonText: "Sim",
+                cancelButtonText: "Não",
+                type: 'warning'
+            }).then(() => {
+                this.$http.post(this.data.store_route,this.form).then( res => {
+                    let data = res.data
+                    if(data.message) this.$message({showClose: true, message : data.message.text,type: data.message.type})
+                    if(data.success) return window.location.href=data.route
+                    this.loading = false
+                }).catch( er => {
+                    let errors = er.response.data.errors
+                    this.errors = errors
+                    this.loading = false
+                })
+            }).catch( () => false)
         }
     }
 }

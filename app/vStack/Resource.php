@@ -40,6 +40,11 @@ class Resource
         return [];
     }
 
+    public function search()
+    {
+        return [];
+    }
+
     public function route()
     {
         return route("resource.index", ["resource" => strtolower((new \ReflectionClass($this))->getShortName())]);
@@ -49,6 +54,11 @@ class Resource
     {
         $aux =  explode("/", $this->route());
         $this->id = $aux[count($aux) - 1];
+    }
+
+    public function canViewList()
+    {
+        return false;
     }
 
     public function canView()

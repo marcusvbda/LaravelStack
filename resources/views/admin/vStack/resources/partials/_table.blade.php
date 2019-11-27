@@ -25,6 +25,7 @@
                         </a>
                     </th>
                 @endforeach
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -32,24 +33,27 @@
                 <tr>
                     @foreach($table as $key=>$value)
                         <td>
-                            @if($key=="code")
-                                @if($resource->canUpdate())
-                                    <a class="link" href="{{$resource->route()."/".$row->code}}">{{ $row->code }}</a>
-                                @else 
-                                    {{ $row->code }}
-                                @endif
-                            @else
-                                <?php 
-                                    $indexes = explode("->",$key);
-                                    $value = $row;
-                                    foreach($indexes as $i) {
-                                        $value = $value->{$i}; 
-                                    }
-                                ?>
-                                {!! $value !!}
-                            @endif
+                            <?php 
+                                $indexes = explode("->",$key);
+                                $value = $row;
+                                foreach($indexes as $i) {
+                                    $value = $value->{$i}; 
+                                }
+                            ?>
+                            {!! $value !!}
                         </td>
                     @endforeach
+                    <td>
+                        <?php
+                            $crud_buttons = [
+                                "can_view"     => $resource->canView(),
+                                "can_update"   => $resource->canUpdate(),
+                                "can_delete"   => $resource->canDelete(),
+                                "route_update" =>$resource->route()."/".$row->code
+                            ];
+                        ?>
+                        <resource-crud-buttons :data="{{json_encode($crud_buttons)}}" id="{{$row->id}}"></resource-crud-buttons>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

@@ -10,22 +10,38 @@
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#ui-advanced" aria-expanded="false" aria-controls="ui-advanced">
                     <span class="menu-title d-flex align-items-center">
-                        <i class="el-icon-s-grid mr-2"></i> Resources 
+                        <i class="el-icon-s-grid mr-2"></i> Resources
                         <i class="ml-auto menu-arrow">
-                            <span class="el-icon-arrow-down"></i>
+                            <span class="icon @if(strpos(Route::current()->getName(),"resource")===0) el-icon-arrow-up @else el-icon-arrow-down  @endif "></i>
                         </i>
                     </span>
                 </a>
-                <ul class="nav flex-column sub-menu">
-                    @foreach($resources as $resource)
-                        @if($resource->canView())
-                            <li class="nav-item @if(Menu::ResourceIsActive($resource->id)) active @endif">
-                                <a class="nav-link my-0" href="{{$resource->route()}}">{!! $resource->icon() !!} {{$resource->singularLabel()}}</a>
-                            </li>
-                        @endif
-                    @endforeach
-                </ul>
+                <div class="collapse @if(strpos(Route::current()->getName(),"resource")===0) show @endif" id="ui-advanced" style="">
+                    <ul class="nav flex-column sub-menu">
+                        @foreach($resources as $resource)
+                            @if($resource->canViewList())
+                                <li class="nav-item @if(Menu::ResourceIsActive($resource->id)) active @endif">
+                                    <a class="nav-link my-0" href="{{$resource->route()}}">{!! $resource->icon() !!} {{$resource->singularLabel()}}</a>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
             </li>
         @endif
     </ul>
 </nav>
+
+@section("scripts")
+<script>
+$('[data-toggle=collapse]').click(function(){
+    let icon = $(this).find(".icon")
+    if($(icon).hasClass("el-icon-arrow-down")) {
+        $(icon).removeClass("el-icon-arrow-down")
+        return $(icon).addClass("el-icon-arrow-up")
+    }
+    $(icon).removeClass("el-icon-arrow-up")
+    return $(icon).addClass("el-icon-arrow-down")
+});
+</script>
+@endsection

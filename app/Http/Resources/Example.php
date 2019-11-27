@@ -29,7 +29,6 @@ class Example extends Resource
     public function table()
     {
         return [
-            "code" => ["label" => "#", "size" => "10%", "sortable" => false],
             "name" => ["label" => "Nome"],
             "relation->name" => ["label" => "Relacionamento", "sortable" => true, "sortable_index" => "example_relation_id"],
             "f_active" => ["label" => "Ativo", "sortable" => true, "sortable_index" => "active"],
@@ -56,6 +55,16 @@ class Example extends Resource
             new ExampleFilterByDate,
             new ExampleFilterByRangeDate
         ];
+    }
+
+    public function search()
+    {
+        return ["name"];
+    }
+
+    public function canViewList()
+    {
+        return Auth::user()->hasRole("user"); //true
     }
 
     public function canView()

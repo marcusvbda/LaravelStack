@@ -8,15 +8,27 @@
         <nav aria-label="breadcrumb">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('admin.home')}}" class="link">Dashboard</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{$resource->label()}}</li>
                 </ol>
             </nav>
         </nav>
-        <div class="d-flex flex-row justify-content-between mb-3">
-            <h4>{!! @$resource->icon() !!} Listagem de {{$resource->label()}}</h4>
+        <h4>{!! @$resource->icon() !!} Listagem de {{$resource->label()}}</h4>
+        <div class="d-flex flex-row justify-content-between align-items-center">
+            <div class="col-md-3 col-sm-12 pl-0 mb-2">
+                <?php 
+                    $globalFilterData = [
+                        "filter_route" => request()->url(),
+                        "query" => request()->query(),
+                        "value" => @$_GET["_"] ? $_GET["_"] : ""
+                    ];
+                ?>
+                @if($resource->search())
+                    <resource-filter-global :data="{{json_encode($globalFilterData)}}"></resource-filter-global>
+                @endif
+            </div>
             @if($resource->canCreate())
-            <a class="btn btn-primary btn-sm-block text-white cursor-pointer" href="{{route('resource.create',['resource'=>$resource->id])}}">
+            <a class="btn btn-primary btn-sm-block text-white cursor-pointer mb-3" href="{{route('resource.create',['resource'=>$resource->id])}}">
                     <span class="el-icon-plus mr-2"></span>Cadastrar {{$resource->singularLabel()}}
                 </a>
             @endif

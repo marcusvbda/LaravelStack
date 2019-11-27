@@ -1,12 +1,12 @@
 <template>
-<div class="d-flex justify-content-between align-items-center">
+<div class="d-flex justify-content-end align-items-center">
     <ul class="navbar-nav">
         <li class="nav-item dropdown">
-            <button class="nav-link dropdown-toggle d-flex align-items-center btn btn-primary btn-sm btn-sm-block px-5" href="#" id="resourceFilterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="el-icon-search mr-2"></span>Filtros
+            <button class="nav-link dropdown-toggle d-flex align-items-center btn btn-sm btn-sm-block px-5" v-bind:class="{'btn-primary':data.hasFilter, 'btn-outline-dark':!data.hasFilter}" href="#" id="resourceFilterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="el-icon-more mr-2"></span>
                 <span v-if="data.hasFilter" class="badge badge-light ml-2 mt-1">{{data.hasFilter}}</span>
             </button>
-            <div class="dropdown-menu filter p-0" id="prevent_close_menu" aria-labelledby="resourceFilterDropdown">
+            <div class="dropdown-menu dropdown-menu-right filter p-0" id="prevent_close_menu" aria-labelledby="resourceFilterDropdown">
                 <table class="table table-striped">
                     <tbody>
                         <tr><td>Por Página :</td></tr>
@@ -99,7 +99,7 @@ export default {
         setFormValue(index,value,filter) {
             if(filter.component == "text-filter")        value = String(value)
             if(filter.component == "check-filter")       value = value==="true"
-            if(filter.component == "select-filter")      value = value ? Number(value) : ""
+            if(filter.component == "select-filter")      value = value ? (!isNaN(Number(value)) ? Number(value) : "") : ""
             if(filter.component == "rangedate-filter")   value = value.split(",")
             this.$set(this.filter,index,value)
         },
@@ -113,8 +113,17 @@ export default {
             let str_query = ""
             let filter_keys = Object.keys(this.filter)
             for(let i in filter_keys) this.data.query[filter_keys[i]] = this.filter[filter_keys[i]]
-            for(let i in this.data.query) if(i!="page") str_query += `${i}=${this.data.query[i]}&`
+            for(let i in this.data.query) {
+                if((i!="page")&&(i!="_")) {
+                    if(!["null",null].includes(this.data.query[i])) {
+                        str_query += `${i}=${this.data.query[i]}&`
+                    }
+                }
+            }
             str_query = str_query.slice( 0, -1 )
+            if(this.data.query["_"]) {
+                str_query += `${str_query ? "&" : ""}_=${this.data.query["_"] ? this.data.query["_"] : ""}`
+            }
             window.location.href =  `${this.data.route}?${str_query}`
         }
     },
