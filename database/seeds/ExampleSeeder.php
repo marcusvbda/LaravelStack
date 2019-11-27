@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\{Example, ExampleRelation};
+use App\Http\Models\{Example, ExampleRelation};
+// use DB;
 
 class ExampleSeeder extends Seeder
 {
@@ -12,13 +13,15 @@ class ExampleSeeder extends Seeder
      */
     public function run()
     {
-        ExampleRelation::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table("example_relation")->truncate();
         for ($i = 1; $i <= 10; $i++) {
             ExampleRelation::create(["name" => uniqid()]);
         }
-        Example::truncate();
-        for ($i = 1; $i <= 1000; $i++) {
+        DB::table("example")->truncate();
+        for ($i = 1; $i <= 100; $i++) {
             Example::create(["name" => "lorem ipsum " . $i, "example_relation_id" => rand(1, 10), "active" => (rand(0, 1) === 1)]);
         }
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

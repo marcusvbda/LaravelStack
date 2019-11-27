@@ -16,7 +16,7 @@ class ExampleRelation extends Migration
         Schema::create('example_relation', function (Blueprint $table) {
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
-            $table->egine = 'InnoDB';
+            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('name');
             $table->rememberToken();
