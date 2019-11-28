@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label v-if="!hidelabel" class="mb-1"><span v-html="label ? label : ''"></span></label>
+        <label class="mb-1"><span v-html="label ? label : ''"></span></label>
         <div class="input-group">
             <div class="input-group-prepend" v-if="prepend">
                 <span class="input-group-text">
@@ -23,7 +23,7 @@
 </template>
 <script>
 export default {
-    props:["label","type","placeholder","errors","prepend","append","hidelabel","disabled"],
+    props:["label","type","placeholder","errors","prepend","append","disabled"],
     data() {
         return {
             val : null

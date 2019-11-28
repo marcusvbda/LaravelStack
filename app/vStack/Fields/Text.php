@@ -22,9 +22,10 @@ class Text extends Field
         $type           = $this->options["type"];
         $field          = $this->options["field"];
         $placeholder    = $this->options["placeholder"];
+        $disabled       = @$this->options["disabled"] ? "true" : "false";
         $view = "<v-input class='mb-3'  
                     :hidelabel='hide_label' 
-                    :disabled='hide_label'                                                                  
+                    :disabled='$disabled'                                                                  
                     label='$label'                                                                   
                     prepend='$prepend'                                                               
                     append='$append'                                                               

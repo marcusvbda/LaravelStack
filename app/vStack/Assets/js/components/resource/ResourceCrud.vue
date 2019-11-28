@@ -30,7 +30,6 @@ export default {
             loading : false,
             form : {},
             errors : {},
-            hide_label : false
         }
     },
     components : {

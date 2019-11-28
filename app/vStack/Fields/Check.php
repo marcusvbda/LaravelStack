@@ -21,10 +21,11 @@ class Check extends Field
         $inactive_color = @$this->options["inactive_color"] ? $this->options["inactive_color"] : "red";
         $active_text    = @$this->options["active_text"] ? $this->options["active_text"] : "";
         $inactive_text  = @$this->options["inactive_text"] ? $this->options["inactive_text"] : "";
+        $disabled       = @$this->options["disabled"] ? "true" : "false";
         $view = "<div>                                         
                     <label v-if='!hide_label' class='mb-3'>$label</label>                     
                     <el-switch             
-                        :disabled='hide_label'                            
+                        :disabled='$disabled'                            
                         class='ml-3'                          
                         v-model='form.$field'                 
                         active-color='$active_color'          

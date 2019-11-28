@@ -3980,7 +3980,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["label", "type", "placeholder", "errors", "prepend", "append", "hidelabel", "disabled"],
+  props: ["label", "type", "placeholder", "errors", "prepend", "append", "disabled"],
   data: function data() {
     return {
       val: null
@@ -4040,7 +4040,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["placeholder", "label", "route_list", "list_model", "hidelabel", "disabled", "errors"],
+  props: ["placeholder", "label", "route_list", "list_model", "disabled", "errors"],
   data: function data() {
     return {
       loading: true,
@@ -4135,8 +4135,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       loading: false,
       form: {},
-      errors: {},
-      hide_label: false
+      errors: {}
     };
   },
   components: {
@@ -73317,13 +73316,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    !_vm.hidelabel
-      ? _c("label", { staticClass: "mb-1" }, [
-          _c("span", {
-            domProps: { innerHTML: _vm._s(_vm.label ? _vm.label : "") }
-          })
-        ])
-      : _vm._e(),
+    _c("label", { staticClass: "mb-1" }, [
+      _c("span", {
+        domProps: { innerHTML: _vm._s(_vm.label ? _vm.label : "") }
+      })
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "input-group" }, [
       _vm.prepend
@@ -73487,9 +73484,7 @@ var render = function() {
         class: { "is-invalid": _vm.errors }
       },
       [
-        !_vm.hidelabel
-          ? _c("label", { domProps: { innerHTML: _vm._s(_vm.label) } })
-          : _vm._e(),
+        _c("label", { domProps: { innerHTML: _vm._s(_vm.label) } }),
         _vm._v(" "),
         _c(
           "el-select",

@@ -1,7 +1,7 @@
 <template>
     <div class="mb-3">
         <div class="input-group v-select"  v-bind:class="{'is-invalid' : errors}">
-            <label v-if="!hidelabel" v-html="label"></label>
+            <label v-html="label"></label>
             <el-select :disabled="disabled" class="w-100" clearable v-model="value" filterable :placeholder="placeholder" v-loading="loading"
                
             >
@@ -18,7 +18,7 @@
 </template>
 <script>
 export default {
-    props : ["placeholder","label","route_list","list_model","hidelabel","disabled","errors"],
+    props : ["placeholder","label","route_list","list_model","disabled","errors"],
     data() {
         return {
             loading : true,
