@@ -10,7 +10,7 @@
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#ui-advanced" aria-expanded="false" aria-controls="ui-advanced">
                     <span class="menu-title d-flex align-items-center">
-                        <i class="el-icon-s-grid mr-2"></i> Resources
+                        <i class="el-icon-s-grid mr-2"></i> Recursos
                         <i class="ml-auto menu-arrow">
                             <span class="icon @if(strpos(Route::current()->getName(),"resource")===0) el-icon-arrow-up @else el-icon-arrow-down  @endif "></i>
                         </i>
