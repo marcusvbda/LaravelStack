@@ -1,6 +1,6 @@
 {
-    "/assets/js/app.js": "/assets/js/app.js",
-    "/assets/css/app.css": "/assets/css/app.css",
-    "/assets/js/manifest.js": "/assets/js/manifest.js",
-    "/assets/js/vendor.js": "/assets/js/vendor.js"
+    "/assets/backend/js/app.js": "/assets/backend/js/app.js",
+    "/assets/backend/css/app.css": "/assets/backend/css/app.css",
+    "/assets/backend/js/manifest.js": "/assets/backend/js/manifest.js",
+    "/assets/backend/js/vendor.js": "/assets/backend/js/vendor.js"
 }

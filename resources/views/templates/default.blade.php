@@ -4,7 +4,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<meta name="root-url" content="{{ url('') }}">
-		<link rel="stylesheet" href="{{ mix('assets/css/app.css') }}">
+		<link rel="stylesheet" href="{{ mix('assets/backend/css/app.css') }}">
 		<link rel="icon" type="image/png" href="{{ URL::asset('/assets/images/favicon.png') }}" />
 		<title>{{config("app.name")}} - @yield("title")</title>
 	</head>
@@ -12,9 +12,9 @@
 		<div id="app">
 			@yield("body")
 		</div>
-		<script src="{{ mix('/assets/js/manifest.js')}}"></script>
-		<script src="{{ mix('/assets/js/vendor.js')}}"></script>
-		<script src="{{ mix('/assets/js/app.js') }}"></script>
+		<script src="{{ mix('/assets/backend/js/manifest.js')}}"></script>
+		<script src="{{ mix('/assets/backend/js/vendor.js')}}"></script>
+		<script src="{{ mix('/assets/backend/js/app.js') }}"></script>
 		@yield("scripts")
 	</body>
 </html>

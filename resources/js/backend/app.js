@@ -1,4 +1,4 @@
-require('../../app/vStack/Assets/js/components/autoload')
+require('../../../app/vStack/Assets/js/components/autoload')
 require('./libs/jquery')
 require('bootstrap')
 require('./components/autoload')
