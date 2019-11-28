@@ -23,7 +23,7 @@ export default {
                 this.loading = this.$loading()
                 this.$http.delete(this.data.route_destroy,{}).then( res => {
                     res = res.data
-                    window.location.reload()
+                    return window.location.href=res.route
                 }).catch( er => {
                     this.loading.close()
                     console.log(er)

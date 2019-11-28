@@ -19,6 +19,5 @@ Route::group(['prefix' => $backend_prefix], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::get('', 'HomeController@index')->name("admin.home");
         require "partials/account.php";
-        require "partials/resources.php";
     });
 });

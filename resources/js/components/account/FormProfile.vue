@@ -29,7 +29,7 @@
                                 <div class="col-12 form-label-group">
                                     <v-input class="mb-3" 
                                         :label="`<b>Nome</b>`" 
-                                        :prepend="`<i class='el-icon-user text-primary'></i>`" 
+                                        :prepend="`<i class='el-icon-user text-secondary'></i>`" 
                                         v-model="editing_form.name" 
                                         placeholder="Digite aqui seu nome ..." 
                                         :errors="errors.name ? errors.name : false"

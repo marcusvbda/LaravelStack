@@ -1,5 +1,5 @@
 <div class="table-responsive-sm">
-    <table class="table table-striped hovered resource-table table-hover">
+    <table class="table table-striped hovered resource-table table-hover mb-0">
         <thead>
             <tr>
                 <?php

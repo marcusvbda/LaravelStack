@@ -29,7 +29,8 @@ export default {
         return {
             loading : false,
             form : {},
-            errors : {}
+            errors : {},
+            hide_label : false
         }
     },
     components : {

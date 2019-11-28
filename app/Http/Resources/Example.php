@@ -50,7 +50,8 @@ class Example extends Resource
             new BelongsTo([
                 "label" => "<b>Relacionamento</b>", "field" => "example_relation_id",
                 "placeholder" => "Selecione um Relacionamento",
-                "model" => "App\Http\Models\ExampleRelation"
+                "model" => "App\Http\Models\ExampleRelation",
+                "rules" => "required"
             ])
         ];
     }

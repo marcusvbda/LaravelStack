@@ -1,13 +1,13 @@
 <template>
     <div>
-        <label class="mb-1"><span v-html="label ? label : ''"></span></label>
+        <label v-if="!hidelabel" class="mb-1"><span v-html="label ? label : ''"></span></label>
         <div class="input-group">
             <div class="input-group-prepend" v-if="prepend">
                 <span class="input-group-text">
                     <span v-html="prepend ? prepend : ''"></span>
                 </span>
             </div>
-            <input class="form-control" v-model="val" v-bind:class="{'is-invalid' : errors}" :placeholder="placeholder ? placeholder : ''" name="email" :type="type ? type : 'text'">
+            <input :disabled="disabled" class="form-control" v-model="val" v-bind:class="{'is-invalid' : errors}" :placeholder="placeholder ? placeholder : ''" name="email" :type="type ? type : 'text'">
             <div class="input-group-append" v-if="append">
                 <span class="input-group-text">
                     <span v-html="append ? append : ''"></span>
@@ -23,7 +23,7 @@
 </template>
 <script>
 export default {
-    props:["label","type","placeholder","errors","prepend","append"],
+    props:["label","type","placeholder","errors","prepend","append","hidelabel","disabled"],
     data() {
         return {
             val : null

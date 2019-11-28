@@ -36,10 +36,10 @@
         
         <div class="card">
             <div class="card-header">
-                @include("admin.vStack.resources.partials._filter")
+                @include("vStack::resources.partials._filter")
             </div>
             <div class="card-body p-0">
-                @include("admin.vStack.resources.partials._table")
+                @include("vStack::resources.partials._table")
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-between align-items-center">

@@ -24,7 +24,7 @@ class Example extends Migration
             $table->foreign('example_relation_id')
                 ->references('id')
                 ->on('example_relation')
-                ->onDelete('cascade');
+                ->onDelete('restrict');
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

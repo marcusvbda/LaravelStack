@@ -14,7 +14,7 @@ class ResourceController extends Controller
         $resource = ResourcesHelpers::find($resource);
         if (!$resource->canViewList()) abort(403);
         $data = $this->getPaginatedData($resource, $request);
-        return view("admin.vStack.resources.index", compact("resource", "data"));
+        return view("vStack::resources.index", compact("resource", "data"));
     }
 
     private function getPaginatedData($resource, Request $request)
@@ -38,7 +38,7 @@ class ResourceController extends Controller
         if (!$resource->canCreate()) abort(403);
         $data = $this->makeCrudData($resource);
         $data["page_type"] = "Cadastro";
-        return view("admin.vStack.resources.crud", compact("resource", "data"));
+        return view("vStack::resources..crud", compact("resource", "data"));
     }
 
     public function edit($resource, $code)
@@ -48,7 +48,7 @@ class ResourceController extends Controller
         $content = $resource->model->findOrFail($code);
         $data = $this->makeCrudData($resource, $content);
         $data["page_type"] = "Edição";
-        return view("admin.vStack.resources.crud", compact("resource", "data"));
+        return view("vStack::resources..crud", compact("resource", "data"));
     }
 
     public function destroy($resource, $code)
@@ -58,10 +58,54 @@ class ResourceController extends Controller
         $content = $resource->model->findOrFail($code);
         if ($content->delete()) {
             Messages::send("success", $resource->singularLabel() . " Excluido com sucesso !!");
-            return ["success" => true];
+            return ["success" => true, "route" => $resource->route()];
         }
         Messages::send("error", " Erro ao excluir com " . $resource->singularLabel() . " !!");
-        return ["success" => false];
+        return ["success" => false,  "route" => $resource->route()];
+    }
+
+    public function view($resource, $code)
+    {
+        $resource = ResourcesHelpers::find($resource);
+        if (!$resource->canView()) abort(403);
+        $content = $resource->model->findOrFail($code);
+        $data = $this->makeViewData($content->code, $resource, $content);
+        $data["page_type"] = "Visualização";
+        return view("vStack::resources..view", compact("resource", "data"));
+    }
+
+    private function makeViewData($code, $resource, $content = null)
+    {
+        $route = $resource->route();
+        return [
+            "fields"        => $this->makeViewDataFields($content, $resource->fields()),
+            "can_update"    => $resource->canUpdate(),
+            "can_delete"    => $resource->canDelete(),
+            "update_route"  => $route . "/" . $code . "/edit",
+            "route_destroy" => $route . "/" . $code . "/destroy",
+        ];
+    }
+
+    private function makeViewDataFields($content, $fields)
+    {
+        $data = [];
+        if (!$content) return $fields;
+        foreach ($fields  as $field) {
+            switch ($field->options["type"]) {
+                case "text":
+                    $data[$field->options["label"]] = @$content->{$field->options["field"]};
+                    break;
+                case "check":
+                    $data[$field->options["label"]] = @$content->{$field->options["field"]} ? '<span class="badge badge-success">Sim</span>' : '<span class="badge badge-danger">Não</span>';
+                    break;
+                default:
+                    $model = $field->options["model"];
+                    $value = app()->make($model)->findOrFail($content->{$field->options["field"]})->name;
+                    $data[$field->options["label"]] = $value;
+                    break;
+            }
+        }
+        return $data;
     }
 
     private function makeCrudData($resource, $content = null)
@@ -73,16 +117,6 @@ class ResourceController extends Controller
             "list_route"  => route('resource.index', ["resource" => $resource->id]),
             "resource_id" => $resource->id
         ];
-    }
-
-    public function view($resource, $code)
-    {
-        $resource = ResourcesHelpers::find($resource);
-        if (!$resource->canView()) abort(403);
-        $content = $resource->model->findOrFail($code);
-        $data = $this->makeCrudData($resource, $content);
-        $data["page_type"] = "Visualização";
-        return view("admin.vStack.resources.view", compact("resource", "data"));
     }
 
     private function makeCrudDataFields($content, $fields)

@@ -5,7 +5,6 @@ namespace App\vStack\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Traits\hasCode;
-use Carbon\Carbon;
 
 class DefaultModel extends Model
 {

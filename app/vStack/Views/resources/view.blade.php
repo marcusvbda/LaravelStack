@@ -15,8 +15,13 @@
             </nav>
         </nav>
         <div class="d-flex flex-row justify-content-between mb-3">
-            <h4>{!! @$resource->icon() !!} {{$data["page_type"]}} de {{$resource->singularLabel()}}</h4>
+            
         </div>
+        <resource-view :data="{{json_encode($data)}}">
+            <template slot="title">
+                <h4>{!! @$resource->icon() !!} {{$data["page_type"]}} de {{$resource->singularLabel()}}</h4>
+            </template>
+        </resource-view>
     </div>
 </div>
 @endsection
