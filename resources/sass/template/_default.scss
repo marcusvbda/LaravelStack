@@ -26,8 +26,7 @@ body {
 .sidebar {
     color : #d6d6d6;
     min-height: calc(100vh - 56px);
-    background: $secondary;
-    background: linear-gradient(180deg, $secondary 0%, rgba(245,245,245,1) 100%);    
+    background: $secondary;   
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     padding: 0;

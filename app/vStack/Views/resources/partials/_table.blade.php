@@ -37,10 +37,10 @@
                                 $indexes = explode("->",$key);
                                 $_val = $row;
                                 foreach($indexes as $i) {
-                                    $_val = $_val->{$i}; 
+                                    $_val = @$_val->{$i}; 
                                 }
                             ?>
-                            {!! @$_val ? $_val : $row->{$value} !!}
+                            {!! @$_val ? $_val : @$row->{$value} !!}
                         </td>
                     @endforeach
                     <td>
