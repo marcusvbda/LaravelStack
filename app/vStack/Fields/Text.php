@@ -17,13 +17,15 @@ class Text extends Field
     private function makeView()
     {
         $label          = $this->options["label"];
-        $prepend        = $this->options["prepend"];
+        $append         = @$this->options["append"];
+        $prepend        = @$this->options["prepend"];
         $type           = $this->options["type"];
         $field          = $this->options["field"];
         $placeholder    = $this->options["placeholder"];
         $view = "<v-input class='mb-3'                                                            
                     label='$label'                                                                   
                     prepend='$prepend'                                                               
+                    append='$append'                                                               
                     type='$type'                                                                     
                     v-model='form.$field'                                                            
                     placeholder='$placeholder'                                                       

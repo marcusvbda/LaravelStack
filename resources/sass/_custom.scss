@@ -2,3 +2,11 @@
 .cursor-pointer {
     cursor : pointer;
 }
+
+
+.form-control {
+    &::placeholder {
+        color : #C0C4CC;
+        font-size : 14px;
+    }
+}

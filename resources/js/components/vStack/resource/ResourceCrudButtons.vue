@@ -8,6 +8,11 @@
 <script>
 export default {
     props:["data","id"],
+    data() {
+        return {
+            loading : null
+        }
+    },
     methods : {
         destroy() {
             this.$confirm(`Confirma Exclusão ?`, "Confirmação", {
@@ -15,7 +20,14 @@ export default {
                 cancelButtonText: "Não",
                 type: 'error'
             }).then(() => {
-                alert("DESTROY"+this.id)
+                this.loading = this.$loading()
+                this.$http.delete(this.data.route_destroy,{}).then( res => {
+                    res = res.data
+                    window.location.reload()
+                }).catch( er => {
+                    this.loading.close()
+                    console.log(er)
+                })
             }).catch( () => false)
         }
     }

@@ -49,7 +49,8 @@
                                 "can_view"     => $resource->canView(),
                                 "can_update"   => $resource->canUpdate(),
                                 "can_delete"   => $resource->canDelete(),
-                                "route_update" =>$resource->route()."/".$row->code
+                                "route_update" => $resource->route()."/".$row->code,
+                                "route_destroy"=> $resource->route()."/".$row->code."/destroy"
                             ];
                         ?>
                         <resource-crud-buttons :data="{{json_encode($crud_buttons)}}" id="{{$row->id}}"></resource-crud-buttons>

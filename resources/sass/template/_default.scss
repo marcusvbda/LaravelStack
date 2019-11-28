@@ -84,7 +84,7 @@ body {
                             transition :.5s;
                             color : white;
                         }
-                        margin-left: 40px;
+                        margin-left: 20px;
                         font-size:14px;
                     }
                 }
@@ -162,7 +162,7 @@ body {
     width: 35px;
     font-size: 10px;
     &.color{
-        background-color: #78909C;
+        background-color: $secondary;
         font-weight: 500;
         color: white !important;
     }

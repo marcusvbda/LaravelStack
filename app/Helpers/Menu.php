@@ -8,8 +8,6 @@ class Menu
 
     static function ResourceIsActive($route)
     {
-        $aux =  explode("/", url()->current());
-        $aux = "resource." . $aux[count($aux) - 1];
-        return self::isActive($route, $aux);
+        return url()->current() == $route;
     }
 }

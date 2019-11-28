@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use App\vStack\Resource;
 use App\Http\Filters\Example\{ExampleFilterByName, ExampleFilterByRelation, ExampleFilterByActive, ExampleFilterByDate, ExampleFilterByRangeDate};
-use App\vStack\Fields\{Text, Check};
+use App\vStack\Fields\{Text, Check, BelongsTo};
 use Auth;
 
 class Example extends Resource
@@ -46,6 +46,11 @@ class Example extends Resource
             ]),
             new Check([
                 "label" => "<b>Ativo</b>", "field" => "active"
+            ]),
+            new BelongsTo([
+                "label" => "<b>Relacionamento</b>", "field" => "example_relation_id",
+                "placeholder" => "Selecione um Relacionamento",
+                "model" => "App\Http\Models\ExampleRelation"
             ])
         ];
     }

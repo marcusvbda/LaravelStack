@@ -19,11 +19,15 @@
                 <div class="collapse @if(strpos(Route::current()->getName(),"resource")===0) show @endif" id="ui-advanced" style="">
                     <ul class="nav flex-column sub-menu">
                         @foreach($resources as $resource)
-                            @if($resource->canViewList())
-                                <li class="nav-item @if(Menu::ResourceIsActive($resource->id)) active @endif">
-                                    <a class="nav-link my-0" href="{{$resource->route()}}">{!! $resource->icon() !!} {{$resource->singularLabel()}}</a>
-                                </li>
-                            @endif
+                            @foreach(array_keys($resource) as $key)
+                                @if($resource[$key]->canViewList())
+                                    <li class="nav-item @if(Menu::ResourceIsActive($resource[$key]->route())) active @endif">
+                                        <a class="nav-link my-0" href="{{$resource[$key]->route()}}">
+                                            <div class="d-flex flex-row flex-wrap align-items-center">{!! $resource[$key]->icon() !!} {{$resource[$key]->singularLabel()}}</div>
+                                        </a>
+                                    </li>
+                                @endif
+                            @endforeach
                         @endforeach
                     </ul>
                 </div>

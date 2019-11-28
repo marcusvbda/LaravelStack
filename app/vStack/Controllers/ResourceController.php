@@ -36,7 +36,6 @@ class ResourceController extends Controller
     {
         $resource = ResourcesHelpers::find($resource);
         if (!$resource->canCreate()) abort(403);
-        // dd($resource->fields());
         $data = $this->makeCrudData($resource);
         return view("admin.vStack.resources.crud", compact("resource", "data"));
     }
@@ -50,9 +49,21 @@ class ResourceController extends Controller
         return view("admin.vStack.resources.crud", compact("resource", "data"));
     }
 
+    public function destroy($resource, $code)
+    {
+        $resource = ResourcesHelpers::find($resource);
+        if (!$resource->canDelete()) abort(403);
+        $content = $resource->model->findOrFail($code);
+        if ($content->delete()) {
+            Messages::send("success", $resource->singularLabel() . " Excluido com sucesso !!");
+            return ["success" => true];
+        }
+        Messages::send("error", " Erro ao excluir com " . $resource->singularLabel() . " !!");
+        return ["success" => false];
+    }
+
     private function makeCrudData($resource, $content = null)
     {
-        // dd($resource->fields());
         return [
             "id"          => @$content->id,
             "page_type"   => @$content->id ? 'Edição' : 'Cadastro',
@@ -87,5 +98,11 @@ class ResourceController extends Controller
         $target->save();
         Messages::send("success", $resource->singularLabel() . " Salvo com sucesso !!");
         return ["success" => true, "route" => route('resource.index', ["resource" => $resource->id])];
+    }
+
+    public function option_list(Request $request)
+    {
+        $model = app()->make($request["model"]);
+        return ["success" => true, "data" => $model->select("id", "name")->get()];
     }
 }

@@ -10152,7 +10152,7 @@ body {
 
 .sidebar .nav .nav-item .sub-menu .nav-item .nav-link {
   color: #d6d6d6;
-  margin-left: 40px;
+  margin-left: 20px;
   font-size: 14px;
 }
 
@@ -10238,7 +10238,7 @@ body {
 }
 
 .img-profile.color {
-  background-color: #78909C;
+  background-color: #444F5E;
   font-weight: 500;
   color: white !important;
 }
@@ -10261,4 +10261,29 @@ body {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.form-control::-webkit-input-placeholder {
+  color: #C0C4CC;
+  font-size: 14px;
+}
+
+.form-control::-moz-placeholder {
+  color: #C0C4CC;
+  font-size: 14px;
+}
+
+.form-control:-ms-input-placeholder {
+  color: #C0C4CC;
+  font-size: 14px;
+}
+
+.form-control::-ms-input-placeholder {
+  color: #C0C4CC;
+  font-size: 14px;
+}
+
+.form-control::placeholder {
+  color: #C0C4CC;
+  font-size: 14px;
 }

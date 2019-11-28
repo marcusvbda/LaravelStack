@@ -9,7 +9,7 @@ class ResourcesHelpers
         foreach (glob($path . "*.php") as $filename) {
             if (basename($filename) != "Resource.php") {
                 $name = str_replace(".php", "", basename($filename));
-                $data = [$name => self::make($filename, $name)];
+                $data[] = [$name => self::make($filename, $name)];
             }
         }
         return $data;
@@ -25,14 +25,17 @@ class ResourcesHelpers
     static function find($name)
     {
         $resources = self::all();
-        $resource = array_filter(
-            $resources,
-            function ($r) use ($name) {
-                return $r->id == $name;
+        $_resource = null;
+        foreach ($resources as $resource) {
+            foreach (array_keys($resource) as $key) {
+                if ($resource[$key]->id == $name) {
+                    $_resource =  $resource[$key];
+                    break;
+                }
             }
-        );
-        if (!$resource) abort(404);
-        foreach ($resource as $value) return $value;
+        }
+        if (!$_resource) abort(404);
+        return $_resource;
     }
 
     static function sortLink($route, $query, $field, $type)

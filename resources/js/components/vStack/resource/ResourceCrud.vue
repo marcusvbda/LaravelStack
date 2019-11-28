@@ -47,7 +47,9 @@ export default {
         initForm() {
             let fields = this.data.fields
             for(let i in fields) {
-                this.$set(this.form, fields[i].options.field, fields[i].options.value ? fields[i].options.value : fields[i].options.default)
+                let field_name = fields[i].options.field
+                let field_value = fields[i].options.value ? fields[i].options.value : fields[i].options.default
+                this.$set(this.form, field_name, field_value)
             }
             this.$set(this.form, "resource_id", this.data.resource_id)
             if(this.data.id) this.$set(this.form, "id", this.data.id)
