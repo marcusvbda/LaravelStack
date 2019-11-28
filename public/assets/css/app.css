@@ -10055,8 +10055,8 @@ body {
   color: #d6d6d6;
   min-height: calc(100vh - 56px);
   background: #444F5E;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(40%, #444F5E), to(whitesmoke));
-  background: linear-gradient(180deg, #444F5E 40%, whitesmoke 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#444F5E), to(whitesmoke));
+  background: linear-gradient(180deg, #444F5E 0%, whitesmoke 100%);
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   padding: 0;
