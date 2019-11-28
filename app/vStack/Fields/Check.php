@@ -22,7 +22,7 @@ class Check extends Field
         $active_text    = @$this->options["active_text"] ? $this->options["active_text"] : "";
         $inactive_text  = @$this->options["inactive_text"] ? $this->options["inactive_text"] : "";
         $view = "<div>                                         
-                    <label>$label</label>                     
+                    <label class='mb-3'>$label</label>                     
                     <el-switch                                
                         class='ml-3'                          
                         v-model='form.$field'                 

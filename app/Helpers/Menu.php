@@ -6,8 +6,12 @@ class Menu
         return strpos(($compare ? $compare : Route::currentRouteName()), $route) !== false;
     }
 
-    static function ResourceIsActive($route)
+    static function ResourceIsActive($id)
     {
-        return url()->current() == $route;
+        $current = explode("/", url()->current());
+        $resp = array_filter($current, function ($a) use ($id) {
+            if ($a == $id) return $a;
+        });
+        return count($resp) > 0;
     }
 }

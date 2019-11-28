@@ -1,5 +1,5 @@
 <template>
-    <div class="my-3">
+    <div class="mb-3">
         <label v-html="label"></label>
         <el-select class="w-100" clearable v-model="value" filterable :placeholder="placeholder" v-loading="loading">
             <el-option label="" value=""></el-option>

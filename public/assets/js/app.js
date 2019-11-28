@@ -73585,7 +73585,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "my-3" },
+    { staticClass: "mb-3" },
     [
       _c("label", { domProps: { innerHTML: _vm._s(_vm.label) } }),
       _vm._v(" "),
@@ -73751,7 +73751,7 @@ var render = function() {
     { staticClass: "d-flex flex-row justify-content-center flex-wrap" },
     [
       _vm.data.can_view
-        ? _c("a", [
+        ? _c("a", { attrs: { href: _vm.data.route_view } }, [
             _c("span", { staticClass: "icon_resource el-icon-view px-3" })
           ])
         : _vm._e(),

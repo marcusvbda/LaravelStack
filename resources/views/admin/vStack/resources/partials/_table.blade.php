@@ -49,7 +49,8 @@
                                 "can_view"     => $resource->canView(),
                                 "can_update"   => $resource->canUpdate(),
                                 "can_delete"   => $resource->canDelete(),
-                                "route_update" => $resource->route()."/".$row->code,
+                                "route_view"   => $resource->route()."/".$row->code,
+                                "route_update" => $resource->route()."/".$row->code."/edit",
                                 "route_destroy"=> $resource->route()."/".$row->code."/destroy"
                             ];
                         ?>

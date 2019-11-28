@@ -37,6 +37,7 @@ class ResourceController extends Controller
         $resource = ResourcesHelpers::find($resource);
         if (!$resource->canCreate()) abort(403);
         $data = $this->makeCrudData($resource);
+        $data["page_type"] = "Cadastro";
         return view("admin.vStack.resources.crud", compact("resource", "data"));
     }
 
@@ -46,6 +47,7 @@ class ResourceController extends Controller
         if (!$resource->canUpdate()) abort(403);
         $content = $resource->model->findOrFail($code);
         $data = $this->makeCrudData($resource, $content);
+        $data["page_type"] = "Edição";
         return view("admin.vStack.resources.crud", compact("resource", "data"));
     }
 
@@ -66,12 +68,21 @@ class ResourceController extends Controller
     {
         return [
             "id"          => @$content->id,
-            "page_type"   => @$content->id ? 'Edição' : 'Cadastro',
             "fields"      => $this->makeCrudDataFields($content, $resource->fields()),
             "store_route" => route('resource.store'),
             "list_route"  => route('resource.index', ["resource" => $resource->id]),
             "resource_id" => $resource->id
         ];
+    }
+
+    public function view($resource, $code)
+    {
+        $resource = ResourcesHelpers::find($resource);
+        if (!$resource->canView()) abort(403);
+        $content = $resource->model->findOrFail($code);
+        $data = $this->makeCrudData($resource, $content);
+        $data["page_type"] = "Visualização";
+        return view("admin.vStack.resources.view", compact("resource", "data"));
     }
 
     private function makeCrudDataFields($content, $fields)
