@@ -19,6 +19,7 @@ class Example extends Migration
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('name');
+            $table->text('text')->nullable();
             $table->boolean('active')->default(true);
             $table->unsignedBigInteger('example_relation_id');
             $table->foreign('example_relation_id')

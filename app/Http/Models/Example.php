@@ -21,12 +21,14 @@ class Example extends DefaultModel
 
     public function getLastUpdateAttribute()
     {
+        if (!$this->created_at) return;
         return $this->created_at->diffForHumans();
     }
 
     public function getFCreatedAtAttribute()
     {
-        return $this->created_at->format("d/m/Y - H:i:s");
+        if (!$this->created_at) return;
+        return @$this->created_at->format("d/m/Y - H:i:s");
     }
 
     public function relation()

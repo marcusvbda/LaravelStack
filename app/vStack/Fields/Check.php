@@ -15,6 +15,7 @@ class Check extends Field
 
     private function makeView()
     {
+        $view = "";
         $label          = $this->options["label"];
         $field          = $this->options["field"];
         $active_color   = @$this->options["active_color"] ? $this->options["active_color"] : "green";
@@ -22,18 +23,21 @@ class Check extends Field
         $active_text    = @$this->options["active_text"] ? $this->options["active_text"] : "";
         $inactive_text  = @$this->options["inactive_text"] ? $this->options["inactive_text"] : "";
         $disabled       = @$this->options["disabled"] ? "true" : "false";
-        $view = "<div>                                         
-                    <label v-if='!hide_label' class='mb-3'>$label</label>                     
-                    <el-switch             
-                        :disabled='$disabled'                            
-                        class='ml-3'                          
-                        v-model='form.$field'                 
-                        active-color='$active_color'          
-                        inactive-color='$inactive_color'      
-                        active-text='$active_text'            
-                        inactive-text='$inactive_text'>       
-                    </el-switch>                              
-                </div>";
+        if (!@$this->options["hide"])
+            $view = "<div class='form-group d-flex align-items-center row mb-3'>
+                        <label class='col-sm-2 col-form-label'>$label</label>
+                        <div class='col-sm-10 pl-0'>                                                   
+                            <el-switch             
+                                :disabled='$disabled'                            
+                                class='ml-3'                          
+                                v-model='form.$field'                 
+                                active-color='$active_color'          
+                                inactive-color='$inactive_color'      
+                                active-text='$active_text'            
+                                inactive-text='$inactive_text'>       
+                            </el-switch> 
+                        </div>                             
+                    </div>";
         return $this->view = $view;
     }
 }

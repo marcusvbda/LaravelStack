@@ -29,7 +29,7 @@ class ExampleRelation extends Resource
     {
         return [
             new Text([
-                "label" => "<b>Nome</b>", "field" => "name", "required" => true, "prepend" => "A",
+                "label" => "<b>Nome</b>", "field" => "name", "required" => true,
                 "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255"
             ]),
         ];

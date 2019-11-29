@@ -3,7 +3,7 @@
         <form class="needs-validation m-0" novalidate v-on:submit.prevent="submit" >
             <div class="card-body">
                 <div class="row d-flex justify-content-center">
-                    <div class="col-md-8 col-sm-12">
+                    <div class="col-md-10 col-sm-12">
                         <template v-for="(field,i) in data.fields">
                             <v-runtime-template :key="i" :template="field.view"></v-runtime-template>
                         </template>

@@ -20,6 +20,11 @@ class Resource
         return $this->id;
     }
 
+    public function globallySearchable()
+    {
+        return false;
+    }
+
     public function label()
     {
         return $this->id;

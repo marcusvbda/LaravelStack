@@ -9,7 +9,12 @@
                             <span v-html="prepend ? prepend : ''"></span>
                         </span>
                     </div>
-                    <input :disabled="disabled" class="form-control" v-model="val" v-bind:class="{'is-invalid' : errors}" :placeholder="placeholder ? placeholder : ''" name="email" :type="type ? type : 'text'">
+                    <textarea :disabled="disabled" class="form-control" v-model="val" 
+                        style="resize: none;"
+                        v-bind:class="{'is-invalid' : errors}" 
+                        :rows="rows"
+                        :placeholder="placeholder ? placeholder : ''" name="email" :type="type ? type : 'text'">
+                    </textarea>
                     <div class="input-group-append" v-if="append">
                         <span class="input-group-text">
                             <span v-html="append ? append : ''"></span>
@@ -27,7 +32,7 @@
 </template>
 <script>
 export default {
-    props:["label","type","placeholder","errors","prepend","append","disabled"],
+    props:["label","type","placeholder","errors","prepend","append","disabled","rows"],
     data() {
         return {
             val : null

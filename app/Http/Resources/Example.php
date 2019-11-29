@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use App\vStack\Resource;
 use App\Http\Filters\Example\{ExampleFilterByName, ExampleFilterByRelation, ExampleFilterByActive, ExampleFilterByDate, ExampleFilterByRangeDate};
-use App\vStack\Fields\{Text, Check, BelongsTo};
+use App\vStack\Fields\{Text, TextArea, Check, BelongsTo};
 use Auth;
 
 class Example extends Resource
@@ -19,6 +19,11 @@ class Example extends Resource
     public function label()
     {
         return "Exemplos";
+    }
+
+    public function globallySearchable()
+    {
+        return true;
     }
 
     public function icon()
@@ -41,8 +46,12 @@ class Example extends Resource
     {
         return [
             new Text([
-                "label" => "<b>Nome</b>", "field" => "name", "required" => true, "prepend" => "A",
+                "label" => "<b>Nome</b>", "field" => "name", "required" => true,
                 "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255"
+            ]),
+            new TextArea([
+                "label" => "<b>Texto</b>", "field" => "text",
+                "placeholder" => "Digite o texto aqui ...",
             ]),
             new Check([
                 "label" => "<b>Ativo</b>", "field" => "active"

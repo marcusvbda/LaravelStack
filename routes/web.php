@@ -13,8 +13,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-$backend_prefix = config("app.backend_prefix", "admin");
-Route::group(['prefix' => $backend_prefix], function () {
+Route::group(['prefix' => "admin"], function () {
     require "partials/auth.php";
     Route::group(['middleware' => 'auth'], function () {
         Route::get('', 'HomeController@index')->name("admin.home");

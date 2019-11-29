@@ -1,17 +1,20 @@
 <template>
-    <div class="mb-3">
-        <div class="input-group v-select"  v-bind:class="{'is-invalid' : errors}">
-            <label v-html="label"></label>
-            <el-select :disabled="disabled" class="w-100" clearable v-model="value" filterable :placeholder="placeholder" v-loading="loading"
-               
-            >
-                <el-option label="" value=""></el-option>
-                <el-option v-for="(item,i) in options" :key="i" :label="item.name" :value="item.id"></el-option>
-            </el-select>
-            <div class="invalid-feedback" v-if="errors">
-                <ul class="pl-3 mb-0">
-                    <li v-for="(e,i) in errors">{{e}}</li>
-                </ul>
+    <div class="form-group row mb-3">
+            <label class="col-sm-2 col-form-label"><span v-html="label ? label : ''"></span></label>
+            <div class="col-sm-10">
+                <div class="input-group v-select"  v-bind:class="{'is-invalid' : errors}">
+                    <el-select :disabled="disabled" class="w-100" clearable v-model="value" filterable :placeholder="placeholder" v-loading="loading"
+                    
+                    >
+                        <el-option label="" value=""></el-option>
+                        <el-option v-for="(item,i) in options" :key="i" :label="item.name" :value="item.id"></el-option>
+                    </el-select>
+                    <div class="invalid-feedback" v-if="errors">
+                        <ul class="pl-3 mb-0">
+                            <li v-for="(e,i) in errors">{{e}}</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

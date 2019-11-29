@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use ResourcesHelpers;
 use Illuminate\Http\Request;
 use App\vStack\Services\Messages;
+use DB;
 
 class ResourceController extends Controller
 {
@@ -98,10 +99,13 @@ class ResourceController extends Controller
                 case "check":
                     $data[$field->options["label"]] = @$content->{$field->options["field"]} ? '<span class="badge badge-success">Sim</span>' : '<span class="badge badge-danger">Não</span>';
                     break;
-                default:
+                case "belongsTo":
                     $model = $field->options["model"];
                     $value = app()->make($model)->findOrFail($content->{$field->options["field"]})->name;
                     $data[$field->options["label"]] = $value;
+                    break;
+                default:
+                    $data[$field->options["label"]] = @$content->{$field->options["field"]};
                     break;
             }
         }
@@ -149,5 +153,29 @@ class ResourceController extends Controller
     {
         $model = app()->make($request["model"]);
         return ["success" => true, "data" => $model->select("id", "name")->get()];
+    }
+
+    public function globalSearch(Request $request)
+    {
+        $data = [];
+        $filter = $request["filter"];
+        foreach (ResourcesHelpers::all() as $resource) {
+            $keys = array_keys($resource);
+            $resource = $resource[$keys[0]];
+            if ($resource->globallySearchable() && $resource->canView()) {
+                $search_indexes = $resource->search();
+                $query = $resource->model->where("id", ">", 0);
+                foreach ($search_indexes as $si) $query = $query->where($si, "like", "%" . $filter . "%");
+                $label = $resource->singularLabel();
+                foreach ($query->get() as $row) {
+                    $data[] = [
+                        "resource" => $label,
+                        "name"     => $row->name,
+                        "link"     => $resource->route() . "/" . $row->code
+                    ];
+                }
+            }
+        }
+        return ["data" => $data];
     }
 }

@@ -48,7 +48,10 @@ export default {
                     return window.location.href=res.route
                 }).catch( er => {
                     this.loading.close()
-                    console.log(er)
+                    this.$message({
+                        message: er.response.data.message,
+                        type: 'error'
+                    });
                 })
             }).catch( () => false)
         }
