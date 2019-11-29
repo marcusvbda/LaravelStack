@@ -3,6 +3,7 @@
 namespace App\vStack;
 
 use Illuminate\Support\ServiceProvider;
+use App\vStack\Commands\createResource;
 
 class vStackServiceProvider extends ServiceProvider
 {
@@ -10,5 +11,8 @@ class vStackServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__ . '/Routes/resources.php');
         $this->loadViewsFrom(__DIR__ . '/Views', 'vStack');
+        $this->commands([
+            createResource::class
+        ]);
     }
 }
