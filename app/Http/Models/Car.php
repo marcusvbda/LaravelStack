@@ -4,9 +4,9 @@ namespace App\Http\Models;
 
 use App\vStack\Models\DefaultModel;
 
-class Example extends DefaultModel
+class Car extends DefaultModel
 {
-    protected $table = "example";
+    protected $table = "cars";
 
     public $appends = ["f_created_at", "f_active", "last_update"];
 
@@ -31,8 +31,8 @@ class Example extends DefaultModel
         return @$this->created_at->format("d/m/Y - H:i:s");
     }
 
-    public function relation()
+    public function brand()
     {
-        return $this->belongsTo(ExampleRelation::class, "example_relation_id");
+        return $this->belongsTo(Brand::class);
     }
 }

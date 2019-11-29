@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Filters\Example;
+namespace App\Http\Filters\Cars;
 
 use  App\vStack\Filter;
 use DB;
 
-class ExampleFilterByRangeDate extends Filter
+class CarsFilterByRangeDate extends Filter
 {
     public $component           = 'rangedate-filter';
     public $label               = 'Data de Criação :';

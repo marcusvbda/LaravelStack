@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Filters\Example;
+namespace App\Http\Filters\Cars;
 
 use  App\vStack\Filter;
 use DB;
 
-class ExampleFilterByDate extends Filter
+class CarsFilterByDate extends Filter
 {
     public $component     = 'date-filter';
     public $label         = 'Data de Atualização :';

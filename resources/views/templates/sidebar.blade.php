@@ -23,7 +23,7 @@
                                 @if($resource[$key]->canViewList())
                                     <li class="nav-item @if(Menu::ResourceIsActive($resource[$key]->id)) active @endif">
                                         <a class="nav-link my-0" href="{{$resource[$key]->route()}}">
-                                            <div class="d-flex flex-row flex-wrap align-items-center">{!! $resource[$key]->icon() !!} {{$resource[$key]->singularLabel()}}</div>
+                                            <div class="d-flex flex-row flex-wrap align-items-center">{!! $resource[$key]->icon() !!} {{$resource[$key]->label()}}</div>
                                         </a>
                                     </li>
                                 <?php break; ?>

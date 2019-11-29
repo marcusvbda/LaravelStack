@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Filters\Example;
+namespace App\Http\Filters\Cars;
 
 use  App\vStack\Filter;
 
-class ExampleFilterByActive extends Filter
+class CarsFilterByActive extends Filter
 {
     public $component     = 'check-filter';
     public $label         = 'Ativo :';

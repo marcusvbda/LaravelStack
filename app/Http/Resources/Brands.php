@@ -5,17 +5,22 @@ namespace App\Http\Resources;
 use App\vStack\Resource;
 use App\vStack\Fields\Text;
 
-class ExampleRelation extends Resource
+class Brands extends Resource
 {
-    public $model = "App\Http\Models\ExampleRelation";
+    public $model = "App\Http\Models\Brand";
     public function singularLabel()
     {
-        return "Relacionamento Exemplo";
+        return "Marca";
     }
 
     public function label()
     {
-        return "Relacionamento Exemplos";
+        return "Marcas";
+    }
+
+    public function icon()
+    {
+        return "<span class='el-icon-picture-outline-round mr-2'></span>";
     }
 
     public function table()

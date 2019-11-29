@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Filters\Example;
+namespace App\Http\Filters\Cars;
 
 use  App\vStack\Filter;
 
-class ExampleFilterByName extends Filter
+class CarsFilterByName extends Filter
 {
     public $component   = 'text-filter';
     public $label       = 'Nome :';
