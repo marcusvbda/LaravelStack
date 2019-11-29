@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class createResource extends Command
 {
-    protected $signature = 'vstack:make-resource {resource} {table}';
+    protected $signature = 'vstack:make-resource {resource} {model} {table}';
     public function __construct()
     {
         parent::__construct();
@@ -15,15 +15,16 @@ class createResource extends Command
     {
         $data = $this->arguments();
         $resource = $data["resource"];
-        $table = @$data["table"] ? $data["table"] : $resource;
+        $table = $data["table"];
+        $model = $data["table"];
         $totalSteps = 2;
         $bar = $this->output->createProgressBar($totalSteps);
-        $this->createModel($bar, $resource, $table);
-        $this->createResource($bar, $resource, $table);
+        $this->createModel($bar, $table, $model);
+        $this->createResource($bar, $resource, $table, $model);
         $bar->finish();
     }
 
-    private function createResource($bar, $resource, $table)
+    private function createResource($bar, $resource, $table, $model)
     {
         $bar->start();
         $dir = app_path("\\Http\\Resources");
@@ -34,7 +35,7 @@ namespace App\Http\Resources;
 use App\vStack\Resource;
 class ' . $resource . ' extends Resource
 {
-    public $model = "App\Http\Models\\' . $resource . '";
+    public $model = "App\Http\Models\\' . $model . '";
 }';
         $dir = app_path("\\Http\\Models");
         file_put_contents($resource_path, $content);
@@ -42,16 +43,16 @@ class ' . $resource . ' extends Resource
         echo "\ncreated resource $resource_path.php\n";
     }
 
-    private function createModel($bar, $resource, $table)
+    private function createModel($bar, $table, $model)
     {
         $bar->start();
         $dir = app_path("\\Http\\Models");
-        $model_path = $dir . "\\" . $resource . ".php";
+        $model_path = $dir . "\\" . $model . ".php";
         $content =
             '<?php
 namespace App\Http\Models;
 use App\vStack\Models\DefaultModel;
-class ' . $resource . ' extends DefaultModel
+class ' . $model . ' extends DefaultModel
 {
     protected $table = "' . $table . '";
     // public $cascadeDeletes = [];
