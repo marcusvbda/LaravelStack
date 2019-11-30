@@ -31,6 +31,11 @@ class Cars extends Resource
         return "<b class='el-icon-s-help mr-2'></b>";
     }
 
+    public function menu()
+    {
+        return "<span class='el-icon-menu mr-2'></span> Automotores";
+    }
+
     public function table()
     {
         return [

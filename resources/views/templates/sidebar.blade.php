@@ -5,35 +5,33 @@
                 <span class="menu-title"><i class="el-icon-s-home mr-2"></i> Dashboard</span>
             </a>
         </li>
-        <?php $resources = ResourcesHelpers::all(); ?>
-        @if(Count($resources)>0)
+        <?php $resource_groups = ResourcesHelpers::all(); ?>
+        @foreach($resource_groups as $group=>$resources)
             <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#ui-advanced" aria-expanded="false" aria-controls="ui-advanced">
+                <?php $_aux = uniqid(); ?>
+                <a class="nav-link" data-toggle="collapse" href="#ui-advanced_{{$_aux}}" aria-expanded="false" aria-controls="ui-advanced_{{$_aux}}">
                     <span class="menu-title d-flex align-items-center">
-                        <i class="el-icon-s-grid mr-2"></i> Recursos
+                        {!! $group !!}
                         <i class="ml-auto menu-arrow">
                             <span class="icon @if(strpos(Route::current()->getName(),"resource")===0) el-icon-arrow-up @else el-icon-arrow-down  @endif "></i>
                         </i>
                     </span>
                 </a>
-                <div class="collapse @if(strpos(Route::current()->getName(),"resource")===0) show @endif" id="ui-advanced" style="">
+                <div class="collapse" id="ui-advanced_{{$_aux}}" >
                     <ul class="nav flex-column sub-menu">
                         @foreach($resources as $resource)
-                            @foreach(array_keys($resource) as $key)
-                                @if($resource[$key]->canViewList())
-                                    <li class="nav-item @if(Menu::ResourceIsActive($resource[$key]->id)) active @endif">
-                                        <a class="nav-link my-0" href="{{$resource[$key]->route()}}">
-                                            <div class="d-flex flex-row flex-wrap align-items-center">{!! $resource[$key]->icon() !!} {{$resource[$key]->label()}}</div>
-                                        </a>
-                                    </li>
-                                <?php break; ?>
-                                @endif
-                            @endforeach
+                            @if($resource->canViewList())
+                                <li class="nav-item @if(Menu::ResourceIsActive($resource->id)) active @endif">
+                                    <a class="nav-link my-0" href="{{$resource->route()}}">
+                                        <div class="d-flex flex-row flex-wrap align-items-center">{!! $resource->icon() !!} {{$resource->label()}}</div>
+                                    </a>
+                                </li>
+                            @endif
                         @endforeach
                     </ul>
                 </div>
             </li>
-        @endif
+        @endforeach
     </ul>
 </nav>
 
@@ -48,5 +46,6 @@ $('[data-toggle=collapse]').click(function(){
     $(icon).removeClass("el-icon-arrow-up")
     return $(icon).addClass("el-icon-arrow-down")
 });
+console.log($(".nav-item.active").parent().parent().toggleClass("show"))
 </script>
 @endsection

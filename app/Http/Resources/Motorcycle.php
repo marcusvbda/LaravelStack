@@ -72,6 +72,11 @@ class Motorcycle extends Resource
         ];
     }
 
+    public function menu()
+    {
+        return "<span class='el-icon-menu mr-2'></span> Automotores";
+    }
+
     public function search()
     {
         return ["name"];

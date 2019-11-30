@@ -61,7 +61,7 @@
         @else
             <div class="d-flex flex-column align-items-center justify-items-center">
                 <div class="col-md-6 col-sm-12 text-center">
-                    <h4 class="text-center mt-5">Nenhum {{$resource->label()}} cadastrado(a) ainda...</h4>
+                    <h4 class="text-center mt-5">Nada cadastrado ainda...</h4>
                     @if($resource->canCreate())
                         <a class="btn btn-primary btn-sm-block text-white cursor-pointer mb-3 mt-2" href="{{route('resource.create',['resource'=>$resource->id])}}">
                             <span class="el-icon-plus mr-2"></span>Cadastrar {{$resource->singularLabel()}}

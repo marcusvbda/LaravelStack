@@ -10076,7 +10076,6 @@ body {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
           flex-direction: column;
-  margin-bottom: 60px;
 }
 
 .sidebar .nav .nav-item {
@@ -10121,7 +10120,7 @@ body {
 
 .sidebar .nav .nav-item .sub-menu .nav-item .nav-link {
   color: #d6d6d6;
-  margin-left: 20px;
+  margin-left: 30px;
   font-size: 14px;
 }
 

@@ -9,7 +9,8 @@ class ResourcesHelpers
         foreach (glob($path . "*.php") as $filename) {
             if (basename($filename) != "Resource.php") {
                 $name = str_replace(".php", "", basename($filename));
-                $data[] = [$name => self::make($filename, $name)];
+                $resource = self::make($filename, $name);
+                @$data[$resource->menu()][] =  self::make($filename, $name);
             }
         }
         return $data;
@@ -24,14 +25,11 @@ class ResourcesHelpers
 
     static function find($name)
     {
-        $resources = self::all();
+        $groups = self::all();
         $_resource = null;
-        foreach ($resources as $resource) {
-            foreach (array_keys($resource) as $key) {
-                if ($resource[$key]->id == $name) {
-                    $_resource =  $resource[$key];
-                    break;
-                }
+        foreach ($groups as $resources) {
+            foreach ($resources as $resource) {
+                if ($resource->id == $name)  return $resource;
             }
         }
         if (!$_resource) abort(404);
