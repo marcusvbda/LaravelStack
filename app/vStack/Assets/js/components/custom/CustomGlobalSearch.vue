@@ -45,7 +45,7 @@ export default {
 </script>
 <style scoped lang="scss">
     .globalsearch {
-        margin-left:118px;
+        margin-left:112px;
         width: 300px;
     }
     .el-scrollbar {

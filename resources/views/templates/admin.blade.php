@@ -5,7 +5,7 @@
     <div class="container-fluid page-body-wrapper">
         @include("templates.sidebar")
         <div class="main-panel w-100">
-            <div class="content-wrapper">
+            <div class="content-wrapper pt-3">
                 @yield('content')
             </div>
             <footer class="footer">

@@ -11550,7 +11550,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".globalsearch[data-v-1ad254e8] {\n  margin-left: 118px;\n  width: 300px;\n}\n.el-scrollbar .el-autocomplete-suggestion__list li[data-v-1ad254e8] {\n  line-height: normal;\n}\n.el-scrollbar .el-autocomplete-suggestion__list li .value[data-v-1ad254e8] {\n  text-overflow: ellipsis;\n  overflow: hidden;\n  color: gray;\n  font-weight: 600;\n  font-size: 15px;\n  border-bottom: 1px solid #f1f1f1;\n}\n.el-scrollbar .el-autocomplete-suggestion__list li ._link[data-v-1ad254e8] {\n  color: gray;\n  font-size: 15px;\n  margin-bottom: 20px;\n}", ""]);
+exports.push([module.i, ".globalsearch[data-v-1ad254e8] {\n  margin-left: 112px;\n  width: 300px;\n}\n.el-scrollbar .el-autocomplete-suggestion__list li[data-v-1ad254e8] {\n  line-height: normal;\n}\n.el-scrollbar .el-autocomplete-suggestion__list li .value[data-v-1ad254e8] {\n  text-overflow: ellipsis;\n  overflow: hidden;\n  color: gray;\n  font-weight: 600;\n  font-size: 15px;\n  border-bottom: 1px solid #f1f1f1;\n}\n.el-scrollbar .el-autocomplete-suggestion__list li ._link[data-v-1ad254e8] {\n  color: gray;\n  font-size: 15px;\n  margin-bottom: 20px;\n}", ""]);
 
 // exports
 
