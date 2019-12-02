@@ -39,6 +39,15 @@
         tr {
             td {
                 font-size: 14px;
+                .crud-btns {
+                    display:none!important;
+                }
+            }
+            &:hover {
+                transition:.5s;
+                .crud-btns {
+                    display:block!important;
+                }
             }
         }
     }
@@ -58,18 +67,6 @@
 
 .withFilter {
     border : 1px solid $primary;
-}
-
-.icon_resource {
-    font-size: 20px;
-    font-weight: 800;
-    color :  $secondary;
-    opacity :  .3;
-    &:hover {
-        transition :.5s;
-        opacity :  1;
-        color : $primary;
-    }
 }
 
 .filter {

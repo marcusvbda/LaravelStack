@@ -27,38 +27,46 @@
                         @endif
                     </th>
                 @endforeach
-                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach($data as $row)
                 <tr>
+                    <?php $show_btns = true; ?>
                     @foreach($table as $key=>$value)
                         <td>
-                            <?php 
-                                $indexes = explode("->",$key);
-                                $_val = $row;
-                                foreach($indexes as $i) {
-                                    $_val = @$_val->{$i}; 
-                                }
-                                $text = @$_val ? $_val : @$row->{$value};
-                            ?>
-                            {!! $text ? $text : '-' !!}
+                            <div class="d-flex flex-column">
+                                <?php 
+                                    $indexes = explode("->",$key);
+                                    $_val = $row;
+                                    foreach($indexes as $i) {
+                                        $_val = @$_val->{$i}; 
+                                    }
+                                    $text = @$_val ? $_val : @$row->{$value};
+                                ?>
+                                @if($show_btns) 
+                                    @if($resource->canView())
+                                        <div><a href="{{$resource->route().'/'.$row->code}}" class="link"><b>{!! $text ? $text : '-' !!}</a></b></div>
+                                    @else
+                                        <div>{!! $text ? $text : '-' !!}</div>
+                                    @endif
+                                    <?php
+                                        $crud_buttons = [
+                                            "code"         => $row->code,
+                                            "can_view"     => $resource->canView(),
+                                            "can_update"   => $resource->canUpdate(),
+                                            "can_delete"   => $resource->canDelete(),
+                                            "route"        => $resource->route()."/".$row->code
+                                        ];
+                                    ?>
+                                    <resource-crud-buttons :data="{{json_encode($crud_buttons)}}" id="{{$row->id}}"></resource-crud-buttons>
+                                @else 
+                                    <div>{!! $text ? $text : '-' !!}</div>
+                                @endif
+                            </div>
                         </td>
+                        <?php $show_btns = false; ?>
                     @endforeach
-                    <td>
-                        <?php
-                            $crud_buttons = [
-                                "can_view"     => $resource->canView(),
-                                "can_update"   => $resource->canUpdate(),
-                                "can_delete"   => $resource->canDelete(),
-                                "route_view"   => $resource->route()."/".$row->code,
-                                "route_update" => $resource->route()."/".$row->code."/edit",
-                                "route_destroy"=> $resource->route()."/".$row->code."/destroy"
-                            ];
-                        ?>
-                        <resource-crud-buttons :data="{{json_encode($crud_buttons)}}" id="{{$row->id}}"></resource-crud-buttons>
-                    </td>
                 </tr>
             @endforeach
         </tbody>

@@ -10312,6 +10312,19 @@ body {
   font-size: 14px;
 }
 
+.resource-table tbody tr td .crud-btns {
+  display: none !important;
+}
+
+.resource-table tbody tr:hover {
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.resource-table tbody tr:hover .crud-btns {
+  display: block !important;
+}
+
 .dropdown-menu.filter {
   right: -5px;
   width: 500px;
@@ -10321,20 +10334,6 @@ body {
 
 .withFilter {
   border: 1px solid #0073aa;
-}
-
-.icon_resource {
-  font-size: 20px;
-  font-weight: 800;
-  color: #444F5E;
-  opacity: .3;
-}
-
-.icon_resource:hover {
-  -webkit-transition: .5s;
-  transition: .5s;
-  opacity: 1;
-  color: #0073aa;
 }
 
 .filter.withFilter {

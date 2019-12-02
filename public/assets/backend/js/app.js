@@ -4520,6 +4520,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data", "id"],
   data: function data() {
@@ -4538,7 +4546,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function () {
         _this.loading = _this.$loading();
 
-        _this.$http["delete"](_this.data.route_destroy, {}).then(function (res) {
+        _this.$http["delete"](_this.data.route + "/destroy", {}).then(function (res) {
           res = res.data;
           return window.location.href = res.route;
         })["catch"](function (er) {
@@ -74172,22 +74180,45 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "d-flex flex-row justify-content-center flex-wrap" },
+    {
+      staticClass: "d-flex flex-row flex-wrap cursor-pointer",
+      staticStyle: { "min-height": "25px" }
+    },
     [
       _vm.data.can_view
-        ? _c("a", { attrs: { href: _vm.data.route_view } }, [
-            _c("span", { staticClass: "icon_resource el-icon-view px-3" })
-          ])
+        ? _c(
+            "a",
+            {
+              staticClass: "link mr-1 crud-btns d-flex align-items-center",
+              attrs: { href: _vm.data.route }
+            },
+            [
+              _c("span", { staticClass: "el-icon-view pr-1" }),
+              _vm._v("Visualizar\n    ")
+            ]
+          )
         : _vm._e(),
       _vm._v(" "),
       _vm.data.can_update
         ? _c(
             "a",
             {
-              staticClass: "cursor_pointer",
-              attrs: { href: _vm.data.route_update }
+              staticClass: "link mx-1 crud-btns d-flex align-items-center",
+              attrs: { href: _vm.data.route + "/edit" }
             },
-            [_c("span", { staticClass: "icon_resource el-icon-edit px-3" })]
+            [
+              _c(
+                "span",
+                {
+                  staticClass: "mr-2",
+                  staticStyle: { opacity: ".4", color: "black" }
+                },
+                [_vm._v("|")]
+              ),
+              _vm._v(" "),
+              _c("span", { staticClass: "el-icon-edit pr-1" }),
+              _vm._v("Editar\n    ")
+            ]
           )
         : _vm._e(),
       _vm._v(" "),
@@ -74195,6 +74226,9 @@ var render = function() {
         ? _c(
             "a",
             {
+              staticClass:
+                "link mx-1 text-danger crud-btns d-flex align-items-center",
+              staticStyle: { "text-decoration": "underline" },
               on: {
                 click: function($event) {
                   $event.preventDefault()
@@ -74202,7 +74236,19 @@ var render = function() {
                 }
               }
             },
-            [_c("span", { staticClass: "icon_resource el-icon-delete px-3" })]
+            [
+              _c(
+                "span",
+                {
+                  staticClass: "mr-2",
+                  staticStyle: { opacity: ".4", color: "black" }
+                },
+                [_vm._v("|")]
+              ),
+              _vm._v(" "),
+              _c("span", { staticClass: "el-icon-delete pr-1" }),
+              _vm._v("Excluir\n    ")
+            ]
           )
         : _vm._e()
     ]
