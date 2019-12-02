@@ -90,6 +90,11 @@ class Resource
         return [];
     }
 
+    public function lens()
+    {
+        return [];
+    }
+
     public function search()
     {
         return [];

@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-12 d-flex justify-content-end d-flex align-items-center">
                         <a :href="data.list_route" class="mr-4 text-danger link"><b>Cancelar</b></a>
-                        <button class="ml-3 btn btn-primary btn-sm-block" type="sumit">{{pageType=='CREATE' ? 'Cadastrar' : 'Alterar'}}</button>
+                        <button class="ml-3 btn btn-outline-primary btn-sm btn-sm-block" type="sumit">{{pageType=='CREATE' ? 'Cadastrar' : 'Alterar'}}</button>
                     </div>
                 </div>
             </div>

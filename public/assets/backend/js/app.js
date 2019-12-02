@@ -74130,7 +74130,8 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "ml-3 btn btn-primary btn-sm-block",
+                    staticClass:
+                      "ml-3 btn btn-outline-primary btn-sm btn-sm-block",
                     attrs: { type: "sumit" }
                   },
                   [
@@ -74240,13 +74241,22 @@ var render = function() {
         "div",
         { staticClass: "col-md-3 col-sm-12 mb-3" },
         [
-          _c("label", { staticClass: "mb-0" }, [_vm._v("Por Página :")]),
+          _c(
+            "label",
+            { staticClass: "mb-0", staticStyle: { "font-size": "14px" } },
+            [_vm._v("Por Página :")]
+          ),
           _vm._v(" "),
           _c(
             "el-select",
             {
               staticClass: "w-100 filter",
-              attrs: { filterable: "", id: "per_page", field: "per_page" },
+              attrs: {
+                size: "medium",
+                filterable: "",
+                id: "per_page",
+                field: "per_page"
+              },
               on: { change: _vm.makeNewRoute },
               model: {
                 value: _vm.filter.per_page,
@@ -74279,9 +74289,11 @@ var render = function() {
             "div",
             { staticClass: "col-md-3 col-sm-12 mb-3" },
             [
-              _c("label", { staticClass: "mb-0" }, [
-                _c("span", { domProps: { innerHTML: _vm._s(filter.label) } })
-              ]),
+              _c(
+                "label",
+                { staticClass: "mb-0", staticStyle: { "font-size": "14px" } },
+                [_c("span", { domProps: { innerHTML: _vm._s(filter.label) } })]
+              ),
               _vm._v(" "),
               _c("v-runtime-template", {
                 key: key,
@@ -74335,7 +74347,12 @@ var render = function() {
         {
           staticClass: "filter",
           class: { withFilter: _vm.filter },
-          attrs: { placeholder: "Pesquisar ...", name: "_", type: "text" },
+          attrs: {
+            size: "medium",
+            placeholder: "Pesquisar ...",
+            name: "_",
+            type: "text"
+          },
           on: { change: _vm.submit },
           model: {
             value: _vm.filter,

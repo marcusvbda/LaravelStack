@@ -45,7 +45,7 @@ class Filter
     {
         $index         = $this->index;
         $placeholder   = @$this->placeholder ? $this->placeholder : "";
-        $this->view =  "<el-input clearable v-model='filter.$index' 
+        $this->view =  "<el-input clearable size='medium' v-model='filter.$index' 
                             @change='makeNewRoute' 
                             type='text' class='w-100'      
                             placeholder='$placeholder'
@@ -58,7 +58,7 @@ class Filter
         $index         = $this->index;
         $placeholder   = @$this->placeholder ? $this->placeholder : "";
         $view = "<el-select 
-                    v-model='filter.$index' class='w-100' @change='makeNewRoute'
+                    v-model='filter.$index' size='medium' class='w-100' @change='makeNewRoute'
                     filterable placeholder='$placeholder'
                     v-bind:class='{\"withFilter\" : filter.$index}'>
                     <el-option label=\"\" value=\"\"></el-option>";
@@ -75,7 +75,7 @@ class Filter
     {
         $index = $this->index;
         $text  = @$this->text ? $this->text : "";
-        $this->view =  "<el-checkbox class='d-flex align-items-center'
+        $this->view =  "<el-checkbox size='medium' class='d-flex align-items-center'
                             v-model='filter.$index' @change='makeNewRoute' >$text
                         </el-checkbox>";
     }
@@ -84,7 +84,7 @@ class Filter
     {
         $index = $this->index;
         $placeholder = @$this->placeholder ? $this->placeholder : "";
-        $this->view  =  "<el-date-picker class='w-100' clearable
+        $this->view  =  "<el-date-picker size='medium' class='w-100' clearable
                             v-model='filter.$index' @change='makeNewRoute' type='date'
                             :format=\"'dd/MM/yyyy'\"
                             value-format='yyyy-MM-dd'
@@ -97,7 +97,7 @@ class Filter
         $index             = $this->index;
         $end_placeholder   = @$this->end_placeholder ? $this->end_placeholder : "";
         $start_placeholder = @$this->start_placeholder ? $this->start_placeholder : "";
-        $this->view =  "<el-date-picker class='w-100' clearable
+        $this->view =  "<el-date-picker size='medium' class='w-100' clearable
                             v-model='filter.$index' @change='makeNewRoute' type='daterange'
                             :format=\"'dd/MM/yyyy'\"
                             value-format='yyyy-MM-dd'

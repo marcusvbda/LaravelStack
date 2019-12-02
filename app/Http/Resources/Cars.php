@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use App\vStack\Resource;
-use App\Http\Filters\Cars\{CarsFilterByName, CarsFilterByBrand, CarsFilterByActive, CarsFilterByDate, CarsFilterByRangeDate};
+use App\Http\Filters\Cars\{CarsFilterByName, CarsFilterByBrand, CarsFilterByDate, CarsFilterByRangeDate};
 use App\vStack\Fields\{Text, TextArea, Check, BelongsTo};
 use Auth;
 
@@ -47,6 +47,14 @@ class Cars extends Resource
         ];
     }
 
+    public function lens()
+    {
+        return [
+            "Apenas Ativos" => ["field" => "active", "value" => true],
+            "Apenas Inativos" => ["field" => "active", "value" => false],
+        ];
+    }
+
     public function fields()
     {
         return [
@@ -75,7 +83,6 @@ class Cars extends Resource
         return [
             new CarsFilterByName,
             new CarsFilterByBrand,
-            new CarsFilterByActive,
             new CarsFilterByDate,
             new CarsFilterByRangeDate
         ];

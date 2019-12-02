@@ -1,4 +1,4 @@
-<div class="table-responsive-sm" style="border: 1px solid #ccd0d4;">
+<div class="table-responsive-sm">
     <table class="table table-striped hovered resource-table table-hover mb-0">
         <thead>
             <tr>

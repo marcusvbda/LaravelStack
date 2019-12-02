@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use App\vStack\Resource;
-use App\Http\Filters\Motorcycles\{MotorcyclesFilterByBrand};
+use App\Http\Filters\Motorcycles\{MotorcyclesFilterByBrand, MotorcyclesFilterByActive};
 use App\vStack\Fields\{Text, TextArea, Check, BelongsTo};
 use Auth;
 
@@ -68,7 +68,8 @@ class Motorcycle extends Resource
     public function filters()
     {
         return [
-            new MotorcyclesFilterByBrand
+            new MotorcyclesFilterByBrand,
+            new MotorcyclesFilterByActive,
         ];
     }
 

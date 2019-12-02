@@ -1,8 +1,8 @@
 <template>
 <div class="d-flex flex-row row align-items-center mb-3 flex-wrap mb-4 w-100">
     <div class="col-md-3 col-sm-12 mb-3">
-        <label class="mb-0">Por Página :</label>
-        <el-select filterable class="w-100 filter" id="per_page" field="per_page" v-model="filter.per_page"  @change="makeNewRoute">
+        <label class="mb-0" style="font-size:14px;">Por Página :</label>
+        <el-select size='medium' filterable class="w-100 filter" id="per_page" field="per_page" v-model="filter.per_page"  @change="makeNewRoute">
             <el-option :label="5" value="5"></el-option>
             <el-option :label="10" value="10"></el-option>
             <el-option :label="20" value="20"></el-option>
@@ -12,7 +12,7 @@
     </div>
     <template v-for="(filter,key) in data.filters" >
         <div class="col-md-3 col-sm-12 mb-3">
-            <label class="mb-0"><span v-html="filter.label"></span></label>
+            <label class="mb-0" style="font-size:14px;"><span v-html="filter.label"></span></label>
             <v-runtime-template :key="key" :template="filter.view"></v-runtime-template>
         </div>
     </template>

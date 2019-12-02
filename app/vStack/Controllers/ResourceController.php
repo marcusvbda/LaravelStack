@@ -29,6 +29,13 @@ class ResourceController extends Controller
         foreach ($resource->search() as $search) {
             $query = $query->where($search, "like", "%" . (@$data["_"] ? $data["_"] : "") . "%");
         }
+        foreach ($resource->lens() as $len) {
+            $field = $len["field"];
+            if (isset($data[$field])) {
+                $value = $data[$field];
+                $query = $query->where($field, $value);
+            }
+        }
         $query = $query->paginate($perPage);
         return $query;
     }
