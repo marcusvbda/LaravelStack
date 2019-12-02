@@ -26,9 +26,10 @@
                     text-decoration: unset;
                     font-weight: 400;
                     .sort-icon {
-                        opacity: .5;
+                        display:none;
                         &.active {
-                            opacity: 1;
+                            display:block;
+                            font-weight: bolder;
                         }
                     }
                 }

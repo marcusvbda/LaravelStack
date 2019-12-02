@@ -10301,11 +10301,12 @@ body {
 }
 
 .resource-table thead tr th .link-sortable .sort-icon {
-  opacity: .5;
+  display: none;
 }
 
 .resource-table thead tr th .link-sortable .sort-icon.active {
-  opacity: 1;
+  display: block;
+  font-weight: bolder;
 }
 
 .resource-table tbody tr td {

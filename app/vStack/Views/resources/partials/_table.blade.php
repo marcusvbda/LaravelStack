@@ -18,8 +18,8 @@
                                 class="d-flex flex-row align-items-center link-sortable">
                                 <div class="link">{{isset($value["label"]) ? @$value["label"] : $value}}</div>
                                 <div class="ml-auto d-flex flex-row">
-                                    <span class="sort-icon el-icon-sort-down @if($order_type=='asc' && $order_by==$sortable_index ) active @endif"></span>
-                                    <span class="sort-icon el-icon-sort-up @if($order_type=='desc' && $order_by==$sortable_index) active @endif"></span>
+                                    <span class="sort-icon el-icon-arrow-down @if($order_type=='asc' && $order_by==$sortable_index ) active @endif"></span>
+                                    <span class="sort-icon el-icon-arrow-up @if($order_type=='desc' && $order_by==$sortable_index) active @endif"></span>
                                 </div>
                             </a>
                         @else 
