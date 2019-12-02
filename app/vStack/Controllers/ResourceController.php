@@ -30,6 +30,7 @@ class ResourceController extends Controller
             $query = $query->where($search, "like", "%" . (@$data["_"] ? $data["_"] : "") . "%");
         }
         foreach ($resource->lens() as $len) {
+            // dd($data, $len["field"]);
             $field = $len["field"];
             if (isset($data[$field])) {
                 $value = $data[$field];
