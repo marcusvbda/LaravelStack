@@ -13,63 +13,82 @@
                 </ol>
             </nav>
         </nav>
-        <h4>{!! @$resource->icon() !!} Listagem de {{$resource->label()}}</h4>
 
-        @if($resource->model->count()>0)
-            <div class="d-flex flex-row justify-content-between align-items-center">
-                <div class="col-md-3 col-sm-12 pl-0 mb-2">
-                    <?php 
-                        $globalFilterData = [
-                            "filter_route" => request()->url(),
-                            "query" => request()->query(),
-                            "value" => @$_GET["_"] ? $_GET["_"] : ""
-                        ];
-                    ?>
-                    @if($resource->search())
-                        <resource-filter-global :data="{{json_encode($globalFilterData)}}"></resource-filter-global>
-                    @endif
-                </div>
+        <div class="d-flex flex-row align-items-center mb-2">
+            <h4 class="mb-1">{!! @$resource->indexLabel() !!}</h4>
+            <div class="d-flex flex-row">
                 @if($resource->canCreate())
-                    <a class="btn btn-primary btn-sm-block text-white cursor-pointer mb-3" href="{{route('resource.create',['resource'=>$resource->id])}}">
-                        <span class="el-icon-plus mr-2"></span>Cadastrar {{$resource->singularLabel()}}
+                    <a class="btn btn-outline-primary btn-sm-block btn-sm cursor-pointer ml-3" href="{{route('resource.create',['resource'=>$resource->id])}}">
+                        {!! $resource->storeButtonLabel() !!}
+                    </a>
+                @endif
+                @if($resource->canCreate())
+                    <a class="btn btn-outline-primary btn-sm-block btn-sm cursor-pointer ml-2" href="{{route('resource.create',['resource'=>$resource->id])}}">
+                        {!! $resource->importButtonlabel() !!}
+                    </a>
+                @endif
+                @if($resource->model->count()>0)
+                    <a class="btn btn-outline-primary btn-sm-block btn-sm cursor-pointer ml-2" href="{{route('resource.create',['resource'=>$resource->id])}}">
+                        {!! $resource->exportButtonlabel() !!}
                     </a>
                 @endif
             </div>
-            
-            <div class="card">
-                <div class="card-header">
-                    @include("vStack::resources.partials._filter")
-                </div>
-                <div class="card-body p-0">
+            <div class="col-md-3 col-sm-12 pl-0 ml-auto">
+                <?php 
+                    $globalFilterData = [
+                        "filter_route" => request()->url(),
+                        "query" => request()->query(),
+                        "value" => @$_GET["_"] ? $_GET["_"] : ""
+                    ];
+                ?>
+                @if($resource->model->count()>0)
+                    @if($resource->search())
+                        <resource-filter-global :data="{{json_encode($globalFilterData)}}"></resource-filter-global>
+                    @endif
+                @endif
+            </div>
+        </div>
+        @if($resource->model->count()>0)
+            <div class="filter d-flex flex-row justify-content-between">
+                @include("vStack::resources.partials._filter")
+            </div>
+
+            <div class="row">
+                <div class="col-12">
                     @if($data->total()>0)
                         @include("vStack::resources.partials._table")
                     @else 
-                        <h4 class="text-center my-4">Nenhum resultado encontrado</h4>
+                        <h4 class="text-center my-4">{{ $resource->noResultsFoundText() }}</h4>
                     @endif
                 </div>
-                @if($data->total()>0)
-                    <div class="card-footer">
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    @if($data->total()>0)
                         <div class="d-flex justify-content-between align-items-center">
-                            <div>Resultados encontrados : {{ $data->total() }}</div>
+                            <div class="mt-3">{!! $resource->resultsFoundLabel() !!} {{ $data->total() }}</div>
                             <div class="float-right">
                                 {{$data->appends(request()->query())->links()}}
                             </div>
                         </div>
-                    </div>
-                @endif
+                    @endif
+                </div>
             </div>
         @else
             <div class="d-flex flex-column align-items-center justify-items-center">
                 <div class="col-md-6 col-sm-12 text-center">
-                    <h4 class="text-center mt-5">Nada cadastrado ainda...</h4>
+                    <h4 class="text-center mt-5">
+                        <h1 style="opacity: .3;font-size: 250px;">{!!$resource->icon()!!}</h1>
+                        <div>{!! $resource->nothingStoredText() !!}</div>
+                    </h4>
                     @if($resource->canCreate())
-                        <a class="btn btn-primary btn-sm-block text-white cursor-pointer mb-3 mt-2" href="{{route('resource.create',['resource'=>$resource->id])}}">
-                            <span class="el-icon-plus mr-2"></span>Cadastrar {{$resource->singularLabel()}}
+                        <a class="btn btn-primary btn-sm-block cursor-pointer mb-3 mt-2" href="{{route('resource.create',['resource'=>$resource->id])}}">
+                            {!! $resource->storeButtonLabel() !!}
                         </a>
                     @endif
                 </div>
             </div>
-        @endif
+        @endif    
     </div>
 </div>
 @endsection

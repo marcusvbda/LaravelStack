@@ -46,6 +46,5 @@ $('[data-toggle=collapse]').click(function(){
     $(icon).removeClass("el-icon-arrow-up")
     return $(icon).addClass("el-icon-arrow-down")
 });
-console.log($(".nav-item.active").parent().parent().toggleClass("show"))
 </script>
 @endsection

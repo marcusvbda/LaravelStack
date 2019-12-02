@@ -50,6 +50,41 @@ class Resource
         return [];
     }
 
+    public function indexLabel()
+    {
+        return $this->icon() . " Listagem de " . $this->label();
+    }
+
+    public function storeButtonlabel()
+    {
+        return "<span class='el-icon-plus mr-2'></span>Cadastrar";
+    }
+
+    public function importButtonlabel()
+    {
+        return "<span class='el-icon-upload2 mr-2'></span>Importar";
+    }
+
+    public function exportButtonlabel()
+    {
+        return "<span class='el-icon-download mr-2'></span>Exportar";
+    }
+
+    public function noResultsFoundText()
+    {
+        return "Nenhum resultado encontrado";
+    }
+
+    public function resultsFoundLabel()
+    {
+        return "Resultados encontrados : ";
+    }
+
+    public function nothingStoredText()
+    {
+        return "Nada cadastrado ainda...";
+    }
+
     public function fields()
     {
         return [];

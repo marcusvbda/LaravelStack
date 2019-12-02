@@ -1,11 +1,29 @@
 .resource-table{
-    .link-sortable {
-        color: black;
-        text-decoration: unset;
-        .sort-icon {
-            opacity: .5;
-            &.active {
-                opacity: 1;
+    thead {
+        tr {
+            height: 30px;
+            th {
+                padding : 8px;
+                border-bottom: 1px solid #ccd0d4;
+                .link-sortable {
+                    font-size:14px;
+                    color: black;
+                    text-decoration: unset;
+                    font-weight: 400;
+                    .sort-icon {
+                        opacity: .5;
+                        &.active {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    tbody {
+        tr {
+            td {
+                font-size: 14px;
             }
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <form class="needs-validation mt-4" v-on:submit.prevent="submit" >
+    <form class="needs-validation mb-0" v-on:submit.prevent="submit" >
         <el-input placeholder="Pesquisar ..." name="_" type="text" class="filter" v-model="filter" @change="submit" v-bind:class="{'withFilter':filter}"> 
             <i class="el-icon-search el-input__icon" slot="suffix"></i>
         </el-input>

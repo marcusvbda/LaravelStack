@@ -1,40 +1,21 @@
 <template>
-<div class="d-flex justify-content-end align-items-center">
-    <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-            <button class="nav-link dropdown-toggle d-flex align-items-center btn btn-sm btn-sm-block px-5" v-bind:class="{'btn-primary':data.hasFilter, 'btn-outline-dark':!data.hasFilter}" href="#" id="resourceFilterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="el-icon-more mr-2"></span>
-                <span v-if="data.hasFilter">{{data.hasFilter}}</span>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right filter p-0" id="prevent_close_menu" aria-labelledby="resourceFilterDropdown">
-                <table class="table table-striped">
-                    <tbody>
-                        <tr><td>Por Página :</td></tr>
-                        <tr>
-                            <td>
-                                <el-select filterable class="w-100 filter" id="per_page" field="per_page" v-model="filter.per_page"  @change="makeNewRoute">
-                                    <el-option :label="5" value="5"></el-option>
-                                    <el-option :label="10" value="10"></el-option>
-                                    <el-option :label="20" value="20"></el-option>
-                                    <el-option :label="50" value="50"></el-option>
-                                    <el-option :label="100" value="100"></el-option>
-                                    <el-option :label="200" value="200"></el-option>
-                                </el-select>
-                            </td>
-                        </tr>
-                        <template v-for="(filter,key) in data.filters" >
-                            <tr><td><span v-html="filter.label"></span></td></tr>
-                            <tr>
-                                <td>
-                                    <v-runtime-template :key="key" :template="filter.view"></v-runtime-template>
-                                </td>
-                            </tr>
-                        </template>
-                    </tbody>
-                </table>
-            </div>
-        </li>
-    </ul>
+<div class="d-flex flex-row row align-items-center mb-3 flex-wrap mb-4 w-100">
+    <div class="col-md-3 col-sm-12 mb-3">
+        <label class="mb-0">Por Página :</label>
+        <el-select filterable class="w-100 filter" id="per_page" field="per_page" v-model="filter.per_page"  @change="makeNewRoute">
+            <el-option :label="5" value="5"></el-option>
+            <el-option :label="10" value="10"></el-option>
+            <el-option :label="20" value="20"></el-option>
+            <el-option :label="50" value="50"></el-option>
+            <el-option :label="100" value="100"></el-option>
+        </el-select>
+    </div>
+    <template v-for="(filter,key) in data.filters" >
+        <div class="col-md-3 col-sm-12 mb-3">
+            <label class="mb-0"><span v-html="filter.label"></span></label>
+            <v-runtime-template :key="key" :template="filter.view"></v-runtime-template>
+        </div>
+    </template>
 </div>
 </template>
 <script>
@@ -53,9 +34,6 @@ export default {
     },
     async created() {
         this.initFormFilter()
-    },
-    mounted() {
-        document.getElementById("prevent_close_menu").addEventListener('click', event => event.stopPropagation())
     },
     methods: {
         setFormValue(index,value,filter) {

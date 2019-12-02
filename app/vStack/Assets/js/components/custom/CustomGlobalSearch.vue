@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar-nav mb-0 globalsearch">
+    <div class="navbar-nav mb-0 globalsearch w-100" >
         <el-autocomplete v-model="filter" :fetch-suggestions="querySearchAsync" 
             placeholder="Pesquisar ..." class="w-100"
             @select="handleSelect"
@@ -45,8 +45,10 @@ export default {
 </script>
 <style scoped lang="scss">
     .globalsearch {
-        margin-left:112px;
+        // margin-left:112px;
         width: 300px;
+        padding-left : 200px;
+        padding-right : 200px;
     }
     .el-scrollbar {
         .el-autocomplete-suggestion__list {

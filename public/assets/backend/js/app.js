@@ -4591,25 +4591,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
@@ -4636,11 +4617,6 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     }, null, this);
-  },
-  mounted: function mounted() {
-    document.getElementById("prevent_close_menu").addEventListener('click', function (event) {
-      return event.stopPropagation();
-    });
   },
   methods: {
     setFormValue: function setFormValue(index, value, filter) {
@@ -11550,7 +11526,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".globalsearch[data-v-1ad254e8] {\n  margin-left: 112px;\n  width: 300px;\n}\n.el-scrollbar .el-autocomplete-suggestion__list li[data-v-1ad254e8] {\n  line-height: normal;\n}\n.el-scrollbar .el-autocomplete-suggestion__list li .value[data-v-1ad254e8] {\n  text-overflow: ellipsis;\n  overflow: hidden;\n  color: gray;\n  font-weight: 600;\n  font-size: 15px;\n  border-bottom: 1px solid #f1f1f1;\n}\n.el-scrollbar .el-autocomplete-suggestion__list li ._link[data-v-1ad254e8] {\n  color: gray;\n  font-size: 15px;\n  margin-bottom: 20px;\n}", ""]);
+exports.push([module.i, ".globalsearch[data-v-1ad254e8] {\n  width: 300px;\n  padding-left: 200px;\n  padding-right: 200px;\n}\n.el-scrollbar .el-autocomplete-suggestion__list li[data-v-1ad254e8] {\n  line-height: normal;\n}\n.el-scrollbar .el-autocomplete-suggestion__list li .value[data-v-1ad254e8] {\n  text-overflow: ellipsis;\n  overflow: hidden;\n  color: gray;\n  font-weight: 600;\n  font-size: 15px;\n  border-bottom: 1px solid #f1f1f1;\n}\n.el-scrollbar .el-autocomplete-suggestion__list li ._link[data-v-1ad254e8] {\n  color: gray;\n  font-size: 15px;\n  margin-bottom: 20px;\n}", ""]);
 
 // exports
 
@@ -73661,7 +73637,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "navbar-nav mb-0 globalsearch" },
+    { staticClass: "navbar-nav mb-0 globalsearch w-100" },
     [
       _c(
         "el-autocomplete",
@@ -74255,149 +74231,72 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "d-flex justify-content-end align-items-center" },
+    {
+      staticClass:
+        "d-flex flex-row row align-items-center mb-3 flex-wrap mb-4 w-100"
+    },
     [
-      _c("ul", { staticClass: "navbar-nav" }, [
-        _c("li", { staticClass: "nav-item dropdown" }, [
-          _c(
-            "button",
-            {
-              staticClass:
-                "nav-link dropdown-toggle d-flex align-items-center btn btn-sm btn-sm-block px-5",
-              class: {
-                "btn-primary": _vm.data.hasFilter,
-                "btn-outline-dark": !_vm.data.hasFilter
-              },
-              attrs: {
-                href: "#",
-                id: "resourceFilterDropdown",
-                "data-toggle": "dropdown",
-                "aria-haspopup": "true",
-                "aria-expanded": "false"
-              }
-            },
-            [
-              _c("span", { staticClass: "el-icon-more mr-2" }),
-              _vm._v(" "),
-              _vm.data.hasFilter
-                ? _c("span", [_vm._v(_vm._s(_vm.data.hasFilter))])
-                : _vm._e()
-            ]
-          ),
+      _c(
+        "div",
+        { staticClass: "col-md-3 col-sm-12 mb-3" },
+        [
+          _c("label", { staticClass: "mb-0" }, [_vm._v("Por Página :")]),
           _vm._v(" "),
           _c(
-            "div",
+            "el-select",
             {
-              staticClass: "dropdown-menu dropdown-menu-right filter p-0",
-              attrs: {
-                id: "prevent_close_menu",
-                "aria-labelledby": "resourceFilterDropdown"
+              staticClass: "w-100 filter",
+              attrs: { filterable: "", id: "per_page", field: "per_page" },
+              on: { change: _vm.makeNewRoute },
+              model: {
+                value: _vm.filter.per_page,
+                callback: function($$v) {
+                  _vm.$set(_vm.filter, "per_page", $$v)
+                },
+                expression: "filter.per_page"
               }
             },
             [
-              _c("table", { staticClass: "table table-striped" }, [
-                _c(
-                  "tbody",
-                  [
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c(
-                        "td",
-                        [
-                          _c(
-                            "el-select",
-                            {
-                              staticClass: "w-100 filter",
-                              attrs: {
-                                filterable: "",
-                                id: "per_page",
-                                field: "per_page"
-                              },
-                              on: { change: _vm.makeNewRoute },
-                              model: {
-                                value: _vm.filter.per_page,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.filter, "per_page", $$v)
-                                },
-                                expression: "filter.per_page"
-                              }
-                            },
-                            [
-                              _c("el-option", {
-                                attrs: { label: 5, value: "5" }
-                              }),
-                              _vm._v(" "),
-                              _c("el-option", {
-                                attrs: { label: 10, value: "10" }
-                              }),
-                              _vm._v(" "),
-                              _c("el-option", {
-                                attrs: { label: 20, value: "20" }
-                              }),
-                              _vm._v(" "),
-                              _c("el-option", {
-                                attrs: { label: 50, value: "50" }
-                              }),
-                              _vm._v(" "),
-                              _c("el-option", {
-                                attrs: { label: 100, value: "100" }
-                              }),
-                              _vm._v(" "),
-                              _c("el-option", {
-                                attrs: { label: 200, value: "200" }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.data.filters, function(filter, key) {
-                      return [
-                        _c("tr", [
-                          _c("td", [
-                            _c("span", {
-                              domProps: { innerHTML: _vm._s(filter.label) }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c(
-                            "td",
-                            [
-                              _c("v-runtime-template", {
-                                key: key,
-                                attrs: { template: filter.view }
-                              })
-                            ],
-                            1
-                          )
-                        ])
-                      ]
-                    })
-                  ],
-                  2
-                )
-              ])
-            ]
+              _c("el-option", { attrs: { label: 5, value: "5" } }),
+              _vm._v(" "),
+              _c("el-option", { attrs: { label: 10, value: "10" } }),
+              _vm._v(" "),
+              _c("el-option", { attrs: { label: 20, value: "20" } }),
+              _vm._v(" "),
+              _c("el-option", { attrs: { label: 50, value: "50" } }),
+              _vm._v(" "),
+              _c("el-option", { attrs: { label: 100, value: "100" } })
+            ],
+            1
           )
-        ])
-      ])
-    ]
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm._l(_vm.data.filters, function(filter, key) {
+        return [
+          _c(
+            "div",
+            { staticClass: "col-md-3 col-sm-12 mb-3" },
+            [
+              _c("label", { staticClass: "mb-0" }, [
+                _c("span", { domProps: { innerHTML: _vm._s(filter.label) } })
+              ]),
+              _vm._v(" "),
+              _c("v-runtime-template", {
+                key: key,
+                attrs: { template: filter.view }
+              })
+            ],
+            1
+          )
+        ]
+      })
+    ],
+    2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [_c("td", [_vm._v("Por Página :")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -74422,7 +74321,7 @@ var render = function() {
   return _c(
     "form",
     {
-      staticClass: "needs-validation mt-4",
+      staticClass: "needs-validation mb-0",
       on: {
         submit: function($event) {
           $event.preventDefault()
