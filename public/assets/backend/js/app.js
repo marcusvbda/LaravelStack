@@ -4589,24 +4589,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
     return {
-      filter: {
-        per_page: this.data.perpage
-      }
+      filter: {}
     };
   },
   components: {
@@ -74279,56 +74267,9 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass:
-        "d-flex flex-row row align-items-center mb-3 flex-wrap mb-4 w-100"
+      staticClass: "d-flex flex-row row align-items-center mb-3 flex-wrap mb-4"
     },
     [
-      _c(
-        "div",
-        { staticClass: "col-md-3 col-sm-12 mb-3" },
-        [
-          _c(
-            "label",
-            { staticClass: "mb-0", staticStyle: { "font-size": "14px" } },
-            [_vm._v("Por Página :")]
-          ),
-          _vm._v(" "),
-          _c(
-            "el-select",
-            {
-              staticClass: "w-100 filter",
-              attrs: {
-                size: "medium",
-                filterable: "",
-                id: "per_page",
-                field: "per_page"
-              },
-              on: { change: _vm.makeNewRoute },
-              model: {
-                value: _vm.filter.per_page,
-                callback: function($$v) {
-                  _vm.$set(_vm.filter, "per_page", $$v)
-                },
-                expression: "filter.per_page"
-              }
-            },
-            [
-              _c("el-option", { attrs: { label: 5, value: "5" } }),
-              _vm._v(" "),
-              _c("el-option", { attrs: { label: 10, value: "10" } }),
-              _vm._v(" "),
-              _c("el-option", { attrs: { label: 20, value: "20" } }),
-              _vm._v(" "),
-              _c("el-option", { attrs: { label: 50, value: "50" } }),
-              _vm._v(" "),
-              _c("el-option", { attrs: { label: 100, value: "100" } })
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
       _vm._l(_vm.data.filters, function(filter, key) {
         return [
           _c(

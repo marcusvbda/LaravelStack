@@ -23,7 +23,7 @@ class ResourceController extends Controller
         $data      = $request->all();
         $orderBy   = @$data["order_by"] ? $data["order_by"] : "id";
         $orderType = @$data["order_type"] ? $data["order_type"] : "desc";
-        $perPage   = @$data["per_page"] ? $data["per_page"] : 10;
+        $perPage   = $resource->resultsPerPage();
         $query     = $resource->model->orderBy($orderBy, $orderType);
         foreach ($resource->filters() as $filter) $query = $filter->applyFilter($query, $data);
         foreach ($resource->search() as $search) {

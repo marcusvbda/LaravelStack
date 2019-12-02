@@ -20,6 +20,11 @@ class Resource
         return $this->id;
     }
 
+    public function resultsPerPage()
+    {
+        return 10;
+    }
+
     public function menu()
     {
         return "<span class='el-icon-menu mr-2'></span> Recursos";
