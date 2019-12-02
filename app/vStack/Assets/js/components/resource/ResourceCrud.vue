@@ -1,24 +1,28 @@
 <template>
-    <div class="card">
-        <form class="needs-validation m-0" novalidate v-on:submit.prevent="submit" >
-            <div class="card-body">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-10 col-sm-12">
-                        <template v-for="(field,i) in data.fields">
-                            <v-runtime-template :key="i" :template="field.view"></v-runtime-template>
-                        </template>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <form class="needs-validation m-0" novalidate v-on:submit.prevent="submit" >
+                    <div class="card-body">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-10 col-sm-12">
+                                <template v-for="(field,i) in data.fields">
+                                    <v-runtime-template :key="i" :template="field.view"></v-runtime-template>
+                                </template>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col-12 d-flex justify-content-end d-flex align-items-center">
-                        <a :href="data.list_route" class="mr-4 text-danger link"><b>Cancelar</b></a>
-                        <button class="ml-3 btn btn-outline-primary btn-sm btn-sm-block" type="sumit">{{pageType=='CREATE' ? 'Cadastrar' : 'Alterar'}}</button>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-end d-flex align-items-center">
+                                <a :href="data.list_route" class="mr-4 text-danger link"><b>Cancelar</b></a>
+                                <button class="ml-3 btn btn-primary btn-sm-block" type="sumit">{{pageType=='CREATE' ? 'Cadastrar' : 'Alterar'}}</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </template>
 <script>

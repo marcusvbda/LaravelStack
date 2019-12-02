@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="form-group row mb-3">
-            <label class="col-sm-2 col-form-label"><span v-html="label ? label : ''"></span></label>
+            <label class="col-sm-2 col-form-label" v-if="label"><span v-html="label ? label : ''"></span></label>
             <div class="col-sm-10">
                 <div class="input-group">
                     <div class="input-group-prepend" v-if="prepend">

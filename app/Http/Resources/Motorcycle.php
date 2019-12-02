@@ -46,18 +46,18 @@ class Motorcycle extends Resource
     {
         return [
             new Text([
-                "label" => "<b>Nome</b>", "field" => "name", "required" => true,
+                "label" => "Nome", "field" => "name", "required" => true,
                 "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255"
             ]),
             new TextArea([
-                "label" => "<b>Descrição</b>", "field" => "description",
+                "label" => "Descrição", "field" => "description",
                 "placeholder" => "Digite o texto aqui ...",
             ]),
             new Check([
-                "label" => "<b>Ativo</b>", "field" => "active"
+                "label" => "Ativo", "field" => "active"
             ]),
             new BelongsTo([
-                "label" => "<b>Marca</b>", "field" => "brand_id",
+                "label" => "Marca", "field" => "brand_id",
                 "placeholder" => "Selecione a marca",
                 "model" => "App\Http\Models\Brand",
                 "rules" => "required"

@@ -131,6 +131,16 @@ class Resource
         return true;
     }
 
+    public function canImport()
+    {
+        return true;
+    }
+
+    public function canExport()
+    {
+        return true;
+    }
+
     public function canUpdate()
     {
         return true;

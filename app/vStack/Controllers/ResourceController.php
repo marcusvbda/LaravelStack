@@ -30,7 +30,6 @@ class ResourceController extends Controller
             $query = $query->where($search, "like", "%" . (@$data["_"] ? $data["_"] : "") . "%");
         }
         foreach ($resource->lens() as $len) {
-            // dd($data, $len["field"]);
             $field = $len["field"];
             if (isset($data[$field])) {
                 $value = $data[$field];
@@ -47,7 +46,26 @@ class ResourceController extends Controller
         if (!$resource->canCreate()) abort(403);
         $data = $this->makeCrudData($resource);
         $data["page_type"] = "Cadastro";
-        return view("vStack::resources..crud", compact("resource", "data"));
+        return view("vStack::resources.crud", compact("resource", "data"));
+    }
+
+    public function import($resource)
+    {
+        $resource = ResourcesHelpers::find($resource);
+        if (!($resource->canImport() && $resource->canCreate())) abort(403);
+        $data = $this->makeImportData($resource);
+        return view("vStack::resources.import", compact('data'));
+    }
+
+    private function makeImportData($resource)
+    {
+        return [
+            "resource" => [
+                "label"          => $resource->label(),
+                "singular_label" => $resource->singularLabel(),
+                "route"          => $resource->route()
+            ]
+        ];
     }
 
     public function edit($resource, $code)
@@ -57,7 +75,7 @@ class ResourceController extends Controller
         $content = $resource->model->findOrFail($code);
         $data = $this->makeCrudData($resource, $content);
         $data["page_type"] = "Edição";
-        return view("vStack::resources..crud", compact("resource", "data"));
+        return view("vStack::resources.crud", compact("resource", "data"));
     }
 
     public function destroy($resource, $code)
@@ -80,7 +98,7 @@ class ResourceController extends Controller
         $content = $resource->model->findOrFail($code);
         $data = $this->makeViewData($content->code, $resource, $content);
         $data["page_type"] = "Visualização";
-        return view("vStack::resources..view", compact("resource", "data"));
+        return view("vStack::resources.view", compact("resource", "data"));
     }
 
     private function makeViewData($code, $resource, $content = null)

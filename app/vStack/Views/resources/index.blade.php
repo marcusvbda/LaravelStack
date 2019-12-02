@@ -21,19 +21,21 @@
         <h4 class="mb-1">{!! @$resource->indexLabel() !!}</h4>
         <div class="d-flex flex-row">
             @if($resource->canCreate())
-                <a class="btn btn-outline-primary btn-sm-block btn-sm cursor-pointer ml-3" href="{{route('resource.create',['resource'=>$resource->id])}}">
+                <a class="btn btn-primary btn-sm-block btn-sm cursor-pointer ml-4 px-3 pr-4" href="{{route('resource.create',['resource'=>$resource->id])}}">
                     {!! $resource->storeButtonLabel() !!}
                 </a>
+                @if($resource->canImport())
+                    <a class="btn btn-outline-secondary btn-sm-block btn-sm cursor-pointer pr-3 ml-2" href="{{route('resource.import',['resource'=>$resource->id])}}">
+                        {!! $resource->importButtonlabel() !!}
+                    </a>
+                @endif
             @endif
-            @if($resource->canCreate())
-                <a class="btn btn-outline-primary btn-sm-block btn-sm cursor-pointer ml-2" href="{{route('resource.create',['resource'=>$resource->id])}}">
-                    {!! $resource->importButtonlabel() !!}
-                </a>
-            @endif
-            @if($resource->model->count()>0)
-                <a class="btn btn-outline-primary btn-sm-block btn-sm cursor-pointer ml-2" href="{{route('resource.create',['resource'=>$resource->id])}}">
-                    {!! $resource->exportButtonlabel() !!}
-                </a>
+            @if($resource->canView() && $resource->canExport())
+                @if($resource->model->count()>0)
+                    <a class="btn btn-outline-secondary btn-sm-block btn-sm cursor-pointer pr-3 ml-2" href="#">
+                        {!! $resource->exportButtonlabel() !!}
+                    </a>
+                @endif
             @endif
         </div>
     </div>

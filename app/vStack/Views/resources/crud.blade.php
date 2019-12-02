@@ -14,12 +14,14 @@
                 </ol>
             </nav>
         </nav>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
         <div class="d-flex flex-row justify-content-between mb-3">
             <h4>{!! @$resource->icon() !!} {{$data["page_type"]}} de {{$resource->singularLabel()}}</h4>
         </div>
-        <resource-crud 
-            :data="{{json_encode($data)}}"
-        ></resource-crud>
     </div>
 </div>
+<resource-crud :data="{{json_encode($data)}}"></resource-crud>
 @endsection

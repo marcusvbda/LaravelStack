@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-row row align-items-center mb-3 flex-wrap mb-4">
+    <div class="d-flex flex-row row align-items-center mb-3 flex-wrap mb-4" v-if="data.filters.length>0">
         <template v-for="(filter,key) in data.filters" >
             <div class="col-md-3 col-sm-12 mb-3">
                 <label class="mb-0" style="font-size:14px;"><span v-html="filter.label"></span></label>
