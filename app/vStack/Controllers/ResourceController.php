@@ -59,21 +59,82 @@ class ResourceController extends Controller
 
     private function makeImportData($resource)
     {
+        $columns = $resource->model->getConnection()->getSchemaBuilder()->getColumnListing($resource->model->getTable());
+        $columns = array_filter($columns,function($x)
+        {
+            if(!in_array($x,["id","created_at","deleted_at","updated_at","email_verified_at","confirmation_token","recovery_token","password"])) return $x;
+        });
         return [
             "resource" => [
                 "label"          => $resource->label(),
                 "singular_label" => $resource->singularLabel(),
-                "route"          => $resource->route()
+                "route"          => $resource->route(),
+                "columns"        => $columns
             ]
         ];
     }
 
-    public function importCSV()
+    public function checkFileImport($resource,Request $request)
+    {
+        $resource = ResourcesHelpers::find($resource);
+        if (!($resource->canImport() && $resource->canCreate())) abort(403);
+        $file = $request->file("file");
+        $delimiter = $request["delimiter"];
+        if(!$file) return ["success" => false, "message" => ["type" => "error", "text" => "Arquivo inválido..."]];
+        if($file->getSize()>137072) return ["success" => false, "message" => ["type" => "error", "text" => "Arquivo maior do que o permitido..."]];
+        $csvFile = file($file->getPathName());
+        if(!@$csvFile[0]) return ["success" => false, "message" => ["type" => "error", "text" => "Arquivo inválido..."]];
+        $header = str_getcsv($csvFile[0],$delimiter);
+        return ["success" => true, "data" => $header];
+    } 
+
+    public function importSubmit($resource,Request $request)
+    {
+        $resource = ResourcesHelpers::find($resource);
+        if (!($resource->canImport() && $resource->canCreate())) abort(403);
+        $data = $request->all();
+        $file = $data["file"];
+        if(!$file) return ["success" => false, "message" => ["type" => "error", "text" => "Arquivo inválido..."]];
+        if($file->getSize()>137072) return ["success" => false, "message" => ["type" => "error", "text" => "Arquivo maior do que o permitido..."]];
+        $csvFile = file($file->getPathName());
+        if(!@$csvFile[0]) return ["success" => false, "message" => ["type" => "error", "text" => "Arquivo inválido..."]];
+        $data["config"] = json_decode($data["config"]);
+        $this->importCSV($resource,$csvFile,$data["config"]);
+        return ["success"=>true];
+    } 
+
+    private function importCSV($resource,$rows,$config)
     {
         $user = Auth::user();
-        dispatch(function () use ($user) {
-            sleep(10);
-            Messages::notify("success", "Arquivo Lorem ipsum importado com sucesso !!!", $user->id);
+        dispatch(function () use ($user,$rows,$config,$resource) {
+            $headers = $config->data->csv_header;
+            $data = [];
+            for($i=1;$i<count($rows);$i++)
+            {
+                $_data = [];
+                $columns = str_getcsv($rows[$i],$config->delimiter);
+                for($y=0;$y<count($headers);$y++) $_data[$headers[$y]] = $columns[$y];
+                if( $_data) $data[] = $_data;
+            }
+            $fieldlist = $config->fieldlist;
+            $errors = 0;
+            $count = 0;
+            foreach($data as $row)
+            {
+                $new = [];
+                foreach($fieldlist as $key=>$value)
+                {
+                    if($value!="_IGNORE_") $new[$value] = $row[$key];
+                }
+                try {
+                    $resource->model->create($new);
+                    $count++;
+                } catch(\Exception $e) {
+                    $errors ++;
+                }
+            }
+            if($count > 0) Messages::notify("success", $count." ".($count>1 ? $resource->label()." importado" : $resource->singularLabel()." importados")." com sucesso !!", $user->id);
+            if($errors > 0) Messages::notify("danger", $errors." ".($errors>1 ? $resource->label()." não pode" : $resource->singularLabel()." não puderam")." ser importados !!", $user->id);
         });
     }
 

@@ -5,6 +5,8 @@ Route::group(['prefix' => "admin"], function () {
         Route::get('{resource}', '\App\vStack\Controllers\ResourceController@index')->name("resource.index");
         Route::get('{resource}/create', '\App\vStack\Controllers\ResourceController@create')->name("resource.create");
         Route::get('{resource}/import', '\App\vStack\Controllers\ResourceController@import')->name("resource.import");
+        Route::post('{resource}/import/check_file', '\App\vStack\Controllers\ResourceController@checkFileImport')->name("resource.import.check_file");
+        Route::post('{resource}/import/submit', '\App\vStack\Controllers\ResourceController@importSubmit')->name("resource.import.submit");
         Route::get('{resource}/{code}', '\App\vStack\Controllers\ResourceController@view')->middleware(['hashids:code'])->name("resource.view");
         Route::get('{resource}/{code}/edit', '\App\vStack\Controllers\ResourceController@edit')->middleware(['hashids:code'])->name("resource.edit");
         Route::delete('{resource}/{code}/destroy', '\App\vStack\Controllers\ResourceController@destroy')->middleware(['hashids:code'])->name("resource.destroy");

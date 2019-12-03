@@ -4,6 +4,7 @@ require('bootstrap')
 require('./components/autoload')
 require('./libs/axios')
 require('./libs/element')
+require('./helpers')
 
 
 import Vue from 'vue'
@@ -18,4 +19,3 @@ const vue = new Vue({
     }
 })
 window.vue = vue
-require('./helpers')

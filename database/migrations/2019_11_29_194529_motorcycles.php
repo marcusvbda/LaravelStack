@@ -26,7 +26,6 @@ class Motorcycles extends Migration
                 ->references('id')
                 ->on('brands')
                 ->onDelete('restrict');
-            $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
         });

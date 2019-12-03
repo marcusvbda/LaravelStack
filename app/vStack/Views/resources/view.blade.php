@@ -1,10 +1,8 @@
 @extends("templates.admin")
 @section('title',$resource->label())
 @section('content')
-@include("templates.alerts")
 <div class="row">
     <div class="col-12">
-        @include("templates.alerts")
         <nav aria-label="breadcrumb">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">

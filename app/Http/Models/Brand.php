@@ -9,11 +9,11 @@ class Brand extends DefaultModel
 {
     protected $table = "brands";
     // public $cascadeDeletes = ['examples'];
-    public $restrictDeletes = ['examples', "motorcycles"];
+    public $restrictDeletes = ['cars', "motorcycles"];
 
     public function cars()
     {
-        return $this->hasMany(Example::class);
+        return $this->hasMany(Car::class);
     }
 
     public function motorcycles()

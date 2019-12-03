@@ -19,7 +19,6 @@ class Brands extends Migration
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('name');
-            $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
         });

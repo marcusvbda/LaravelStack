@@ -6,6 +6,7 @@
         @include("templates.sidebar")
         <div class="main-panel w-100">
             <div class="content-wrapper pt-3">
+                @include("templates.alerts")
                 @yield('content')
             </div>
             <footer class="footer">

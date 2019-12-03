@@ -5,10 +5,11 @@
                 <el-step title="Upload de arquivo"></el-step>
                 <el-step title="Mapeamento de coluna"></el-step>
                 <el-step title="Importação"></el-step>
-                <el-step title="Concluido"></el-step>
             </el-steps>
             <div class="card mt-3">
                 <step-0 v-if="config.step==0" :data="data" :frm="frm" :config="config"/>
+                <step-1 v-if="config.step==1" :data="data" :frm="frm" :config="config"/>
+                <step-2 v-if="config.step>=2" :data="data" :frm="frm" :config="config"/>
             </div>
         </div>
     </div>
@@ -19,17 +20,24 @@ export default {
     data() {
         return {
             frm : {
-                update: false
+                file : null
             },
             config : {
                 show_advanced : false,
                 delimiter : ",",
                 step : 0,
+                data : {
+                    columns : this.data.resource.columns,
+                    csv_header : []
+                },
+                fieldlist : {}
             }
         }
     },
     components : {
-        "step-0" : require("./partials/-ImportStep0").default
+        "step-0" : require("./partials/-ImportStep0").default,
+        "step-1" : require("./partials/-ImportStep1").default,
+        "step-2" : require("./partials/-ImportStep2").default,
     }
 }
 </script>
