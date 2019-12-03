@@ -16,7 +16,7 @@ class createResource extends Command
         $data = $this->arguments();
         $resource = $data["resource"];
         $table = $data["table"];
-        $model = $data["table"];
+        $model = $data["model"];
         $totalSteps = 2;
         $bar = $this->output->createProgressBar($totalSteps);
         $this->createModel($bar, $table, $model);

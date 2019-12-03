@@ -23,14 +23,17 @@ class ForgotPasswordController extends Controller
         $user->recovery_token = md5($user->created_at . "_" . $user->id);
         $link = route("auth.forgot_my_password.renew", ["token" => $user->recovery_token]);
         $appName = Config("app.name");
-        $html = "
-            <p>Olá {$user->name},</p>
-            <p>Esqueceu sua senha ? Sem problemas! </p>
-            <p>Clique no link abaixo e renove-a</p>
-            <a href='{$link}' target='_BLANK'>{$link}</a>
-            <p style='margin-top:30px'>Thank you, {$appName}";
-        SendMail::to($user->email, "Renove sua senha", $html);
         $user->save();
+        $user->refresh();
+        dispatch(function () use ($user, $link, $appName) {
+            $html = "
+                <p>Olá {$user->name},</p>
+                <p>Esqueceu sua senha ? Sem problemas! </p>
+                <p>Clique no link abaixo e renove-a</p>
+                <a href='{$link}' target='_BLANK'>{$link}</a>
+                <p style='margin-top:30px'>Thank you, {$appName}";
+            SendMail::to($user->email, "Renove sua senha", $html);
+        });
     }
 
     public function resetPassword(Request $request)

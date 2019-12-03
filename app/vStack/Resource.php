@@ -87,7 +87,7 @@ class Resource
 
     public function nothingStoredText()
     {
-        return "Nada cadastrado ainda...";
+        return "<h4>Nada cadastrado ainda...<h4>";
     }
 
     public function fields()

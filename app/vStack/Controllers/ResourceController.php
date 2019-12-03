@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use ResourcesHelpers;
 use Illuminate\Http\Request;
 use App\vStack\Services\Messages;
-use DB;
+use Auth;
 
 class ResourceController extends Controller
 {
@@ -66,6 +66,15 @@ class ResourceController extends Controller
                 "route"          => $resource->route()
             ]
         ];
+    }
+
+    public function importCSV()
+    {
+        $user = Auth::user();
+        dispatch(function () use ($user) {
+            sleep(10);
+            Messages::notify("success", "Arquivo Lorem ipsum importado com sucesso !!!", $user->id);
+        });
     }
 
     public function edit($resource, $code)

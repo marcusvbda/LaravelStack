@@ -4,3 +4,7 @@ To create a new resource, you need to create a command and execute this command 
 ```
 php artisan vstack:make-resource {resource} {model} {table}
 ```
+
+```
+php artisan queue:listen
+```

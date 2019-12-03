@@ -39,16 +39,20 @@ class RegisterController extends Controller
     {
         Auth::logout();
         $user->confirmation_token = md5($user->created_at . "_" . $user->id);
+        $user->save();
+        $user->refresh();
         $link = route("auth.signup.confirm", ["token" => $user->confirmation_token]);
         $appName = Config("app.name");
-        $html = "
-            <p>Olá {$user->name},</p>
-            <p>Obrigado por cadastrar-se. Sua conta foi criada com successo e está pendente de confirmação.</p>
-            <p>Para ativa-la, basta clicar no link abaixo</p>
-            <a href='{$link}' target='_BLANK'>{$link}</a>
-            <p style='margin-top:30px'>Obrigado, {$appName}";
-        SendMail::to($user->email, "Confirme sua conta", $html);
-        $user->save();
+
+        dispatch(function () use ($user, $link, $appName) {
+            $html = "
+                <p>Olá {$user->name},</p>
+                <p>Obrigado por cadastrar-se. Sua conta foi criada com successo e está pendente de confirmação.</p>
+                <p>Para ativa-la, basta clicar no link abaixo</p>
+                <a href='{$link}' target='_BLANK'>{$link}</a>
+                <p style='margin-top:30px'>Obrigado, {$appName}";
+            SendMail::to($user->email, "Confirme sua conta", $html);
+        });
     }
 
     public function confirmAccount($token)

@@ -173,7 +173,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\vStack\vStackServiceProvider::class
+        App\vStack\vStackServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class
     ],
 
     /*
