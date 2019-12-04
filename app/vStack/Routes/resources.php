@@ -4,6 +4,7 @@ Route::group(['prefix' => "admin"], function () {
         Route::post('store', '\App\vStack\Controllers\ResourceController@store')->name("resource.store");
         Route::get('{resource}', '\App\vStack\Controllers\ResourceController@index')->name("resource.index");
         Route::get('{resource}/create', '\App\vStack\Controllers\ResourceController@create')->name("resource.create");
+        Route::get('{resource}/export', '\App\vStack\Controllers\ResourceController@export')->name("resource.export");
         Route::get('{resource}/import', '\App\vStack\Controllers\ResourceController@import')->name("resource.import");
         Route::post('{resource}/import/check_file', '\App\vStack\Controllers\ResourceController@checkFileImport')->name("resource.import.check_file");
         Route::post('{resource}/import/submit', '\App\vStack\Controllers\ResourceController@importSubmit')->name("resource.import.submit");

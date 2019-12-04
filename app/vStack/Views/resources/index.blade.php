@@ -30,7 +30,7 @@
             @endif
             @if($resource->canView() && $resource->canExport())
                 @if($resource->model->count()>0)
-                    <a class="btn btn-outline-secondary btn-sm-block btn-sm cursor-pointer pr-3 ml-2" href="#">
+                    <a class="btn btn-outline-secondary btn-sm-block btn-sm cursor-pointer pr-3 ml-2" target="_BLANK" href="{{route('resource.export',['resource'=>$resource->id])}}">
                         {!! $resource->exportButtonlabel() !!}
                     </a>
                 @endif

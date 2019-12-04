@@ -5,6 +5,7 @@ namespace App\vStack\Controllers;
 use App\Http\Controllers\Controller;
 use ResourcesHelpers;
 use Illuminate\Http\Request;
+use Response;
 use App\vStack\Services\Messages;
 use Auth;
 
@@ -14,16 +15,16 @@ class ResourceController extends Controller
     {
         $resource = ResourcesHelpers::find($resource);
         if (!$resource->canViewList()) abort(403);
-        $data = $this->getPaginatedData($resource, $request);
+        $data = $this->getData($resource, $request);
+        $data = $data->paginate($resource->resultsPerPage());
         return view("vStack::resources.index", compact("resource", "data"));
     }
 
-    private function getPaginatedData($resource, Request $request)
+    private function getData($resource, Request $request)
     {
         $data      = $request->all();
         $orderBy   = @$data["order_by"] ? $data["order_by"] : "id";
         $orderType = @$data["order_type"] ? $data["order_type"] : "desc";
-        $perPage   = $resource->resultsPerPage();
         $query     = $resource->model->orderBy($orderBy, $orderType);
         foreach ($resource->filters() as $filter) $query = $filter->applyFilter($query, $data);
         foreach ($resource->search() as $search) {
@@ -36,7 +37,6 @@ class ResourceController extends Controller
                 $query = $query->where($field, $value);
             }
         }
-        $query = $query->paginate($perPage);
         return $query;
     }
 
@@ -57,10 +57,14 @@ class ResourceController extends Controller
         return view("vStack::resources.import", compact('data'));
     }
 
+    private function getResourceTableColumns($resource) 
+    {
+        return $resource->model->getConnection()->getSchemaBuilder()->getColumnListing($resource->model->getTable());
+    }
+
     private function makeImportData($resource)
     {
-        $columns = $resource->model->getConnection()->getSchemaBuilder()->getColumnListing($resource->model->getTable());
-        $columns = array_filter($columns,function($x)
+        $columns = array_filter($this->getResourceTableColumns($resource),function($x)
         {
             if(!in_array($x,["id","created_at","deleted_at","updated_at","email_verified_at","confirmation_token","recovery_token","password"])) return $x;
         });
@@ -122,6 +126,7 @@ class ResourceController extends Controller
             {
                 $new = [];
                 foreach($fieldlist as $key=>$value) if($value!="_IGNORE_") $new[$value] = $row[$key];
+                $new["created_at"] = date('Y-m-d H:i:s');
                 $_news[] = $new;
             }
             try {
@@ -133,6 +138,30 @@ class ResourceController extends Controller
             } 
         })->onQueue("resource-import");
     }
+
+    public function export($resource,Request $request)
+    {
+        $resource = ResourcesHelpers::find($resource);
+        if (!$resource->canExport()) abort(403);
+        $data = $this->getData($resource,$request);
+        $data = $data->get();
+        $columns = array_filter($this->getResourceTableColumns($resource),function($x)
+        {
+            if(!in_array($x,["confirmation_token","recovery_token","password","deleted_at"])) return $x;
+        });
+        $filename = uniqid().".csv";
+        $file = fopen($filename, 'w+');
+        fputcsv($file, $columns, ",",'"');
+        foreach($data as $row) {
+            $_new = [];
+            $row = $row->toArray();
+            foreach($columns as $col) $_new[$col]=$row[$col]; 
+            fputcsv($file, $_new, ",",'"');
+        }
+        fclose($file);
+        return response()->download($filename, $resource->label()."_".date("d-m-Y H:i:s").'.csv', ['Content-Type' => 'text/csv'])->deleteFileAfterSend(true);
+    } 
+
 
     public function edit($resource, $code)
     {
