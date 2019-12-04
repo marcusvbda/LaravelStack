@@ -24,7 +24,7 @@ const vue = new Vue({
             let route = `App.User.${laravel.user.id}`
             Echo.private(route).notification(n => {
                 this.$message({ showClose: true, message: n.message, type: n._type })
-                this.$http.post(`${laravel.root_url}/admin/vstack/notifications/${laravel.user.code}/set_as_readed`, { id: n.id })
+                this.$http.delete(`${laravel.root_url}/admin/vstack/notifications/${laravel.user.code}/${n.id}/destroy`, {})
             })
         }
     }

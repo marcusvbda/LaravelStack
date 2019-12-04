@@ -86501,9 +86501,7 @@ var vue = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
           type: n._type
         });
 
-        _this.$http.post("".concat(laravel.root_url, "/admin/vstack/notifications/").concat(laravel.user.code, "/set_as_readed"), {
-          id: n.id
-        });
+        _this.$http["delete"]("".concat(laravel.root_url, "/admin/vstack/notifications/").concat(laravel.user.code, "/").concat(n.id, "/destroy"), {});
       });
     }
   }
