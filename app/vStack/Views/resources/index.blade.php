@@ -15,7 +15,7 @@
 </div>
 
 <div class="row mb-3">
-    <div class="col-12 d-flex flex-row align-items-center mb-3">
+    <div class="col-12 d-flex flex-row align-items-center">
         <h4 class="mb-1">{!! @$resource->indexLabel() !!}</h4>
         <div class="d-flex flex-row">
             @if($resource->canCreate())

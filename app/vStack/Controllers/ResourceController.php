@@ -117,24 +117,20 @@ class ResourceController extends Controller
                 if( $_data) $data[] = $_data;
             }
             $fieldlist = $config->fieldlist;
-            $errors = 0;
-            $count = 0;
+            $_news = [];
             foreach($data as $row)
             {
                 $new = [];
-                foreach($fieldlist as $key=>$value)
-                {
-                    if($value!="_IGNORE_") $new[$value] = $row[$key];
-                }
-                try {
-                    $resource->model->create($new);
-                    $count++;
-                } catch(\Exception $e) {
-                    $errors ++;
-                }
+                foreach($fieldlist as $key=>$value) if($value!="_IGNORE_") $new[$value] = $row[$key];
+                $_news[] = $new;
             }
-            if($count > 0) Messages::notify("success", $count." ".($count>1 ? $resource->label()." importado" : $resource->singularLabel()." importados")." com sucesso !!", $user->id);
-            if($errors > 0) Messages::notify("danger", $errors." ".($errors>1 ? $resource->label()." não pode" : $resource->singularLabel()." não puderam")." ser importados !!", $user->id);
+            try {
+                $resource->model->insert($_news);
+                $count = count($_news);
+                Messages::notify("success", $count." ".($count>1 ? $resource->label()." importado" : $resource->singularLabel()." importados")." com sucesso !!", $user->id);
+            } catch(\Exception $e) {
+                Messages::notify("error", "<p>Erro ao importar CSV com ".$count." registro".($count>1 ? "s" : "")."</p><p>".$e->getMessage()."</p>", $user->id);
+            } 
         })->onQueue("resource-import");
     }
 
