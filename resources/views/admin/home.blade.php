@@ -1,7 +1,6 @@
 @extends("templates.admin")
 @section('title',"Home")
 @section('content')
-@include("templates.alerts")
 <nav aria-label="breadcrumb">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">

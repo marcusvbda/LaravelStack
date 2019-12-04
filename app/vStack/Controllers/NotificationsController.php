@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\vStack\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Notifications\Alert;

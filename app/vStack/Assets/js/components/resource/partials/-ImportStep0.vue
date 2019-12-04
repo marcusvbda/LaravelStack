@@ -1,5 +1,5 @@
 <template>
-    <div v-loading="loading">
+    <div class="card" v-loading="loading">
         <div class="card-header bg-white py-4">
             <div class="row">
                 <div class="col-12">
@@ -16,8 +16,16 @@
             <div class="row">
                 <div class="col-md-5 col-sm-12">Escolha um arquivo CSV do seu computador</div>
                 <div class="col-md-6 col-sm-12">
-                    <input  accept=".csv" type="file" @change="fileChange">
-                    <div><small class="mt-2">Tamanho máximo: 128 MB</small></div>
+                    <template v-if="!frm.file">
+                        <input  accept=".csv" type="file" @change="fileChange">
+                        <div><small class="mt-2">Tamanho máximo: 128 MB</small></div>
+                    </template>
+                    <template v-else>
+                        <div class="d-flex flex-row">
+                            <div>{{frm.file.name}}</div>
+                            <a href="#" class="ml-2 link text-danger" @click.prevent="frm.file=null">Trocar de Arquivo</a>
+                        </div>
+                    </template>
                 </div>
             </div>
             <div class="row mt-4" v-if="config.show_advanced">

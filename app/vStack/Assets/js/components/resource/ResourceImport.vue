@@ -6,7 +6,11 @@
                 <el-step title="Mapeamento de coluna"></el-step>
                 <el-step title="Importação"></el-step>
             </el-steps>
-            <div class="card mt-3">
+            <div class="mt-3">
+                <a class="link" href="#" v-if="config.step>0" @click.prevent="config.step--">
+                    <span class="el-icon-caret-left mr-2 mb-2"></span>
+                    Voltar à etapa anterior
+                </a>
                 <step-0 v-if="config.step==0" :data="data" :frm="frm" :config="config"/>
                 <step-1 v-if="config.step==1" :data="data" :frm="frm" :config="config"/>
                 <step-2 v-if="config.step>=2" :data="data" :frm="frm" :config="config"/>

@@ -5028,6 +5028,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['data'],
   data: function data() {
@@ -5180,6 +5184,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data", "frm", "config"],
   data: function data() {
@@ -5287,6 +5299,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data", "frm", "config"],
   methods: {
@@ -5294,6 +5310,9 @@ __webpack_require__.r(__webpack_exports__);
       this.loading = true;
       this.config.step += 2;
     }
+  },
+  mounted: function mounted() {
+    this.config.fieldlist = {};
   }
 });
 
@@ -84910,8 +84929,30 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "card mt-3" },
+          { staticClass: "mt-3" },
           [
+            _vm.config.step > 0
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.config.step--
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { staticClass: "el-icon-caret-left mr-2 mb-2" }),
+                    _vm._v(
+                      "\n                Voltar à etapa anterior\n            "
+                    )
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
             _vm.config.step == 0
               ? _c("step-0", {
                   attrs: { data: _vm.data, frm: _vm.frm, config: _vm.config }
@@ -85061,7 +85102,8 @@ var render = function() {
           value: _vm.loading,
           expression: "loading"
         }
-      ]
+      ],
+      staticClass: "card"
     },
     [
       _c("div", { staticClass: "card-header bg-white py-4" }, [
@@ -85112,14 +85154,42 @@ var render = function() {
             _vm._v("Escolha um arquivo CSV do seu computador")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-6 col-sm-12" }, [
-            _c("input", {
-              attrs: { accept: ".csv", type: "file" },
-              on: { change: _vm.fileChange }
-            }),
-            _vm._v(" "),
-            _vm._m(0)
-          ])
+          _c(
+            "div",
+            { staticClass: "col-md-6 col-sm-12" },
+            [
+              !_vm.frm.file
+                ? [
+                    _c("input", {
+                      attrs: { accept: ".csv", type: "file" },
+                      on: { change: _vm.fileChange }
+                    }),
+                    _vm._v(" "),
+                    _vm._m(0)
+                  ]
+                : [
+                    _c("div", { staticClass: "d-flex flex-row" }, [
+                      _c("div", [_vm._v(_vm._s(_vm.frm.file.name))]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "ml-2 link text-danger",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.frm.file = null
+                            }
+                          }
+                        },
+                        [_vm._v("Trocar de Arquivo")]
+                      )
+                    ])
+                  ]
+            ],
+            2
+          )
         ]),
         _vm._v(" "),
         _vm.config.show_advanced
@@ -85221,7 +85291,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-header bg-white py-4" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-12" }, [
@@ -85246,12 +85316,11 @@ var render = function() {
     _c("div", { staticClass: "card-body p-0" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-12" }, [
-          _c(
-            "table",
-            { staticClass: "table table-striped" },
-            [
-              _vm._m(0),
-              _vm._v(" "),
+          _c("table", { staticClass: "table table-striped" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
               _vm._l(_vm.config.data.csv_header, function(column) {
                 return _c("tr", [
                   _c("td", { staticClass: "px-5" }, [_vm._v(_vm._s(column))]),
@@ -85296,10 +85365,10 @@ var render = function() {
                     1
                   )
                 ])
-              })
-            ],
-            2
-          )
+              }),
+              0
+            )
+          ])
         ])
       ])
     ]),
@@ -85337,10 +85406,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", { staticClass: "px-5" }, [_vm._v("Nome da coluna")]),
-      _vm._v(" "),
-      _c("th", { staticClass: "px-5" }, [_vm._v("Mapear para o campo")])
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "px-5" }, [_vm._v("Nome da coluna")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "px-5" }, [_vm._v("Mapear para o campo")])
+      ])
     ])
   }
 ]
@@ -85375,7 +85446,8 @@ var render = function() {
           value: _vm.loading,
           expression: "loading"
         }
-      ]
+      ],
+      staticClass: "card"
     },
     [
       _vm._m(0),
@@ -86409,12 +86481,15 @@ __webpack_require__(/*! ./libs/echo */ "./resources/js/backend/libs/echo.js");
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.productionTip = false;
 var vue = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
+  data: {
+    alerts: []
+  },
   mounted: function mounted() {
     var _this = this;
 
-    this.$http.post("".concat(laravel.root_url, "/admin/notifications/").concat(laravel.user.code), {}).then(function (res) {
+    this.$http.post("".concat(laravel.root_url, "/admin/vstack/notifications/").concat(laravel.user.code), {}).then(function (res) {
       res = res.data;
-      if (res.notifications) _this.makeNotification(res.notifications);
+      if (res.notifications) _this.alerts = res.notifications;
     });
 
     if (laravel.user && laravel.pusher_key) {
@@ -86426,30 +86501,10 @@ var vue = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
           type: n._type
         });
 
-        _this.$http.post("".concat(laravel.root_url, "/admin/notifications/").concat(laravel.user.code, "/set_as_readed"), {
+        _this.$http.post("".concat(laravel.root_url, "/admin/vstack/notifications/").concat(laravel.user.code, "/set_as_readed"), {
           id: n.id
         });
       });
-    }
-  },
-  methods: {
-    makeNotification: function makeNotification(notes) {
-      var _this2 = this;
-
-      var _loop = function _loop(i) {
-        var alert = notes[i].data;
-        setTimeout(function (_) {
-          _this2.$message({
-            showClose: true,
-            message: alert.message,
-            type: alert._type
-          });
-        }, 100);
-      };
-
-      for (var i in notes) {
-        _loop(i);
-      }
     }
   }
 });
