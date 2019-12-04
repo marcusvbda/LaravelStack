@@ -7,10 +7,5 @@ php artisan vstack:make-resource {resource} {model} {table}
 
 to process vstack queue
 ```
-php artisan queue:work --queue=mail,resource-import,broadcasts
-```
-
-to run websocket server
-```
-php artisan websockets:serve
+php artisan queue:work --queue=mail,resource-import,alert-broadcasts
 ```

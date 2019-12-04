@@ -19,4 +19,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return \Hashids::encode($this->id);
     }
+
+    public function receivesBroadcastNotificationsOn()
+    {
+        return 'App.User.'.$this->id;
+    }
 }

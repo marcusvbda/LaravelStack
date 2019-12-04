@@ -86389,7 +86389,6 @@ module.exports = g;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
 __webpack_require__(/*! ../../../app/vStack/Assets/js/components/autoload */ "./app/vStack/Assets/js/components/autoload.js");
 
 __webpack_require__(/*! ./libs/jquery */ "./resources/js/backend/libs/jquery.js");
@@ -86404,25 +86403,56 @@ __webpack_require__(/*! ./libs/element */ "./resources/js/backend/libs/element.j
 
 __webpack_require__(/*! ./helpers */ "./resources/js/backend/helpers.js");
 
+__webpack_require__(/*! ./libs/echo */ "./resources/js/backend/libs/echo.js");
+
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.productionTip = false;
 var vue = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
-  el: '#app'
+  el: '#app',
+  mounted: function mounted() {
+    var _this = this;
+
+    if (laravel.user && laravel.pusher_key) {
+      this.$http.post("".concat(laravel.root_url, "/admin/notifications/").concat(laravel.user.code), {}).then(function (res) {
+        res = res.data;
+        if (res.notifications) _this.makeNotification(res.notifications);
+      });
+      var route = "App.User.".concat(laravel.user.id);
+      Echo["private"](route).notification(function (n) {
+        _this.$message({
+          showClose: true,
+          message: n.message,
+          type: n._type
+        });
+
+        _this.$http.post("".concat(laravel.root_url, "/admin/notifications/").concat(laravel.user.code, "/set_as_readed"), {
+          id: n.id
+        });
+      });
+    }
+  },
+  methods: {
+    makeNotification: function makeNotification(notes) {
+      var _this2 = this;
+
+      var _loop = function _loop(i) {
+        var alert = notes[i].data;
+        setTimeout(function (_) {
+          _this2.$message({
+            showClose: true,
+            message: alert.message,
+            type: alert._type
+          });
+        }, 100);
+      };
+
+      for (var i in notes) {
+        _loop(i);
+      }
+    }
+  }
 });
 window.vue = vue;
-
-window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
-window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_1__["default"]({
-  broadcaster: 'pusher',
-  key: laravel.pusher_key,
-  wsHost: window.location.hostname,
-  wsPort: 6001,
-  disableStats: true
-});
-window.Echo["private"]('App.User.' + laravel.user_id).notification(function (notification) {
-  console.log('notifyyyyy');
-  console.log(notification);
-});
 
 /***/ }),
 
@@ -86983,6 +87013,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$http = axios__WEBPACK_IMPORTED_MODULE_1___default.a;
+
+/***/ }),
+
+/***/ "./resources/js/backend/libs/echo.js":
+/*!*******************************************!*\
+  !*** ./resources/js/backend/libs/echo.js ***!
+  \*******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
+
+
+if (laravel.pusher_key) {
+  window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
+  window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
+    broadcaster: 'pusher',
+    key: laravel.pusher_key,
+    cluster: laravel.pusher_cluster
+  });
+}
 
 /***/ }),
 

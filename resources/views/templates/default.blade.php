@@ -7,7 +7,16 @@
 				csrf_token : '{{ csrf_token() }}',
 				root_url : '{{ url('') }}',
 				pusher_key : '{{env("PUSHER_APP_KEY","")}}',
-				user_id : {{Auth::check() ? Auth::user()->id : 0}}
+				pusher_cluster : '{{env("PUSHER_APP_CLUSTER","")}}',
+				@if(Auth::check())
+					<?php $user =  Auth::user(); ?>
+					user : {
+						id : {{$user->id}},
+						code : '{{$user->code}}',
+					},
+				@else
+				user : false
+				@endif
 			}
 		</script>
 		<meta name="csrf-token" content="{{ csrf_token() }}">
