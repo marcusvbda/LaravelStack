@@ -10,12 +10,21 @@ require('./helpers')
 import Vue from 'vue'
 Vue.config.productionTip = false
 const vue = new Vue({
-    el: '#app',
-    data() {
-        return {
-            csrf_token: $('meta[name="csrf-token"]').attr('content'),
-            root_url: $('meta[name="root-url"]').attr('content'),
-        }
-    }
+    el: '#app'
 })
 window.vue = vue
+import Echo from 'laravel-echo'
+window.Pusher = require('pusher-js')
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: laravel.pusher_key,
+    wsHost: window.location.hostname,
+    wsPort: 6001,
+    disableStats: true
+})
+
+window.Echo.private('App.User.' + laravel.user_id)
+    .notification((notification) => {
+        console.log('notifyyyyy');
+        console.log(notification)
+    });

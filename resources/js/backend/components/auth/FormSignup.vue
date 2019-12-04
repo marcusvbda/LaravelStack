@@ -10,14 +10,12 @@
                 <slot name="alerts"></slot>
                 <form class="needs-validation mt-4" novalidate v-on:submit.prevent="submit" >
                     <v-input class="mb-3" 
-                        :label="`<b>Nome</b>`" 
                         :prepend="`<i class='el-icon-user text-secondary'></i>`" 
                         v-model="frm.name" 
                         placeholder="Digite aqui seu nome ..." 
                         :errors="errors.name ? errors.name : false"
                     />
                     <v-input class="mb-3" 
-                        :label="`<b>E-mail</b>`" 
                         :prepend="`<i class='text-secondary'>@</i>`" 
                         type="email" 
                         v-model="frm.email" 
@@ -25,7 +23,6 @@
                         :errors="errors.email ? errors.email : false"
                     />
                     <v-input class="mb-3" 
-                        :label="`<b>Senha</b>`"
                         :prepend="`<i class='el-icon-lock text-secondary'></i>`" 
                         type="password" 
                         v-model="frm.password" 
@@ -33,7 +30,6 @@
                         :errors="errors.password ? errors.password : false"
                     />
                     <v-input class="mb-3" 
-                        :label="`<b>Confirme sua senha</b>`"
                         :prepend="`<i class='el-icon-lock text-secondary'></i>`" 
                         type="password" 
                         v-model="frm.password_confirmation" 

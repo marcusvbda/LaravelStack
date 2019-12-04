@@ -52,7 +52,7 @@ class RegisterController extends Controller
                 <a href='{$link}' target='_BLANK'>{$link}</a>
                 <p style='margin-top:30px'>Obrigado, {$appName}";
             SendMail::to($user->email, "Confirme sua conta", $html);
-        });
+        })->onQueue("mail");
     }
 
     public function confirmAccount($token)

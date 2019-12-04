@@ -1,7 +1,7 @@
 <template>
     <div class="form-group row mb-3">
-            <label class="col-sm-2 col-form-label"><span v-html="label ? label : ''"></span></label>
-            <div class="col-sm-10">
+            <label class="col-sm-2 col-form-label" v-if="label"><span v-html="label ? label : ''"></span></label>
+            <div class="col-sm-10" v-bind:class="{'col-sm-10' : label,'col-sm-12':!label}">
                 <div class="input-group v-select"  v-bind:class="{'is-invalid' : errors}">
                     <el-select :disabled="disabled" class="w-100" clearable v-model="value" filterable :placeholder="placeholder" v-loading="loading"
                     

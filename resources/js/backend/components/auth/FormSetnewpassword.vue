@@ -10,7 +10,6 @@
                 <slot name="alerts"></slot>
                 <form class="needs-validation mt-4" novalidate v-on:submit.prevent="submit" >
                     <v-input class="mb-3" 
-                        :label="`<b>Senha</b>`"
                         :prepend="`<i class='el-icon-lock text-secondary'></i>`" 
                         type="password" 
                         v-model="frm.password" 
@@ -18,7 +17,6 @@
                         :errors="errors.password ? errors.password : false"
                     />
                     <v-input class="mb-3" 
-                        :label="`<b>Confirme sua senha</b>`"
                         :prepend="`<i class='el-icon-lock text-secondary'></i>`" 
                         type="password" 
                         v-model="frm.password_confirmation" 

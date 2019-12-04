@@ -135,7 +135,7 @@ class ResourceController extends Controller
             }
             if($count > 0) Messages::notify("success", $count." ".($count>1 ? $resource->label()." importado" : $resource->singularLabel()." importados")." com sucesso !!", $user->id);
             if($errors > 0) Messages::notify("danger", $errors." ".($errors>1 ? $resource->label()." não pode" : $resource->singularLabel()." não puderam")." ser importados !!", $user->id);
-        });
+        })->onQueue("resource-import");
     }
 
     public function edit($resource, $code)

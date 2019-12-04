@@ -5,6 +5,12 @@ To create a new resource, you need to create a command and execute this command 
 php artisan vstack:make-resource {resource} {model} {table}
 ```
 
+to process vstack queue
 ```
-php artisan queue:listen
+php artisan queue:work --queue=mail,resource-import,broadcasts
+```
+
+to run websocket server
+```
+php artisan websockets:serve
 ```

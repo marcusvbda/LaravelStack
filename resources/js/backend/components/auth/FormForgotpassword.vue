@@ -10,7 +10,6 @@
                 <slot name="alerts"></slot>
                 <form class="needs-validation mt-4" novalidate v-on:submit.prevent="submit" >
                     <v-input class="mb-3" 
-                        :label="`<b>E-mail</b>`" 
                         :prepend="`<i class='el-icon-user text-secondary'></i>`" 
                         type="email" 
                         v-model="frm.email" 

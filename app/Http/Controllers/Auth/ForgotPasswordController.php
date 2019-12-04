@@ -31,9 +31,9 @@ class ForgotPasswordController extends Controller
                 <p>Esqueceu sua senha ? Sem problemas! </p>
                 <p>Clique no link abaixo e renove-a</p>
                 <a href='{$link}' target='_BLANK'>{$link}</a>
-                <p style='margin-top:30px'>Thank you, {$appName}";
+                <p style='margin-top:30px'>Obrigado, {$appName}";
             SendMail::to($user->email, "Renove sua senha", $html);
-        });
+        })->onQueue("mail");
     }
 
     public function resetPassword(Request $request)

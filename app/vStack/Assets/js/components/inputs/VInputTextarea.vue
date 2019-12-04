@@ -2,7 +2,7 @@
     <div>
         <div class="form-group row mb-3">
             <label class="col-sm-2 col-form-label"><span v-html="label ? label : ''"></span></label>
-            <div class="col-sm-10">
+            <div class="col-sm-10" v-bind:class="{'col-sm-10' : label,'col-sm-12':!label}">
                 <div class="input-group">
                     <div class="input-group-prepend" v-if="prepend">
                         <span class="input-group-text">
