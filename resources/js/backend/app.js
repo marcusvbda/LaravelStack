@@ -13,11 +13,11 @@ Vue.config.productionTip = false
 const vue = new Vue({
     el: '#app',
     mounted() {
+        this.$http.post(`${laravel.root_url}/admin/notifications/${laravel.user.code}`, {}).then(res => {
+            res = res.data
+            if (res.notifications) this.makeNotification(res.notifications)
+        })
         if (laravel.user && laravel.pusher_key) {
-            this.$http.post(`${laravel.root_url}/admin/notifications/${laravel.user.code}`, {}).then(res => {
-                res = res.data
-                if (res.notifications) this.makeNotification(res.notifications)
-            })
             let route = `App.User.${laravel.user.id}`
             Echo.private(route).notification(n => {
                 this.$message({ showClose: true, message: n.message, type: n._type })

@@ -86412,11 +86412,12 @@ var vue = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   mounted: function mounted() {
     var _this = this;
 
+    this.$http.post("".concat(laravel.root_url, "/admin/notifications/").concat(laravel.user.code), {}).then(function (res) {
+      res = res.data;
+      if (res.notifications) _this.makeNotification(res.notifications);
+    });
+
     if (laravel.user && laravel.pusher_key) {
-      this.$http.post("".concat(laravel.root_url, "/admin/notifications/").concat(laravel.user.code), {}).then(function (res) {
-        res = res.data;
-        if (res.notifications) _this.makeNotification(res.notifications);
-      });
       var route = "App.User.".concat(laravel.user.id);
       Echo["private"](route).notification(function (n) {
         _this.$message({
