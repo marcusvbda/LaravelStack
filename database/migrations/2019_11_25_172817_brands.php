@@ -19,6 +19,11 @@ class Brands extends Migration
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('name');
+            $table->unsignedBigInteger('tenant_id');
+            $table->foreign('tenant_id')
+                ->references('id')
+                ->on('tenants')
+                ->onDelete('restrict');
             $table->softDeletes();
             $table->timestamps();
         });

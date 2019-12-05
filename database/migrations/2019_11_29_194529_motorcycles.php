@@ -26,6 +26,11 @@ class Motorcycles extends Migration
                 ->references('id')
                 ->on('brands')
                 ->onDelete('restrict');
+            $table->unsignedBigInteger('tenant_id');
+            $table->foreign('tenant_id')
+                ->references('id')
+                ->on('tenants')
+                ->onDelete('restrict');
             $table->softDeletes();
             $table->timestamps();
         });

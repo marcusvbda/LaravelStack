@@ -2,12 +2,14 @@
 
 namespace App\Http\Models;
 
-use App\vStack\Models\DefaultModel;
+use App\vStack\Models\DefaultTenantModel;
 
-class Car extends DefaultModel
+class Car extends DefaultTenantModel
 {
     protected $table = "cars";
-
+    // public $cascadeDeletes = [];
+    // public $restrictDeletes = [];
+    
     public $appends = ["f_created_at", "f_active", "last_update"];
 
     protected  $casts = [

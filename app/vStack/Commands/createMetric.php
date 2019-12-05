@@ -43,7 +43,8 @@ class ' . $name . ' extends Metric
     {
         return "custom metric content";
     }';
-    } else {
+    } 
+    if(in_array($type,["group-graph"])) {
         $content .='
     public function calculate()
     {

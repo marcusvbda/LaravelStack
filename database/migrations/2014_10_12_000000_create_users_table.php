@@ -24,6 +24,11 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('confirmation_token')->nullable();
             $table->string('recovery_token')->nullable();
+            $table->unsignedBigInteger('tenant_id');
+            $table->foreign('tenant_id')
+                ->references('id')
+                ->on('tenants')
+                ->onDelete('restrict');
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

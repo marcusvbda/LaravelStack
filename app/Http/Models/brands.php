@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Models;
-use App\vStack\Models\DefaultModel;
-class brands extends DefaultModel
+use App\vStack\Models\DefaultTenantModel;
+class brands extends DefaultTenantModel
 {
     protected $table = "brands";
     // public $cascadeDeletes = [];

@@ -61,7 +61,7 @@ class ResourceController extends Controller
     {
         $columns = array_filter($resource->getTableColumns(),function($x)
         {
-            if(!in_array($x,["id","created_at","deleted_at","updated_at","email_verified_at","confirmation_token","recovery_token","password"])) return $x;
+            if(!in_array($x,["id","created_at","deleted_at","updated_at","email_verified_at","confirmation_token","recovery_token","password","tenant_id"])) return $x;
         });
         return [
             "resource" => [
@@ -122,6 +122,7 @@ class ResourceController extends Controller
                 $new = [];
                 foreach($fieldlist as $key=>$value) if($value!="_IGNORE_") $new[$value] = $row[$key];
                 $new["created_at"] = date('Y-m-d H:i:s');
+                $new["tenant_id"]  = $user->tenant_id;
                 $_news[] = $new;
             }
             try {
@@ -141,7 +142,7 @@ class ResourceController extends Controller
         $data = $data->get();
         $columns = array_filter($resource->getTableColumns(),function($x)
         {
-            if(!in_array($x,["confirmation_token","recovery_token","password","deleted_at"])) return $x;
+            if(!in_array($x,["confirmation_token","recovery_token","password","deleted_at","tenant_id"])) return $x;
         });
         $filename = uniqid().".csv";
         $file = fopen($filename, 'w+');

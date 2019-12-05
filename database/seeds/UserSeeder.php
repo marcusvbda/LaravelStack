@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Http\Models\Tenant;
 
 class UserSeeder extends Seeder
 {
@@ -13,13 +14,16 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table("tenants")->truncate();
         DB::table("users")->truncate();
+        Tenant::create(["name"=>"lorem ipsum"]);
         $user = User::create([
             "name"     => "admin",
             "email"    => "admin@admin.com",
             "email"    => "admin@admin.com",
             "password" => bcrypt("admin"),
-            "email_verified_at" => date("Y-m-d H:i:s")
+            "email_verified_at" => date("Y-m-d H:i:s"),
+            "tenant_id" => 1
         ]);
         $user->assignRole("user");
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
