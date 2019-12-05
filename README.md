@@ -10,6 +10,11 @@ to create a filter to your resource
 php artisan vstack:make-filter {resource} {name} {type} {index} {label}
 ```
 
+to create a metric to your resource
+```
+php artisan vstack:make-metric {resource} {name} {type}
+```
+
 to process vstack queue
 ```
 php artisan queue:work --queue=mail,resource-import,alert-broadcasts

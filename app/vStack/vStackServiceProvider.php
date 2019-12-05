@@ -3,7 +3,7 @@
 namespace App\vStack;
 
 use Illuminate\Support\ServiceProvider;
-use App\vStack\Commands\{createResource,createFilter};
+use App\vStack\Commands\{createResource,createFilter,createMetric};
 
 class vStackServiceProvider extends ServiceProvider
 {
@@ -14,6 +14,7 @@ class vStackServiceProvider extends ServiceProvider
         $this->commands([
             createResource::class,
             createFilter::class,
+            createMetric::class,
         ]);
     }
 }

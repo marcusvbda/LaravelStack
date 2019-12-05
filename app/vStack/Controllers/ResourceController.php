@@ -14,7 +14,6 @@ class ResourceController extends Controller
     public function index($resource, Request $request)
     {
         $resource = ResourcesHelpers::find($resource);
-        // dd($resource->metrics());
         if (!$resource->canViewList()) abort(403);
         $data = $this->getData($resource, $request);
         $data = $data->paginate($resource->resultsPerPage());

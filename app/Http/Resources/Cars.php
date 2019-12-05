@@ -6,6 +6,8 @@ use App\vStack\Resource;
 use App\Http\Filters\Cars\{CarsFilterByName, CarsFilterByBrand, CarsFilterByDate, CarsFilterByRangeDate};
 use App\vStack\Fields\{Text, TextArea, Check, BelongsTo};
 use App\vStack\Fields\Card;
+use App\Http\Metrics\Cars\{CarsMetricCustom,CarsMetricPerBrand};
+
 use Auth;
 
 class Cars extends Resource
@@ -98,6 +100,14 @@ class Cars extends Resource
     public function search()
     {
         return ["name"];
+    }
+
+    public function metrics()
+    {
+        return [
+            new CarsMetricCustom,
+            new CarsMetricPerBrand
+        ];
     }
 
     public function canViewList()

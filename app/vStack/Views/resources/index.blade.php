@@ -14,6 +14,8 @@
     </div>
 </div>
 
+@include("vStack::resources.partials._metrics")
+
 <div class="row mb-3">
     <div class="col-12 d-flex flex-row align-items-center">
         <h4 class="mb-1">{!! @$resource->indexLabel() !!}</h4>

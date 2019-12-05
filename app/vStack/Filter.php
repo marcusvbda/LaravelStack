@@ -4,7 +4,7 @@ namespace App\vStack;
 
 class Filter
 {
-    public $view = "";
+    public $view;
     public function __construct()
     {
         $this->makeView();

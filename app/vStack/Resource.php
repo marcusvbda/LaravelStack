@@ -118,6 +118,11 @@ class Resource
         return [];
     }
 
+    public function metrics()
+    {
+        return [];
+    }
+
     public function search()
     {
         return [];

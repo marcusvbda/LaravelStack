@@ -47,4 +47,5 @@ class Brands extends Resource
     {
         return ["name"];
     }
+
 }
