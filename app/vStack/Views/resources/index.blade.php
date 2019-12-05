@@ -44,8 +44,8 @@
 
     <div class="row d-flex align-items-end mb-2">
         <div class="col-md-9 col-sm-12">
-            @if($resource->lens())
-                @include("vStack::resources.partials._lens")
+            @if($resource->lenses())
+                @include("vStack::resources.partials._lenses")
             @endif
         </div>
         <div class="col-md-3 col-sm-12">

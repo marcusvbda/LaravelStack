@@ -1,20 +1,20 @@
 <div class="d-flex flex-row mb-2" style="font-size:14px;">
     <?php 
         $current_len = @$_GET["current_len"] ? @$_GET["current_len"] : "all";
-        $lens = $resource->lens(); 
+        $lenses = $resource->lenses(); 
     ?>
     @if($current_len=="all")   
         <b>Todos</b>
     @else 
         <?php
             $query = request()->query();
-            foreach($lens as $len_key=>$len_value) if(isset($query[$len_value["field"]])) unset($query[$len_value["field"]]);
+            foreach($lenses as $len_key=>$len_value) if(isset($query[$len_value["field"]])) unset($query[$len_value["field"]]);
             if(isset($query["current_len"])) unset($query["current_len"]);
             $route = route("resource.index",array_merge(["resource"=>$resource->id],$query));
         ?>
         <a href="{{$route}}">Todos</a>
     @endif
-    @foreach($lens as $len_key=>$len_value)
+    @foreach($lenses as $len_key=>$len_value)
         <?php
             $query = request()->query();
             $query[$len_value["field"]] = $len_value["value"];

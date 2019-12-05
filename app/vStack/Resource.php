@@ -113,7 +113,7 @@ class Resource
         return $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());
     }
 
-    public function lens()
+    public function lenses()
     {
         return [];
     }

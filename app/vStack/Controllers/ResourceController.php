@@ -14,6 +14,7 @@ class ResourceController extends Controller
     public function index($resource, Request $request)
     {
         $resource = ResourcesHelpers::find($resource);
+        // dd($resource->metrics());
         if (!$resource->canViewList()) abort(403);
         $data = $this->getData($resource, $request);
         $data = $data->paginate($resource->resultsPerPage());
@@ -30,7 +31,7 @@ class ResourceController extends Controller
         foreach ($resource->search() as $search) {
             $query = $query->where($search, "like", "%" . (@$data["_"] ? $data["_"] : "") . "%");
         }
-        foreach ($resource->lens() as $len) {
+        foreach ($resource->lenses() as $len) {
             $field = $len["field"];
             if (isset($data[$field])) {
                 $value = $data[$field];

@@ -48,7 +48,7 @@ class Cars extends Resource
         ];
     }
 
-    public function lens()
+    public function lenses()
     {
         return [
             "Apenas Ativos" => ["field" => "active", "value" => true],
