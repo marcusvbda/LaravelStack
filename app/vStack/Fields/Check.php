@@ -10,10 +10,9 @@ class Check extends Field
         $this->options = $op;
         $this->options["type"] = "check";
         parent::processFieldOptions();
-        $this->makeView();
     }
 
-    private function makeView()
+    public function getView()
     {
         $view = "";
         $label          = $this->options["label"];

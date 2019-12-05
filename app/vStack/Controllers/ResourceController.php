@@ -57,14 +57,9 @@ class ResourceController extends Controller
         return view("vStack::resources.import", compact('data'));
     }
 
-    private function getResourceTableColumns($resource) 
-    {
-        return $resource->model->getConnection()->getSchemaBuilder()->getColumnListing($resource->model->getTable());
-    }
-
     private function makeImportData($resource)
     {
-        $columns = array_filter($this->getResourceTableColumns($resource),function($x)
+        $columns = array_filter($resource->getTableColumns(),function($x)
         {
             if(!in_array($x,["id","created_at","deleted_at","updated_at","email_verified_at","confirmation_token","recovery_token","password"])) return $x;
         });
@@ -144,7 +139,7 @@ class ResourceController extends Controller
         if (!$resource->canExport()) abort(403);
         $data = $this->getData($resource,$request);
         $data = $data->get();
-        $columns = array_filter($this->getResourceTableColumns($resource),function($x)
+        $columns = array_filter($resource->getTableColumns(),function($x)
         {
             if(!in_array($x,["confirmation_token","recovery_token","password","deleted_at"])) return $x;
         });
@@ -178,7 +173,7 @@ class ResourceController extends Controller
         if (!$resource->canDelete()) abort(403);
         $content = $resource->model->findOrFail($code);
         if ($content->delete()) {
-            Messages::send("success", $resource->singularLabel() . " Excluido com sucesso !!");
+            Messages::send("success", "Registro excluido com sucesso !!");
             return ["success" => true, "route" => $resource->route()];
         }
         Messages::send("error", " Erro ao excluir com " . $resource->singularLabel() . " !!");
@@ -274,7 +269,7 @@ class ResourceController extends Controller
         $data = $request->except(["resource_id", "id"]);
         $target->fill($data);
         $target->save();
-        Messages::send("success", $resource->singularLabel() . " Salvo com sucesso !!");
+        Messages::send("success", "Registro salvo com sucesso !!");
         return ["success" => true, "route" => route('resource.index', ["resource" => $resource->id])];
     }
 

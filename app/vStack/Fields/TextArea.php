@@ -11,10 +11,9 @@ class TextArea extends Field
         $this->options = $op;
         $this->options["type"] = "textarea";
         parent::processFieldOptions();
-        $this->makeView();
     }
 
-    private function makeView()
+    public function getView()
     {
         $view = "";
         $label          = $this->options["label"];

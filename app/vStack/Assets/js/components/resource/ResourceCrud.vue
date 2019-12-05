@@ -3,21 +3,8 @@
         <div class="col-12">
             <form class="needs-validation m-0" novalidate v-on:submit.prevent="submit" >
                 
-                <template v-for="(field,i) in data.fields">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="row d-flex justify-content-center mb-3" v-if="field.label" >
-                                <div class="col-md-10 col-sm-12">
-                                    <h4 class="mb-4" v-html="field.label" v-if="field.label"></h4>
-                                </div>
-                            </div>
-                            <div class="row d-flex justify-content-center" v-for="(input,y) in field.inputs">
-                                <div class="col-md-10 col-sm-12">
-                                    <v-runtime-template :key="y" :template="input.view"></v-runtime-template>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <template v-for="(card,i) in data.fields">
+                    <v-runtime-template :key="i" :template="card.view"></v-runtime-template>
                 </template>
                     
                 <div class="row">

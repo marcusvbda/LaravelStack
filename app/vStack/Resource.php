@@ -3,6 +3,7 @@
 namespace App\vStack;
 
 use App;
+use App\vStack\Fields\{Card,Text};
 
 class Resource
 {
@@ -92,7 +93,24 @@ class Resource
 
     public function fields()
     {
-        return [];
+        $fields = [];
+        $columns = array_filter($this->getTableColumns(),function($x)
+        {
+            if(!in_array($x,["id","confirmation_token","recovery_token","password","deleted_at","updated_at","created_at"])) return $x;
+        });
+        foreach($columns as $column)
+        {
+            $fields[] = new Text([
+                "label" => $column, "field" => $column, "required" => true,
+                "placeholder" => "", "rules" => "required|max:255"
+            ]);
+        }
+        return [new Card("Informações",$fields)];
+    }
+
+    public function getTableColumns() 
+    {
+        return $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());
     }
 
     public function lens()

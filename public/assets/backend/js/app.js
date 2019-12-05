@@ -4700,19 +4700,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
@@ -84586,56 +84573,12 @@ var render = function() {
           }
         },
         [
-          _vm._l(_vm.data.fields, function(field, i) {
+          _vm._l(_vm.data.fields, function(card, i) {
             return [
-              _c("div", { staticClass: "card mb-4" }, [
-                _c(
-                  "div",
-                  { staticClass: "card-body" },
-                  [
-                    field.label
-                      ? _c(
-                          "div",
-                          {
-                            staticClass:
-                              "row d-flex justify-content-center mb-3"
-                          },
-                          [
-                            _c("div", { staticClass: "col-md-10 col-sm-12" }, [
-                              field.label
-                                ? _c("h4", {
-                                    staticClass: "mb-4",
-                                    domProps: { innerHTML: _vm._s(field.label) }
-                                  })
-                                : _vm._e()
-                            ])
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm._l(field.inputs, function(input, y) {
-                      return _c(
-                        "div",
-                        { staticClass: "row d-flex justify-content-center" },
-                        [
-                          _c(
-                            "div",
-                            { staticClass: "col-md-10 col-sm-12" },
-                            [
-                              _c("v-runtime-template", {
-                                key: y,
-                                attrs: { template: input.view }
-                              })
-                            ],
-                            1
-                          )
-                        ]
-                      )
-                    })
-                  ],
-                  2
-                )
-              ])
+              _c("v-runtime-template", {
+                key: i,
+                attrs: { template: card.view }
+              })
             ]
           }),
           _vm._v(" "),

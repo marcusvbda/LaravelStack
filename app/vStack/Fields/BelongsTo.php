@@ -11,10 +11,9 @@ class BelongsTo extends Field
         $this->options = $op;
         $this->options["type"] = "belongsTo";
         parent::processFieldOptions();
-        $this->makeView();
     }
 
-    private function makeView()
+    public function getView()
     {
         $view = "";
         $model       = $this->options["model"];

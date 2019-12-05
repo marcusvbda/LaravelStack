@@ -85,29 +85,4 @@ class Motorcycle extends Resource
     {
         return ["name"];
     }
-
-    public function canViewList()
-    {
-        return Auth::user()->hasRole("user"); //true
-    }
-
-    public function canView()
-    {
-        return Auth::user()->hasRole("user"); //true
-    }
-
-    public function canCreate()
-    {
-        return Auth::user()->hasRole("user");  //true
-    }
-
-    public function canUpdate()
-    {
-        return Auth::user()->hasRole("user");  //true
-    }
-
-    public function canDelete()
-    {
-        return Auth::user()->hasRole("user");  //true
-    }
 }

@@ -59,7 +59,7 @@ class Cars extends Resource
     public function fields()
     {
         return [
-            new Card("<span class='el-icon-s-order mr-2'></span>Section Card 2",[
+            new Card("<span class='el-icon-s-order mr-2'></span>Section Card 1",[
                 new Text([
                     "label" => "Nome", "field" => "name", "required" => true,
                     "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255"
@@ -72,7 +72,9 @@ class Cars extends Resource
             new Card("Section Card 2",[
                 new Check([
                     "label" => "Ativo", "field" => "active"
-                ]),
+                ])
+            ]),
+            new Card("Section Card 3",[
                 new BelongsTo([
                     "label" => "Marca", "field" => "brand_id",
                     "placeholder" => "Selecione a marca",
@@ -109,6 +111,11 @@ class Cars extends Resource
     }
 
     public function canCreate()
+    {
+        return Auth::user()->hasRole("user");  //true
+    }
+
+    public function canExport()
     {
         return Auth::user()->hasRole("user");  //true
     }

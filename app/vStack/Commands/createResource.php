@@ -37,7 +37,7 @@ class ' . $resource . ' extends Resource
 {
     public $model = "App\Http\Models\\' . $model . '";
 }';
-        $dir = app_path("\\Http\\Models");
+        $this->makeDir($dir);
         file_put_contents($resource_path, $content);
         $bar->advance();
         echo "\ncreated resource $resource_path.php\n";

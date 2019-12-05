@@ -11,10 +11,9 @@ class Text extends Field
         $this->options = $op;
         $this->options["type"] = "text";
         parent::processFieldOptions();
-        $this->makeView();
     }
 
-    private function makeView()
+    public function getView()
     {
         $view = "";
         $label          = $this->options["label"];
