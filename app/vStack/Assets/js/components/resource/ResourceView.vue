@@ -9,18 +9,23 @@
                 </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-body p-0">
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-striped mb-0">
-                            <tbody>
-                                <tr v-for="(field, i) in data.fields">
-                                    <td style="width:25%;"><span v-html="i"></span></td>
-                                    <td><span v-html="field"></span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+        <div class="row mb-4" v-for="(card, i) in data.fields">
+            <div class="col-12">
+                <h4 v-if="card.label" v-html="card.label"></h4>
+                <div class="card" >
+                    <div class="card-body p-0">
+                        <div class="row" >
+                            <div class="col-md-12">
+                                <table class="table table-striped mb-0">
+                                    <tbody>
+                                        <tr v-for="(field, i) in card.inputs">
+                                            <td style="width:25%;"><span v-html="i"></span></td>
+                                            <td><span v-html="field"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -131,10 +131,9 @@ class ResourceController extends Controller
             }
             try {
                 $resource->model->insert($_news);
-                $count = count($_news);
-                Messages::notify("success", $count." ".($count>1 ? $resource->label()." importado" : $resource->singularLabel()." importados")." com sucesso !!", $user->id);
+                Messages::notify("success", "CSV de ".$resource->label()." importado com sucesso !!", $user->id);
             } catch(\Exception $e) {
-                Messages::notify("error", "<p>Erro ao importar CSV com ".$count." registro".($count>1 ? "s" : "")."</p><p>".$e->getMessage()."</p>", $user->id);
+                Messages::notify("error", "<p>Erro ao importar CSV de ".$resource->label()."</p><p>".$e->getMessage()."</p>", $user->id);
             } 
         })->onQueue("resource-import");
     }
@@ -212,23 +211,30 @@ class ResourceController extends Controller
     {
         $data = [];
         if (!$content) return $fields;
-        foreach ($fields  as $field) {
-            switch ($field->options["type"]) {
-                case "text":
-                    $data[$field->options["label"]] = @$content->{$field->options["field"]};
-                    break;
-                case "check":
-                    $data[$field->options["label"]] = @$content->{$field->options["field"]} ? '<span class="badge badge-success">Sim</span>' : '<span class="badge badge-danger">Não</span>';
-                    break;
-                case "belongsTo":
-                    $model = $field->options["model"];
-                    $value = app()->make($model)->findOrFail($content->{$field->options["field"]})->name;
-                    $data[$field->options["label"]] = $value;
-                    break;
-                default:
-                    $data[$field->options["label"]] = @$content->{$field->options["field"]};
-                    break;
+        foreach ($fields  as $card) {
+            $_card = [
+                "label"  => $card->label,
+                "inputs" => []
+            ];
+            foreach ($card->inputs  as $field) {
+                switch ($field->options["type"]) {
+                    case "text":
+                        $_card["inputs"][$field->options["label"]] = @$content->{$field->options["field"]};
+                        break;
+                    case "check":
+                        $_card["inputs"][$field->options["label"]] = @$content->{$field->options["field"]} ? '<span class="badge badge-success">Sim</span>' : '<span class="badge badge-danger">Não</span>';
+                        break;
+                    case "belongsTo":
+                        $model = $field->options["model"];
+                        $value = app()->make($model)->findOrFail($content->{$field->options["field"]})->name;
+                        $_card["inputs"][$field->options["label"]] = $value;
+                        break;
+                    default:
+                        $_card["inputs"][$field->options["label"]] = @$content->{$field->options["field"]};
+                        break;
+                }
             }
+            $data[] = $_card;
         }
         return $data;
     }
@@ -244,13 +250,15 @@ class ResourceController extends Controller
         ];
     }
 
-    private function makeCrudDataFields($content, $fields)
+    private function makeCrudDataFields($content, $cards)
     {
-        if (!$content) return $fields;
-        foreach ($fields  as $field) {
-            $field->options["value"] = @$content->{$field->options["field"]};
+        if (!$content) return $cards;
+        foreach ($cards  as $card) {
+            foreach ($card->inputs  as $input) {
+                $input->options["value"] = @$content->{$input->options["field"]};
+            }
         }
-        return $fields;
+        return $cards;
     }
 
     public function store(Request $request)

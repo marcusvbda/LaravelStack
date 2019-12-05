@@ -1,27 +1,32 @@
 <template>
     <div class="row">
         <div class="col-12">
-            <div class="card">
-                <form class="needs-validation m-0" novalidate v-on:submit.prevent="submit" >
-                    <div class="card-body">
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-md-10 col-sm-12">
-                                <template v-for="(field,i) in data.fields">
-                                    <v-runtime-template :key="i" :template="field.view"></v-runtime-template>
-                                </template>
+            <form class="needs-validation m-0" novalidate v-on:submit.prevent="submit" >
+                
+                <template v-for="(field,i) in data.fields">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center mb-3" v-if="field.label" >
+                                <div class="col-md-10 col-sm-12">
+                                    <h4 class="mb-4" v-html="field.label" v-if="field.label"></h4>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-center" v-for="(input,y) in field.inputs">
+                                <div class="col-md-10 col-sm-12">
+                                    <v-runtime-template :key="y" :template="input.view"></v-runtime-template>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-end d-flex align-items-center">
-                                <a :href="data.list_route" class="mr-4 text-danger link"><b>Cancelar</b></a>
-                                <button class="ml-3 btn btn-primary btn-sm-block" type="sumit">{{pageType=='CREATE' ? 'Cadastrar' : 'Alterar'}}</button>
-                            </div>
-                        </div>
+                </template>
+                    
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-end d-flex align-items-center">
+                        <a :href="data.list_route" class="mr-4 text-danger link"><b>Cancelar</b></a>
+                        <button class="ml-3 btn btn-primary btn-sm-block" type="sumit">{{pageType=='CREATE' ? 'Cadastrar' : 'Alterar'}}</button>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </template>
@@ -49,7 +54,13 @@ export default {
     },
     methods : {
         initForm() {
-            let fields = this.data.fields
+            let fields = []
+            for(let i in this.data.fields){
+                let card = this.data.fields[i]
+                for(let y in card.inputs){
+                    fields.push(card.inputs[y])
+                }
+            }
             for(let i in fields) {
                 let field_name = fields[i].options.field
                 let field_value = fields[i].options.value ? fields[i].options.value : fields[i].options.default

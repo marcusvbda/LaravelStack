@@ -4708,6 +4708,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
@@ -4742,11 +4747,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     initForm: function initForm() {
-      var fields = this.data.fields;
+      var fields = [];
 
-      for (var i in fields) {
-        var field_name = fields[i].options.field;
-        var field_value = fields[i].options.value ? fields[i].options.value : fields[i].options["default"];
+      for (var i in this.data.fields) {
+        var card = this.data.fields[i];
+
+        for (var y in card.inputs) {
+          fields.push(card.inputs[y]);
+        }
+      }
+
+      for (var _i in fields) {
+        var field_name = fields[_i].options.field;
+        var field_value = fields[_i].options.value ? fields[_i].options.value : fields[_i].options["default"];
         this.$set(this.form, field_name, field_value);
       }
 
@@ -5069,6 +5082,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -84555,79 +84573,107 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-12" }, [
-      _c("div", { staticClass: "card" }, [
-        _c(
-          "form",
-          {
-            staticClass: "needs-validation m-0",
-            attrs: { novalidate: "" },
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.submit($event)
-              }
+      _c(
+        "form",
+        {
+          staticClass: "needs-validation m-0",
+          attrs: { novalidate: "" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.submit($event)
             }
-          },
-          [
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "row d-flex justify-content-center" }, [
+          }
+        },
+        [
+          _vm._l(_vm.data.fields, function(field, i) {
+            return [
+              _c("div", { staticClass: "card mb-4" }, [
                 _c(
                   "div",
-                  { staticClass: "col-md-10 col-sm-12" },
+                  { staticClass: "card-body" },
                   [
-                    _vm._l(_vm.data.fields, function(field, i) {
-                      return [
-                        _c("v-runtime-template", {
-                          key: i,
-                          attrs: { template: field.view }
-                        })
-                      ]
+                    field.label
+                      ? _c(
+                          "div",
+                          {
+                            staticClass:
+                              "row d-flex justify-content-center mb-3"
+                          },
+                          [
+                            _c("div", { staticClass: "col-md-10 col-sm-12" }, [
+                              field.label
+                                ? _c("h4", {
+                                    staticClass: "mb-4",
+                                    domProps: { innerHTML: _vm._s(field.label) }
+                                  })
+                                : _vm._e()
+                            ])
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm._l(field.inputs, function(input, y) {
+                      return _c(
+                        "div",
+                        { staticClass: "row d-flex justify-content-center" },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "col-md-10 col-sm-12" },
+                            [
+                              _c("v-runtime-template", {
+                                key: y,
+                                attrs: { template: input.view }
+                              })
+                            ],
+                            1
+                          )
+                        ]
+                      )
                     })
                   ],
                   2
                 )
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-footer" }, [
-              _c("div", { staticClass: "row" }, [
+            ]
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "col-12 d-flex justify-content-end d-flex align-items-center"
+              },
+              [
                 _c(
-                  "div",
+                  "a",
                   {
-                    staticClass:
-                      "col-12 d-flex justify-content-end d-flex align-items-center"
+                    staticClass: "mr-4 text-danger link",
+                    attrs: { href: _vm.data.list_route }
+                  },
+                  [_c("b", [_vm._v("Cancelar")])]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "ml-3 btn btn-primary btn-sm-block",
+                    attrs: { type: "sumit" }
                   },
                   [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "mr-4 text-danger link",
-                        attrs: { href: _vm.data.list_route }
-                      },
-                      [_c("b", [_vm._v("Cancelar")])]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "ml-3 btn btn-primary btn-sm-block",
-                        attrs: { type: "sumit" }
-                      },
-                      [
-                        _vm._v(
-                          _vm._s(
-                            _vm.pageType == "CREATE" ? "Cadastrar" : "Alterar"
-                          )
-                        )
-                      ]
+                    _vm._v(
+                      _vm._s(_vm.pageType == "CREATE" ? "Cadastrar" : "Alterar")
                     )
                   ]
                 )
-              ])
-            ])
-          ]
-        )
-      ])
+              ]
+            )
+          ])
+        ],
+        2
+      )
     ])
   ])
 }
@@ -85000,75 +85046,91 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "row mb-3" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "col-md-12 d-flex justify-content-between align-items-center"
-        },
-        [
-          _c("div", [_vm._t("title")], 2),
-          _vm._v(" "),
-          _c("div", [
-            _vm.data.can_delete
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger btn-lg btn-sm-block mr-3",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.destroy($event)
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "row mb-3" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "col-md-12 d-flex justify-content-between align-items-center"
+          },
+          [
+            _c("div", [_vm._t("title")], 2),
+            _vm._v(" "),
+            _c("div", [
+              _vm.data.can_delete
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-lg btn-sm-block mr-3",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.destroy($event)
+                        }
                       }
-                    }
-                  },
-                  [_c("span", { staticClass: "el-icon-delete text-white" })]
-                )
+                    },
+                    [_c("span", { staticClass: "el-icon-delete text-white" })]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.data.can_update
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-primary btn-lg btn-sm-block",
+                      attrs: { href: _vm.data.update_route }
+                    },
+                    [_c("span", { staticClass: "el-icon-edit text-white" })]
+                  )
+                : _vm._e()
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.data.fields, function(card, i) {
+        return _c("div", { staticClass: "row mb-4" }, [
+          _c("div", { staticClass: "col-12" }, [
+            card.label
+              ? _c("h4", { domProps: { innerHTML: _vm._s(card.label) } })
               : _vm._e(),
             _vm._v(" "),
-            _vm.data.can_update
-              ? _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-primary btn-lg btn-sm-block",
-                    attrs: { href: _vm.data.update_route }
-                  },
-                  [_c("span", { staticClass: "el-icon-edit text-white" })]
-                )
-              : _vm._e()
-          ])
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body p-0" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("table", { staticClass: "table table-striped mb-0" }, [
-              _c(
-                "tbody",
-                _vm._l(_vm.data.fields, function(field, i) {
-                  return _c("tr", [
-                    _c("td", { staticStyle: { width: "25%" } }, [
-                      _c("span", { domProps: { innerHTML: _vm._s(i) } })
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("span", { domProps: { innerHTML: _vm._s(field) } })
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-body p-0" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("table", { staticClass: "table table-striped mb-0" }, [
+                      _c(
+                        "tbody",
+                        _vm._l(card.inputs, function(field, i) {
+                          return _c("tr", [
+                            _c("td", { staticStyle: { width: "25%" } }, [
+                              _c("span", { domProps: { innerHTML: _vm._s(i) } })
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c("span", {
+                                domProps: { innerHTML: _vm._s(field) }
+                              })
+                            ])
+                          ])
+                        }),
+                        0
+                      )
                     ])
                   ])
-                }),
-                0
-              )
+                ])
+              ])
             ])
           ])
         ])
-      ])
-    ])
-  ])
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

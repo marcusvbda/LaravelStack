@@ -154,8 +154,10 @@ class Resource
     public function getValidationRule()
     {
         $validation_rules = [];
-        foreach ($this->fields() as $field) {
-            $validation_rules[$field->options["field"]] = $field->options["rules"];
+        foreach ($this->fields() as $card) {
+            foreach ($card->inputs as $field) {
+                $validation_rules[$field->options["field"]] = $field->options["rules"];
+            }
         }
         return $validation_rules;
     }

@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use App\vStack\Resource;
 use App\Http\Filters\Cars\{CarsFilterByName, CarsFilterByBrand, CarsFilterByDate, CarsFilterByRangeDate};
 use App\vStack\Fields\{Text, TextArea, Check, BelongsTo};
+use App\vStack\Fields\Card;
 use Auth;
 
 class Cars extends Resource
@@ -58,22 +59,26 @@ class Cars extends Resource
     public function fields()
     {
         return [
-            new Text([
-                "label" => "Nome", "field" => "name", "required" => true,
-                "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255"
+            new Card("<span class='el-icon-s-order mr-2'></span>Section Card 2",[
+                new Text([
+                    "label" => "Nome", "field" => "name", "required" => true,
+                    "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255"
+                ]),
+                new TextArea([
+                    "label" => "Descrição", "field" => "description",
+                    "placeholder" => "Digite o texto aqui ...",
+                ]),
             ]),
-            new TextArea([
-                "label" => "Descrição", "field" => "description",
-                "placeholder" => "Digite o texto aqui ...",
-            ]),
-            new Check([
-                "label" => "Ativo", "field" => "active"
-            ]),
-            new BelongsTo([
-                "label" => "Marca", "field" => "brand_id",
-                "placeholder" => "Selecione a marca",
-                "model" => "App\Http\Models\Brand",
-                "rules" => "required"
+            new Card("Section Card 2",[
+                new Check([
+                    "label" => "Ativo", "field" => "active"
+                ]),
+                new BelongsTo([
+                    "label" => "Marca", "field" => "brand_id",
+                    "placeholder" => "Selecione a marca",
+                    "model" => "App\Http\Models\Brand",
+                    "rules" => "required"
+                ])
             ])
         ];
     }

@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\vStack\Resource;
 use App\vStack\Fields\Text;
+use App\vStack\Fields\Card;
 
 class Brands extends Resource
 {
@@ -33,10 +34,12 @@ class Brands extends Resource
     public function fields()
     {
         return [
-            new Text([
-                "label" => "Nome", "field" => "name", "required" => true,
-                "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255"
-            ]),
+            new Card("Informações",[
+                new Text([
+                    "label" => "Nome", "field" => "name", "required" => true,
+                    "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255"
+                ])
+            ])
         ];
     }
 
