@@ -17,5 +17,10 @@ class CarsMetricCustom extends Metric
                     <h3 class='font-weight-light'>".$day->formated."</h3>
                 </div>";
     }
+
+    public function uriKey()
+    {
+        return 'cars-metric-custom';
+    }
     
 }

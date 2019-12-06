@@ -1,16 +1,20 @@
-<?php
-
+<?php 
 namespace App\Http\Metrics\Cars;
-
-use App\vStack\Metric;
+use  App\vStack\Metric;
+use Illuminate\Http\Request;
 use App\Http\Models\{Car,Brand};
 
 class CarsMetricPerBrand extends Metric
 {
-    public $type = "group-graph";
-    public function calculate() 
+    public $type   = "group-graph";
+    public function calculate(Request $request)
     {
-        return $this->getCarsPerBrand();
+        $values = [];
+        foreach(Brand::all() as $brand) 
+        {
+            $values[$brand->name] = Car::where("brand_id",$brand->id)->count();
+        }
+        return $values;
     }
 
     public function label()
@@ -21,20 +25,8 @@ class CarsMetricPerBrand extends Metric
                 </div>";
     }
 
-    public function width()
+    public function uriKey()
     {
-        return "col-md-4 col-sm-12";
+        return "cars-metric-per-brand";
     }
-    
-    //custom
-    private function getCarsPerBrand()
-    {
-        $values = [];
-        foreach(Brand::all() as $brand) 
-        {
-            $values[$brand->name] = Car::where("brand_id",$brand->id)->count();
-        }
-        return $values;
-    }
-    
 }

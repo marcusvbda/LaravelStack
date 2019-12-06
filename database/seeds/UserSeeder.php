@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table("tenants")->truncate();
         DB::table("users")->truncate();
-        Tenant::create(["name"=>"lorem ipsum"]);
+        Tenant::create(["name"=>uniqid()]);
         $user = User::create([
             "name"     => "admin",
             "email"    => "admin@admin.com",

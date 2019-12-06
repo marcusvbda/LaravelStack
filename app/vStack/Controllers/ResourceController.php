@@ -303,4 +303,20 @@ class ResourceController extends Controller
         }
         return ["data" => $data];
     }
+
+    public function metricCalculate($resource,$key,Request $request)
+    {
+        $resource = ResourcesHelpers::find($resource);
+        $metric = null;
+        foreach($resource->metrics() as $m)
+        {
+            if($m->uriKey() == $key) 
+            {
+                $metric = $m;
+                break;
+            }
+        }
+        if(!$metric) abort(404);
+        return $metric->calculate($request);
+    }
 }

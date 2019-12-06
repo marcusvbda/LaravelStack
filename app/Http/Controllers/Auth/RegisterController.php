@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\vStack\Services\SendMail;
 use App\User;
+use App\Http\Models\Tenant;
 use App\vStack\Services\Messages;
 use Auth;
 
@@ -28,11 +29,20 @@ class RegisterController extends Controller
         ]);
         $data = $request->except(["_token", "password_confirmation"]);
         $data["password"] = bcrypt($data["password"]);
+        $data["tenant_id"] = $this->createTenant()->id;
         $user = User::create($data);
         $user->assignRole("user");
         $this->sendConfirmationEmail($user);
         Messages::send("success", "Usuário cadastrado com sucesso, verifique seu email e confirme-o para poder acessar");
         return ["success" => true, "route" => route("admin.home")];
+    }
+
+    private function createTenant()
+    {
+        $tenant = Tenant::create([
+            "name" => uniqid()
+        ]);  
+        return $tenant;
     }
 
     private function sendConfirmationEmail($user)

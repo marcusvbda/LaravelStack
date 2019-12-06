@@ -1,6 +1,7 @@
 <?php
 
 namespace App\vStack;
+use Illuminate\Http\Request;
 
 class Metric
 {
@@ -57,7 +58,7 @@ class Metric
 
     public function width()
     {
-        return "col-md-3 col-sm-12";
+        return "col-md-4 col-sm-12";
     }
 
     public function processView()
@@ -90,12 +91,16 @@ class Metric
 
     private function GroupGraphContent()
     {
-        $data = $this->calculate();
-        return "<metric-piechart :data='".json_encode($data)."'></metric-piechart>";
+        return "<metric-piechart :route='calculate_route'></metric-piechart>";
     }
 
-    public function calculate()
+    public function calculate(Request $request)
     {
         return [];
+    }
+
+    public function uriKey()
+    {
+        return 'metric_key_here';
     }
 }

@@ -13,5 +13,6 @@ Route::group(['prefix' => "admin"], function () {
         Route::delete('{resource}/{code}/destroy', '\App\vStack\Controllers\ResourceController@destroy')->middleware(['hashids:code'])->name("resource.destroy");
         Route::post('inputs/option_list', '\App\vStack\Controllers\ResourceController@option_list')->name("resource.inputs.option_list");
         Route::post('globalsearch', '\App\vStack\Controllers\ResourceController@globalSearch')->name("resource.globalsearch");
+        Route::post('{resource}/metric-calculate/{key}', '\App\vStack\Controllers\ResourceController@metricCalculate')->name("resource.metricCalculate");
     });
 });

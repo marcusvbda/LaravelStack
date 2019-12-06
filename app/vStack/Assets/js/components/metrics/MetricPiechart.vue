@@ -1,6 +1,6 @@
 <template>
-    <div class='d-flex flex-row justify-content-between align-items-center'>
-        <div v-html="legend"></div>
+    <div class='d-flex flex-row justify-content-between align-items-center' v-loading="loading">
+        <div v-html="legend" style="font-size:11px;"></div>
         <div>
             <pie-chart :data="data" :legend='false' :donut='true' 
             :colors="colors"
@@ -10,7 +10,13 @@
 </template>
 <script>
 export default {
-    props : ["data"],
+    props : ["route"],
+    data() {
+        return {
+            data : [],
+            loading : false
+        }
+    },
     computed : {
         colors() {
             let colors = []
@@ -34,6 +40,9 @@ export default {
             return text
         },
     },
+    mounted() {
+        this.initData()
+    },
     methods : {
         hashCode(str) { 
             var hash = 0
@@ -43,9 +52,17 @@ export default {
         intToRGB(i){
             var c = (i & 0x00FFFFFF).toString(16).toUpperCase()
             return "00000".substring(0, 6 - c.length) + c
+        },
+        initData() {
+            this.loading = true
+            this.$http.post(this.route,{}).then( res => {
+                this.data = res.data
+                this.loading = false
+            }).catch(er => {
+                console.log(er)
+                this.loading = false
+            })
         }
-
-
     }
 }
 </script>

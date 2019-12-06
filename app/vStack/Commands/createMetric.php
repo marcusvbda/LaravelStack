@@ -32,6 +32,7 @@ class createMetric extends Command
             '<?php 
 namespace App\Http\Metrics\\'.$resource.';
 use  App\vStack\Metric;
+use Illuminate\Http\Request;
 
 class ' . $name . ' extends Metric
 {
@@ -46,7 +47,7 @@ class ' . $name . ' extends Metric
     } 
     if(in_array($type,["group-graph"])) {
         $content .='
-    public function calculate()
+    public function calculate(Request $request)
     {
         //metric logic here...
         return ["lorem ipsum" => 12,"ipsum lorem" => 55];
@@ -54,6 +55,11 @@ class ' . $name . ' extends Metric
     }
 
         $content.='
+
+    public function uriKey()
+    {
+        return "'.strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $name)).'";
+    }
 }'; 
         $this->makeDir($dir);   
         file_put_contents($metric_path, $content);

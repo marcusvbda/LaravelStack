@@ -4921,7 +4921,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["data"],
+  props: ["route"],
+  data: function data() {
+    return {
+      data: [],
+      loading: false
+    };
+  },
   computed: {
     colors: function colors() {
       var colors = [];
@@ -4947,6 +4953,9 @@ __webpack_require__.r(__webpack_exports__);
       return text;
     }
   },
+  mounted: function mounted() {
+    this.initData();
+  },
   methods: {
     hashCode: function hashCode(str) {
       var hash = 0;
@@ -4960,6 +4969,18 @@ __webpack_require__.r(__webpack_exports__);
     intToRGB: function intToRGB(i) {
       var c = (i & 0x00FFFFFF).toString(16).toUpperCase();
       return "00000".substring(0, 6 - c.length) + c;
+    },
+    initData: function initData() {
+      var _this = this;
+
+      this.loading = true;
+      this.$http.post(this.route, {}).then(function (res) {
+        _this.data = res.data;
+        _this.loading = false;
+      })["catch"](function (er) {
+        console.log(er);
+        _this.loading = false;
+      });
     }
   }
 });
@@ -5373,7 +5394,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["view"],
+  props: ["view", "calculate_route"],
   components: {
     "v-runtime-template": v_runtime_template__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -122200,10 +122221,21 @@ var render = function() {
   return _c(
     "div",
     {
+      directives: [
+        {
+          name: "loading",
+          rawName: "v-loading",
+          value: _vm.loading,
+          expression: "loading"
+        }
+      ],
       staticClass: "d-flex flex-row justify-content-between align-items-center"
     },
     [
-      _c("div", { domProps: { innerHTML: _vm._s(_vm.legend) } }),
+      _c("div", {
+        staticStyle: { "font-size": "11px" },
+        domProps: { innerHTML: _vm._s(_vm.legend) }
+      }),
       _vm._v(" "),
       _c(
         "div",
