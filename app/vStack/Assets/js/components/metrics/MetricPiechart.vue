@@ -1,10 +1,18 @@
 <template>
-    <div class='d-flex flex-row justify-content-between align-items-center' v-loading="loading"  ref="content" style="display:none;">
-        <div v-html="legend" style="font-size:11px;"></div>
-        <div>
-            <pie-chart :data="data" :legend='false' :donut='true' 
-            :colors="colors"
-            height='100px' width='100px'></pie-chart>
+    <div class="h-100 d-flex align-items-center" >
+        <div class="w-100"  ref="content" style="display:none;">
+            <div class='d-flex flex-row justify-content-between align-items-center mb-2'>
+                <slot name='label'></slot>
+                <slot name='sublabel'></slot>
+            </div>
+            <div class='d-flex flex-row justify-content-between align-items-center' v-loading="loading" >
+                <div v-html="legend" style="font-size:11px;"></div>
+                <div>
+                    <pie-chart :data="data" :legend='false' :donut='true' 
+                    :colors="colors"
+                    height='100px' width='100px'></pie-chart>
+                </div>
+            </div>
         </div>
     </div>
 </template>

@@ -11,10 +11,7 @@ require('./libs/echo')
 import Vue from 'vue'
 Vue.config.productionTip = false
 const vue = new Vue({
-    el: '#app',
-    data: {
-        alerts: []
-    },
+    el: '#vue_app',
     mounted() {
         if (laravel.user) {
             this.$http.post(`${laravel.root_url}/admin/vstack/notifications/${laravel.user.code}`, {}).then(res => {

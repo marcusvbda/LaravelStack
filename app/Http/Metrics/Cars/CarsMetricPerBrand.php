@@ -19,10 +19,12 @@ class CarsMetricPerBrand extends Metric
 
     public function label()
     {
-        return "<div class='d-flex flex-row justify-content-between mb-2'>
-                    <div><b>Carros Por Marca</b></div>
-                    <div>Total : ".Car::count()."</div>
-                </div>";
+        return "<b>Carros Por Marca</b>";
+    }
+
+    public function sublabel()
+    {
+        return "<b>Total : ".Car::count()."</b> ";
     }
 
     public function uriKey()

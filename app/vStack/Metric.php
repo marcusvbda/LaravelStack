@@ -11,7 +11,7 @@ class Metric
 
     public function __construct()
     {
-        $this->initView();
+        $this->view = $this->initView();
         $this->processView();
     }
 
@@ -20,13 +20,45 @@ class Metric
         return "";
     }
 
+    public function sublabel()
+    {
+        return "";
+    }
+
     private function initView()
     {
-        $this->view =  "<div class='".$this->width()."'>
-                            <div class='card p-3 h-100'>__label__here__
-                                __put__content__here__
-                            </div>
-                        </div>";
+        if(in_array($this->type,["custom-content"]))
+        {
+            return  "<div class='".$this->width()." mb-3'>
+                        <div class='card p-3 h-100'>
+                            __content__here__
+                        </div>
+                    </div>";
+        }
+        if(in_array($this->type,["group-graph"]))
+        {
+            return  "<div class='".$this->width()." mb-3'>
+                        <div class='card p-3 h-100'>
+                            __content__here__
+                        </div>
+                    </div>";
+        }
+        if(in_array($this->type,["simple-counter"]))
+        {
+            return  "<div class='".$this->width()." mb-3'>
+                        <div class='card p-3 h-100'>
+                            __content__here__
+                        </div>
+                    </div>";
+        }
+        if(in_array($this->type,["trend-graph"]))
+        {
+            return  "<div class='".$this->width()." mb-3'>
+                        <div class='card p-0 h-100'>
+                            __content__here__
+                        </div>
+                    </div>";
+        }
     }
 
     public function width()
@@ -36,14 +68,8 @@ class Metric
 
     public function processView()
     {
-        $view = str_replace ("__put__content__here__",$this->makeContent(),$this->view);
-        $view = str_replace ("__label__here__",$this->label() ? $this->label() : "",$view);
+        $view = str_replace ("__content__here__",$this->makeContent(),$this->view);
         $this->view = $view;
-    }
-
-    public function content() 
-    {
-        return "card content here";
     }
 
     private function makeContent()
@@ -51,7 +77,7 @@ class Metric
         switch ($this->type) 
         {
             case 'custom-content':
-                return $this->content();
+                return $this->customContent();
                 break;
             case 'group-graph':
                 return $this->groupGraphContent();
@@ -59,20 +85,40 @@ class Metric
             case 'simple-counter':
                 return $this->simpleCounterContent();
                 break;
+            case 'trend-graph':
+                return $this->trendGrapContent();
+                break;
             default:
-                return $this->content();
+                return $this->type;
                 break;
         }
     }
 
     private function groupGraphContent()
     {
-        return "<metric-piechart :time='time' :route='calculate_route'></metric-piechart>";
+        return "<metric-piechart :time='time' :route='calculate_route'>
+                    <template slot='label'>".$this->label()."</template>
+                    <template slot='sublabel'>".$this->sublabel()."</template>
+                </metric-piechart>";
+    }
+
+    private function customContent()
+    {
+        return "<metric-custom-content>
+                    <template slot='label'>".$this->label()."</template>
+                    <template slot='sublabel'>".$this->sublabel()."</template>
+                    <template slot='content'>".$this->content()."</template>
+                </metric-custom-content>";
+    }
+
+    private function trendGrapContent()
+    {
+        return "<metric-trend-graph :ranges='ranges' :time='time' :route='calculate_route'>".$this->label()."</metric-trend-graph>";
     }
 
     private function simpleCounterContent()
     {
-        return "<metric-simple-counter :ranges='ranges' :time='time' :route='calculate_route'></metric-simple-counter>";
+        return "<metric-simple-counter :ranges='ranges' :time='time' :route='calculate_route'>".$this->label()."</metric-simple-counter>";
     }
 
     public function ranges()

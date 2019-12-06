@@ -45,7 +45,7 @@ class ' . $name . ' extends Metric
         return "custom metric content";
     }';
     } 
-    if(in_array($type,["group-graph","simple-counter"])) {
+    if(in_array($type,["group-graph","simple-counter","trend-graph"])) {
         $content .='
     public function calculate(Request $request)
     {
@@ -59,7 +59,7 @@ class ' . $name . ' extends Metric
     }
     ';
     }
-    if(in_array($type,["simple-counter"])) {
+    if(in_array($type,["simple-counter","trend-graph"])) {
         $content .='
     public function ranges()
     {

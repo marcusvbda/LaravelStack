@@ -6,7 +6,7 @@ use App\vStack\Resource;
 use App\Http\Filters\Cars\{CarsFilterByName, CarsFilterByBrand, CarsFilterByDate, CarsFilterByRangeDate};
 use App\vStack\Fields\{Text, TextArea, Check, BelongsTo};
 use App\vStack\Fields\Card;
-use App\Http\Metrics\Cars\{CarsMetricCustom,CarsMetricPerBrand,CarsMetricCountPerDay};
+use App\Http\Metrics\Cars\{CarsMetricCustom,CarsMetricPerBrand,CarsMetricCountPerDay,CarsMetricPerActive,CarsMetricTrendPerDay};
 
 use Auth;
 
@@ -106,8 +106,10 @@ class Cars extends Resource
     {
         return [
             new CarsMetricCustom,
+            new CarsMetricTrendPerDay,
             new CarsMetricPerBrand,
-            new CarsMetricCountPerDay
+            new CarsMetricPerActive,
+            new CarsMetricCountPerDay,
         ];
     }
 

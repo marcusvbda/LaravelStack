@@ -25,7 +25,7 @@
 		<title>{{config("app.name")}} - @yield("title")</title>
 	</head>
 	<body>
-		<div id="app">
+		<div id="vue_app">
 			@yield("body")
 		</div>
 		<script src="{{ mix('/assets/backend/js/manifest.js')}}"></script>

@@ -1,13 +1,14 @@
 <template>
-    <div class="d-fle flex-column justify-content-between" ref="content" style="display:none;">
-        <div class='d-flex flex-row justify-content-between align-items-center'>
-            <h2 v-loading="loading">{{value}}</h2>
-            <div>
-                <v-select v-model='range' :optionlist="options" withoutBlank />
-            </div>
+    <div>
+        <div class='d-flex flex-row justify-content-between align-items-start'>
+            <div><slot></slot></div>
+            <div v-if="options.length>0"><v-select size="mini" v-model='range' :optionlist="options" withoutBlank /></div>
         </div>
-        <div class="mt-3">
-            <span v-html="trend"></span>
+        <div class="d-flex flex-column justify-content-between" ref="content" style="display:none;">
+            <h2 v-loading="loading">{{value}}</h2>
+            <div class="mt-3">
+                <span v-html="trend"></span>
+            </div>
         </div>
     </div>
 </template>
@@ -16,6 +17,7 @@ export default {
     props : ["route","time","ranges"],
     data() {
         return {
+            loaded : false,
             data : [],
             loading : false,
             range : null,
@@ -46,6 +48,7 @@ export default {
     },
     watch : {
         range(val) {
+            if(!this.loaded) return
             this.updateData()
         }
     },
@@ -65,6 +68,7 @@ export default {
                 this.comparison = res.data.average ? res.data.average : 0
                 this.loading = false
                 $(this.$refs.content).show()
+                this.loaded = true
             }).catch(er => {
                 console.log(er)
                 this.loading = false
