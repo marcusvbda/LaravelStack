@@ -4,17 +4,19 @@ namespace App\Http\Metrics\Cars;
 
 use App\vStack\Metric;
 use App\Http\Models\Brand;
-use vStack;
+use Carbon\Carbon;
+
 class CarsMetricCustom extends Metric
 {
     public $type = "custom-content";
 
     public function content() 
     {
-        $day = vStack::getDay();
+        $days_of_week = ["Domingo","Segunda-Feira","Terça-Feira","Quarta-Feira","Quinta-Feira","Sexta-Feira","Sábado"];
+        $date = Carbon::now();
         return "<div class='d-flex h-100 align-items-center justify-content-center flex-column'>
-                    <h2>".$day->week."</h2>
-                    <h3 class='font-weight-light'>".$day->formated."</h3>
+                    <h1>".$days_of_week[$date->dayOfWeek]."</h1>
+                    <h3 class='font-weight-light'>".$date->format("d/m/Y")."</h3>
                 </div>";
     }
 

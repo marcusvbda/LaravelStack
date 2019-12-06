@@ -6,7 +6,7 @@
                     <el-select :disabled="disabled" class="w-100" clearable v-model="value" filterable :placeholder="placeholder" v-loading="loading"
                     
                     >
-                        <el-option label="" value=""></el-option>
+                        <el-option v-if="withoutBlank==undefined" label="" value=""></el-option>
                         <el-option v-for="(item,i) in options" :key="i" :label="item.name" :value="item.id"></el-option>
                     </el-select>
                     <div class="invalid-feedback" v-if="errors">
@@ -21,7 +21,7 @@
 </template>
 <script>
 export default {
-    props : ["placeholder","label","route_list","list_model","disabled","errors"],
+    props : ["placeholder","label","route_list","list_model","disabled","errors","optionlist","withoutBlank"],
     data() {
         return {
             loading : true,
@@ -42,6 +42,10 @@ export default {
     },
     methods : {
         initOptions(callback){
+            if(this.optionlist) {
+                this.options = this.optionlist
+                return callback()
+            }
             this.$http.post(this.route_list,{model:this.list_model}).then( res => {
                 res = res.data
                 this.options = res.data

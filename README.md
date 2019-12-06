@@ -15,6 +15,13 @@ to create a metric to your resource
 php artisan vstack:make-metric {resource} {name} {type}
 ```
 
+metric type
+``` 
+custom-content
+group-graph
+simple-counter
+```
+
 to process vstack queue
 ```
 php artisan queue:work --queue=mail,resource-import,alert-broadcasts

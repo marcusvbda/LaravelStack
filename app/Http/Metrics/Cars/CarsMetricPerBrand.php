@@ -29,4 +29,10 @@ class CarsMetricPerBrand extends Metric
     {
         return "cars-metric-per-brand";
     }
+
+    public function updateTime()
+    {
+        return 60; //seconds
+    }
+
 }

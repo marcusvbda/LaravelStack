@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Http\Models\{Car, Motorcycle, Brand};
 // use DB;
+use Carbon\Carbon;
 
 class ExampleSeeder extends Seeder
 {
@@ -34,10 +35,10 @@ class ExampleSeeder extends Seeder
     private function createCars()
     {
         DB::table("cars")->truncate();
-        Car::create(["name" => "Civic", "brand_id" => 1,"tenant_id" => 1, "active" => true]);
-        Car::create(["name" => "Focus", "brand_id" => 4,"tenant_id" => 1, "active" => false]);
-        Car::create(["name" => "Onix",  "brand_id" => 5,"tenant_id" => 1, "active" => true]);
-        Car::create(["name" => "Palio", "brand_id" => 6,"tenant_id" => 1, "active" => false]);
+        Car::create(["name" => "Civic", "brand_id" => 1,"tenant_id" => 1, "active" => true,"created_at"=>Carbon::now()->subDays(rand(1,10))]);
+        Car::create(["name" => "Focus", "brand_id" => 4,"tenant_id" => 1, "active" => false,"created_at"=>Carbon::now()->subDays(rand(1,10))]);
+        Car::create(["name" => "Onix",  "brand_id" => 5,"tenant_id" => 1, "active" => true,"created_at"=>Carbon::now()->subDays(rand(1,10))]);
+        Car::create(["name" => "Palio", "brand_id" => 6,"tenant_id" => 1, "active" => false,"created_at"=>Carbon::now()->subDays(rand(1,10))]);
     }
 
     private function createMotorcycles()

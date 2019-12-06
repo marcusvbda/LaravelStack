@@ -45,12 +45,25 @@ class ' . $name . ' extends Metric
         return "custom metric content";
     }';
     } 
-    if(in_array($type,["group-graph"])) {
+    if(in_array($type,["group-graph","simple-counter"])) {
         $content .='
     public function calculate(Request $request)
     {
         //metric logic here...
         return ["lorem ipsum" => 12,"ipsum lorem" => 55];
+    }
+    
+    public function updateTime()
+    {
+        return 60; //60 seconds
+    }
+    ';
+    }
+    if(in_array($type,["simple-counter"])) {
+        $content .='
+    public function ranges()
+    {
+        return [];
     }';
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Filters\Cars;
 
 use  App\vStack\Filter;
 use DB;
+use Carbon\Carbon;
 
 class CarsFilterByRangeDate extends Filter
 {
@@ -16,7 +17,9 @@ class CarsFilterByRangeDate extends Filter
     public function apply($query, $value)
     {
         $dates = explode(",", $value);
-        $query = $query->whereRaw((DB::raw("DATE(" . $this->index . ") >='" . date($dates[0]) . "'" . " and " . DB::raw("DATE(" . $this->index . ") <='" . date($dates[1]) . "'"))));
+        $startDate = Carbon::create($dates[0])->format("Y-m-d 00:00:00");
+        $endDate   = Carbon::create($dates[1])->format("Y-m-d 00:00:00");
+        $query = $query->whereRaw(DB::raw("DATE(".$this->index.") >='$startDate'" . " and " ."DATE(created_at) <='$endDate'" ));
         return $query;
     }
 }

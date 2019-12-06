@@ -11,24 +11,8 @@ class Metric
 
     public function __construct()
     {
-        $this->makeView();
+        $this->initView();
         $this->processView();
-    }
-
-    public function makeView()
-    {
-        switch ($this->type) 
-        {
-            case 'custom-content':
-                return $this->view = $this->getCustomContent();
-                break;
-            case 'group-graph':
-                return $this->view = $this->getGroupGraph();
-                break;
-            default:
-                return $this->view = "<div class='text-danger'>metric type not exist</div>";
-                break;
-        }
     }
 
     public function label()
@@ -36,24 +20,13 @@ class Metric
         return "";
     }
 
-    private function getCustomContent()
+    private function initView()
     {
-        return $this->getInitialCard();
-    }
-
-    private function getGroupGraph()
-    {
-        $card = $this->getInitialCard();
-        return $card;
-    }
-
-    private function getInitialCard()
-    {
-        return "<div class='".$this->width()."'>
-                    <div class='card p-3 h-100'>__label__here__
-                        __put__content__here__
-                    </div>
-                </div>";
+        $this->view =  "<div class='".$this->width()."'>
+                            <div class='card p-3 h-100'>__label__here__
+                                __put__content__here__
+                            </div>
+                        </div>";
     }
 
     public function width()
@@ -81,7 +54,10 @@ class Metric
                 return $this->content();
                 break;
             case 'group-graph':
-                return $this->GroupGraphContent();
+                return $this->groupGraphContent();
+                break;
+            case 'simple-counter':
+                return $this->simpleCounterContent();
                 break;
             default:
                 return $this->content();
@@ -89,14 +65,29 @@ class Metric
         }
     }
 
-    private function GroupGraphContent()
+    private function groupGraphContent()
     {
-        return "<metric-piechart :route='calculate_route'></metric-piechart>";
+        return "<metric-piechart :time='time' :route='calculate_route'></metric-piechart>";
+    }
+
+    private function simpleCounterContent()
+    {
+        return "<metric-simple-counter :ranges='ranges' :time='time' :route='calculate_route'></metric-simple-counter>";
+    }
+
+    public function ranges()
+    {
+        return [];
     }
 
     public function calculate(Request $request)
     {
         return [];
+    }
+
+    public function updateTime()
+    {
+        return 60;
     }
 
     public function uriKey()

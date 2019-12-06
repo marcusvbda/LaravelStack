@@ -1,5 +1,5 @@
 <template>
-    <div class='d-flex flex-row justify-content-between align-items-center' v-loading="loading">
+    <div class='d-flex flex-row justify-content-between align-items-center' v-loading="loading"  ref="content" style="display:none;">
         <div v-html="legend" style="font-size:11px;"></div>
         <div>
             <pie-chart :data="data" :legend='false' :donut='true' 
@@ -10,7 +10,7 @@
 </template>
 <script>
 export default {
-    props : ["route"],
+    props : ["route","time"],
     data() {
         return {
             data : [],
@@ -40,8 +40,11 @@ export default {
             return text
         },
     },
-    mounted() {
-        this.initData()
+    async created() {
+        this.updateData()
+        setInterval(_ => {
+            this.updateData()
+        },this.time*1000)
     },
     methods : {
         hashCode(str) { 
@@ -53,10 +56,11 @@ export default {
             var c = (i & 0x00FFFFFF).toString(16).toUpperCase()
             return "00000".substring(0, 6 - c.length) + c
         },
-        initData() {
+        updateData() {
             this.loading = true
             this.$http.post(this.route,{}).then( res => {
                 this.data = res.data
+                $(this.$refs.content).show()
                 this.loading = false
             }).catch(er => {
                 console.log(er)
