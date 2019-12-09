@@ -1,8 +1,19 @@
 <template>
     <div>
         <div class='d-flex flex-row justify-content-between align-items-start'>
-            <div><slot></slot></div>
-            <div v-if="options.length>0"><v-select size="mini" v-model='range' :optionlist="options" withoutBlank /></div>
+            <div class="mr-auto"><slot></slot></div>
+            <div v-if="ranges=='date-interval'">
+                <el-date-picker size='mini' 
+                    v-model='filter.range' type='daterange'
+                    format="dd/MM/yyyy"
+                    value-format='yyyy-MM-dd'
+                    end-placeholder='Data Fim'
+                    start-placeholder='Data início'>
+                </el-date-picker>
+            </div>
+            <template v-else>
+                <div v-if="options.length>0"><v-select size="mini" v-model='filter.range' :optionlist="options" withoutBlank /></div>
+            </template>
         </div>
         <div class="d-flex flex-column justify-content-between" ref="content" style="display:none;">
             <h2 v-loading="loading">{{value}}</h2>
@@ -20,19 +31,22 @@ export default {
             loaded : false,
             data : [],
             loading : false,
-            range : null,
+            filter :{},
             options : [],
             comparison : 0,
-            value : 0
+            value : null
         }
     },
     async created() {
         let result = []
         let ranges = this.ranges
-        let keys = Object.keys(ranges)
-        for(let i in keys) result.push({name:keys[i],id:ranges[keys[i]]})
-        this.options = result
-        if(!this.range && result[0]) this.range = result[0].id
+        if(ranges=="date-interval")  this.initDateInterval()
+        else {
+            let keys = Object.keys(ranges)
+            for(let i in keys) result.push({name:keys[i],id:ranges[keys[i]]})
+            this.options = result
+            if(!this.filter.range && result[0]) this.$set(this.filter,"range",result[0].id)
+        }
         this.updateData()
         setInterval(_ => {
             this.updateData()
@@ -47,12 +61,20 @@ export default {
         }
     },
     watch : {
-        range(val) {
-            if(!this.loaded) return
-            this.updateData()
+        filter: {
+            handler(val) {
+                if(!this.loaded && !val.range) return
+                this.updateData()
+            },
+            deep : true
         }
     },
     methods : {
+        initDateInterval() {
+            let startDate = new Date()
+            let endDate = new Date(new Date().setDate(startDate.getDate()-15))
+            this.$set(this.filter,"range",[startDate.toISOString().slice(0, 10),endDate.toISOString().slice(0, 10)])
+        },
         getTrendPercent() {
             let comparison = Number(this.comparison)
             let value = comparison-Number(this.value)
@@ -62,8 +84,9 @@ export default {
             return result.toFixed(2).replace(/[.,]00$/, "")
         },
         updateData() {
+            if(!this.filter.range) return
             this.loading = true
-            this.$http.post(this.route,{range : this.range}).then( res => {
+            this.$http.post(this.route,this.filter).then( res => {
                 this.value = res.data.value ? res.data.value : 0
                 this.comparison = res.data.average ? res.data.average : 0
                 this.loading = false

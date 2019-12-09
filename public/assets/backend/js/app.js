@@ -5279,6 +5279,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["route", "time", "ranges"],
   data: function data() {
@@ -5286,10 +5297,10 @@ __webpack_require__.r(__webpack_exports__);
       loaded: false,
       data: [],
       loading: false,
-      range: null,
+      filter: {},
       options: [],
       comparison: 0,
-      value: 0
+      value: null
     };
   },
   created: function created() {
@@ -5302,23 +5313,25 @@ __webpack_require__.r(__webpack_exports__);
           case 0:
             result = [];
             ranges = this.ranges;
-            keys = Object.keys(ranges);
+            if (ranges == "date-interval") this.initDateInterval();else {
+              keys = Object.keys(ranges);
 
-            for (i in keys) {
-              result.push({
-                name: keys[i],
-                id: ranges[keys[i]]
-              });
+              for (i in keys) {
+                result.push({
+                  name: keys[i],
+                  id: ranges[keys[i]]
+                });
+              }
+
+              this.options = result;
+              if (!this.filter.range && result[0]) this.$set(this.filter, "range", result[0].id);
             }
-
-            this.options = result;
-            if (!this.range && result[0]) this.range = result[0].id;
             this.updateData();
             setInterval(function (_) {
               _this.updateData();
             }, this.time * 1000);
 
-          case 8:
+          case 5:
           case "end":
             return _context.stop();
         }
@@ -5334,12 +5347,20 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   watch: {
-    range: function range(val) {
-      if (!this.loaded) return;
-      this.updateData();
+    filter: {
+      handler: function handler(val) {
+        if (!this.loaded && !val.range) return;
+        this.updateData();
+      },
+      deep: true
     }
   },
   methods: {
+    initDateInterval: function initDateInterval() {
+      var startDate = new Date();
+      var endDate = new Date(new Date().setDate(startDate.getDate() - 15));
+      this.$set(this.filter, "range", [startDate.toISOString().slice(0, 10), endDate.toISOString().slice(0, 10)]);
+    },
     getTrendPercent: function getTrendPercent() {
       var comparison = Number(this.comparison);
       var value = comparison - Number(this.value);
@@ -5351,10 +5372,9 @@ __webpack_require__.r(__webpack_exports__);
     updateData: function updateData() {
       var _this2 = this;
 
+      if (!this.filter.range) return;
       this.loading = true;
-      this.$http.post(this.route, {
-        range: this.range
-      }).then(function (res) {
+      this.$http.post(this.route, this.filter).then(function (res) {
         _this2.value = res.data.value ? res.data.value : 0;
         _this2.comparison = res.data.average ? res.data.average : 0;
         _this2.loading = false;
@@ -5394,6 +5414,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["route", "time", "ranges"],
   data: function data() {
@@ -5401,7 +5432,7 @@ __webpack_require__.r(__webpack_exports__);
       loaded: false,
       data: [],
       loading: false,
-      range: null,
+      filter: {},
       options: [],
       value: {}
     };
@@ -5416,23 +5447,25 @@ __webpack_require__.r(__webpack_exports__);
           case 0:
             result = [];
             ranges = this.ranges;
-            keys = Object.keys(ranges);
+            if (ranges == "date-interval") this.initDateInterval();else {
+              keys = Object.keys(ranges);
 
-            for (i in keys) {
-              result.push({
-                name: keys[i],
-                id: ranges[keys[i]]
-              });
+              for (i in keys) {
+                result.push({
+                  name: keys[i],
+                  id: ranges[keys[i]]
+                });
+              }
+
+              this.options = result;
+              if (!this.filter.range && result[0]) this.$set(this.filter, "range", result[0].id);
             }
-
-            this.options = result;
-            if (!this.range && result[0]) this.range = result[0].id;
             this.updateData();
             setInterval(function (_) {
               _this.updateData();
             }, this.time * 1000);
 
-          case 8:
+          case 5:
           case "end":
             return _context.stop();
         }
@@ -5440,19 +5473,26 @@ __webpack_require__.r(__webpack_exports__);
     }, null, this);
   },
   watch: {
-    range: function range(val) {
-      if (!this.loaded) return;
-      this.updateData();
+    filter: {
+      handler: function handler(val) {
+        if (!this.loaded && !val.range) return;
+        this.updateData();
+      },
+      deep: true
     }
   },
   methods: {
+    initDateInterval: function initDateInterval() {
+      var startDate = new Date();
+      var endDate = new Date(new Date().setDate(startDate.getDate() - 15));
+      this.$set(this.filter, "range", [startDate.toISOString().slice(0, 10), endDate.toISOString().slice(0, 10)]);
+    },
     updateData: function updateData() {
       var _this2 = this;
 
+      if (!this.filter.range) return;
       this.loading = true;
-      this.$http.post(this.route, {
-        range: this.range
-      }).then(function (res) {
+      this.$http.post(this.route, this.filter).then(function (res) {
         var value = [];
         var data = res.data ? res.data : {};
         var keys = Object.keys(data);
@@ -122841,31 +122881,58 @@ var render = function() {
         staticClass: "d-flex flex-row justify-content-between align-items-start"
       },
       [
-        _c("div", [_vm._t("default")], 2),
+        _c("div", { staticClass: "mr-auto" }, [_vm._t("default")], 2),
         _vm._v(" "),
-        _vm.options.length > 0
+        _vm.ranges == "date-interval"
           ? _c(
               "div",
               [
-                _c("v-select", {
+                _c("el-date-picker", {
                   attrs: {
                     size: "mini",
-                    optionlist: _vm.options,
-                    withoutBlank: ""
+                    type: "daterange",
+                    format: "dd/MM/yyyy",
+                    "value-format": "yyyy-MM-dd",
+                    "end-placeholder": "Data Fim",
+                    "start-placeholder": "Data início"
                   },
                   model: {
-                    value: _vm.range,
+                    value: _vm.filter.range,
                     callback: function($$v) {
-                      _vm.range = $$v
+                      _vm.$set(_vm.filter, "range", $$v)
                     },
-                    expression: "range"
+                    expression: "filter.range"
                   }
                 })
               ],
               1
             )
-          : _vm._e()
-      ]
+          : [
+              _vm.options.length > 0
+                ? _c(
+                    "div",
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          size: "mini",
+                          optionlist: _vm.options,
+                          withoutBlank: ""
+                        },
+                        model: {
+                          value: _vm.filter.range,
+                          callback: function($$v) {
+                            _vm.$set(_vm.filter, "range", $$v)
+                          },
+                          expression: "filter.range"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ]
+      ],
+      2
     ),
     _vm._v(" "),
     _c(
@@ -122928,31 +122995,58 @@ var render = function() {
           "d-flex flex-row justify-content-between align-items-start pt-3 px-3 pb-1"
       },
       [
-        _c("div", [_vm._t("default")], 2),
+        _c("div", { staticClass: "mr-auto" }, [_vm._t("default")], 2),
         _vm._v(" "),
-        _vm.options.length > 0
+        _vm.ranges == "date-interval"
           ? _c(
               "div",
               [
-                _c("v-select", {
+                _c("el-date-picker", {
                   attrs: {
                     size: "mini",
-                    optionlist: _vm.options,
-                    withoutBlank: ""
+                    type: "daterange",
+                    format: "dd/MM/yyyy",
+                    "value-format": "yyyy-MM-dd",
+                    "end-placeholder": "Data Fim",
+                    "start-placeholder": "Data início"
                   },
                   model: {
-                    value: _vm.range,
+                    value: _vm.filter.range,
                     callback: function($$v) {
-                      _vm.range = $$v
+                      _vm.$set(_vm.filter, "range", $$v)
                     },
-                    expression: "range"
+                    expression: "filter.range"
                   }
                 })
               ],
               1
             )
-          : _vm._e()
-      ]
+          : [
+              _vm.options.length > 0
+                ? _c(
+                    "div",
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          size: "mini",
+                          optionlist: _vm.options,
+                          withoutBlank: ""
+                        },
+                        model: {
+                          value: _vm.filter.range,
+                          callback: function($$v) {
+                            _vm.$set(_vm.filter, "range", $$v)
+                          },
+                          expression: "filter.range"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ]
+      ],
+      2
     ),
     _vm._v(" "),
     _c(

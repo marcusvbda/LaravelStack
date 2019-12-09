@@ -8,7 +8,8 @@ class CarsMetricTrendPerDay extends Metric
     public $type   = "trend-graph";
     public function calculate(Request $request)
     {
-        //metric logic here...
+        $range = $request["range"];
+        // dd($range);
         return ["lorem ipsum"=>12,"lorem ipsum 2"=>11,"lorem ipsum 3"=>9];
     }
 
@@ -20,16 +21,6 @@ class CarsMetricTrendPerDay extends Metric
     public function updateTime()
     {
         return 60; //60 seconds
-    }
-    
-    public function ranges()
-    {
-        return [
-            '1 Semana' => 7,
-            '2 Semanas'=> 14,
-            '3 Semanas'=> 21,
-            '4 Semanas'=> 28
-        ];
     }
     
     public function width()

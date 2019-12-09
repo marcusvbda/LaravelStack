@@ -16,7 +16,7 @@ class CarsMetricCountPerDay extends Metric
             "average" => $this->getOverage()
         ];
     }
-
+    
     public function ranges()
     {
         return [
@@ -27,7 +27,7 @@ class CarsMetricCountPerDay extends Metric
             "45 dias"    => 45,
         ];
     }
-    
+
     public function updateTime()
     {
         return 60;//seconds
@@ -36,7 +36,7 @@ class CarsMetricCountPerDay extends Metric
     public function label()
     {
         return "<div class='d-flex flex-row justify-content-start mb-2'>
-                    <div><b>Novos Carros Por Intervalo</b></div>
+                    <div><b>Novos Carros</b></div>
                 </div>";
     }
 

@@ -123,7 +123,7 @@ class Metric
 
     public function ranges()
     {
-        return [];
+        return "date-interval";
     }
 
     public function calculate(Request $request)
