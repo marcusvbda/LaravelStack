@@ -5,12 +5,13 @@ namespace App\Http\Metrics\Cars;
 use App\vStack\Metric;
 use App\Http\Models\Brand;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class CarsMetricCustom extends Metric
 {
     public $type = "custom-content";
 
-    public function content() 
+    public function calculate(Request $request)
     {
         $days_of_week = ["Domingo","Segunda-Feira","Terça-Feira","Quarta-Feira","Quinta-Feira","Sexta-Feira","Sábado"];
         $date = Carbon::now();
@@ -24,5 +25,6 @@ class CarsMetricCustom extends Metric
     {
         return 'cars-metric-custom';
     }
+    
     
 }

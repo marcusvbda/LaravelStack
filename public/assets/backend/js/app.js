@@ -5125,6 +5125,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
 //
 //
 //
@@ -5134,7 +5137,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["route", "time"],
+  data: function data() {
+    return {
+      content: null,
+      loading: false
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function created$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            this.updateData();
+            setInterval(function (_) {
+              _this.updateData();
+            }, this.time * 1000);
+
+          case 2:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, null, this);
+  },
+  methods: {
+    updateData: function updateData() {
+      var _this2 = this;
+
+      this.loading = true;
+      this.$http.post(this.route).then(function (res) {
+        _this2.content = res.data;
+        $(_this2.$refs.content).show();
+        _this2.loading = false;
+      })["catch"](function (er) {
+        console.log(er);
+        _this2.loading = false;
+      });
+    }
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
@@ -122745,7 +122791,17 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "h-100" },
+    {
+      directives: [
+        {
+          name: "loading",
+          rawName: "v-loading",
+          value: _vm.loading,
+          expression: "loading"
+        }
+      ],
+      staticClass: "h-100"
+    },
     [
       _c(
         "div",
@@ -122757,9 +122813,12 @@ var render = function() {
         2
       ),
       _vm._v(" "),
-      _vm._t("content")
-    ],
-    2
+      _c("div", {
+        ref: "content",
+        staticStyle: { display: "none" },
+        domProps: { innerHTML: _vm._s(_vm.content) }
+      })
+    ]
   )
 }
 var staticRenderFns = []

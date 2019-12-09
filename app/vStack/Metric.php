@@ -104,10 +104,9 @@ class Metric
 
     private function customContent()
     {
-        return "<metric-custom-content>
+        return "<metric-custom-content :time='time' :route='calculate_route'>
                     <template slot='label'>".$this->label()."</template>
                     <template slot='sublabel'>".$this->sublabel()."</template>
-                    <template slot='content'>".$this->content()."</template>
                 </metric-custom-content>";
     }
 

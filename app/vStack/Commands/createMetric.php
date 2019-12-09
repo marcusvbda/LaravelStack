@@ -37,25 +37,18 @@ use Illuminate\Http\Request;
 class ' . $name . ' extends Metric
 {
     public $type   = "'.$type.'";';
-    if($type == "custom-content")
-    {
-        $content .='
-    public function content() 
-    {
-        return "custom metric content";
-    }';
-    } 
-    if(in_array($type,["group-graph","simple-counter","trend-graph"])) {
+    if(in_array($type,["group-graph","simple-counter","trend-graph","custom-content"])) {
         $content .='
     public function calculate(Request $request)
     {
-        //metric logic here...
+        //return data or html content here...
         return ["lorem ipsum" => 12,"ipsum lorem" => 55];
     }
     
+    //time to update content
     public function updateTime()
     {
-        return 60; //60 seconds
+        return 60; // seconds
     }
     ';
     }
@@ -63,12 +56,14 @@ class ' . $name . ' extends Metric
         $content .='
     public function ranges()
     {
-        return [];
+        return "date-interval";
+        //return [];
     }';
     }
 
         $content.='
 
+    //required and unique
     public function uriKey()
     {
         return "'.strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $name)).'";
