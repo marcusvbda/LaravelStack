@@ -5349,7 +5349,7 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     filter: {
       handler: function handler(val) {
-        if (!this.loaded && !val.range) return;
+        if (!this.loaded) return;
         this.updateData();
       },
       deep: true
@@ -5357,8 +5357,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     initDateInterval: function initDateInterval() {
-      var startDate = new Date();
-      var endDate = new Date(new Date().setDate(startDate.getDate() - 15));
+      var endDate = new Date();
+      var startDate = new Date(new Date().setDate(endDate.getDate() - 15));
       this.$set(this.filter, "range", [startDate.toISOString().slice(0, 10), endDate.toISOString().slice(0, 10)]);
     },
     getTrendPercent: function getTrendPercent() {
@@ -5475,7 +5475,7 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     filter: {
       handler: function handler(val) {
-        if (!this.loaded && !val.range) return;
+        if (!this.loaded) return;
         this.updateData();
       },
       deep: true
@@ -5483,8 +5483,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     initDateInterval: function initDateInterval() {
-      var startDate = new Date();
-      var endDate = new Date(new Date().setDate(startDate.getDate() - 15));
+      var endDate = new Date();
+      var startDate = new Date(new Date().setDate(endDate.getDate() - 15));
       this.$set(this.filter, "range", [startDate.toISOString().slice(0, 10), endDate.toISOString().slice(0, 10)]);
     },
     updateData: function updateData() {
@@ -5493,15 +5493,8 @@ __webpack_require__.r(__webpack_exports__);
       if (!this.filter.range) return;
       this.loading = true;
       this.$http.post(this.route, this.filter).then(function (res) {
-        var value = [];
         var data = res.data ? res.data : {};
-        var keys = Object.keys(data);
-
-        for (var i in keys) {
-          value.push([keys[i], data[keys[i]]]);
-        }
-
-        _this2.value = value;
+        _this2.value = data;
         _this2.loading = false;
         $(_this2.$refs.content).show();
         _this2.loaded = true;
@@ -122835,6 +122828,7 @@ var render = function() {
               [
                 _c("pie-chart", {
                   attrs: {
+                    discrete: true,
                     data: _vm.data,
                     legend: false,
                     donut: true,
@@ -123062,7 +123056,11 @@ var render = function() {
         ],
         staticClass: "d-flex flex-column justify-content-between p-1"
       },
-      [_c("area-chart", { attrs: { data: _vm.value, height: "120px" } })],
+      [
+        _c("area-chart", {
+          attrs: { discrete: true, data: _vm.value, height: "120px" }
+        })
+      ],
       1
     )
   ])

@@ -63,7 +63,7 @@ export default {
     watch : {
         filter: {
             handler(val) {
-                if(!this.loaded && !val.range) return
+                if(!this.loaded) return
                 this.updateData()
             },
             deep : true
@@ -71,8 +71,8 @@ export default {
     },
     methods : {
         initDateInterval() {
-            let startDate = new Date()
-            let endDate = new Date(new Date().setDate(startDate.getDate()-15))
+            let endDate = new Date()
+            let startDate = new Date(new Date().setDate(endDate.getDate()-15))
             this.$set(this.filter,"range",[startDate.toISOString().slice(0, 10),endDate.toISOString().slice(0, 10)])
         },
         getTrendPercent() {

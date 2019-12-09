@@ -16,7 +16,7 @@
             </template>
         </div>
         <div class="d-flex flex-column justify-content-between p-1" v-loading="loading" >
-            <area-chart :data="value" height="120px" ></area-chart>
+            <area-chart :discrete="true" :data="value" height="120px" ></area-chart>
         </div>
     </div>
 </template>
@@ -51,7 +51,7 @@ export default {
     watch : {
         filter: {
             handler(val) {
-                if(!this.loaded && !val.range) return
+                if(!this.loaded) return
                 this.updateData()
             },
             deep : true
@@ -59,19 +59,16 @@ export default {
     },
     methods : {
         initDateInterval() {
-            let startDate = new Date()
-            let endDate = new Date(new Date().setDate(startDate.getDate()-15))
+            let endDate = new Date()
+            let startDate = new Date(new Date().setDate(endDate.getDate()-15))
             this.$set(this.filter,"range",[startDate.toISOString().slice(0, 10),endDate.toISOString().slice(0, 10)])
         },
         updateData() {
             if(!this.filter.range) return
             this.loading = true
             this.$http.post(this.route,this.filter).then( res => {
-                let value = []
                 let data = res.data ? res.data : {}
-                let keys = Object.keys(data)
-                for(let i in keys) value.push([keys[i],data[keys[i]]])
-                this.value = value
+                this.value = data
                 this.loading = false
                 $(this.$refs.content).show()
                 this.loaded = true
