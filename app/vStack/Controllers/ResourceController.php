@@ -274,6 +274,14 @@ class ResourceController extends Controller
         return ["success" => true, "route" => route('resource.index', ["resource" => $resource->id])];
     }
 
+    public function customCardStore($resource, Request $request)
+    {
+        $resource = ResourcesHelpers::find($resource);
+        if (!$resource->canCustomizeMetrics()) abort(403);
+        $data = $request->all();
+        dd($resource, $data);
+    }
+
     public function option_list(Request $request)
     {
         $model = app()->make($request["model"]);

@@ -35,7 +35,7 @@ class Metric
                         </div>
                     </div>";
         }
-        if(in_array($this->type,["group-graph"]))
+        if(in_array($this->type,["group-chart"]))
         {
             return  "<div class='".$this->width()." mb-3'>
                         <div class='card p-3 h-100'>
@@ -43,7 +43,7 @@ class Metric
                         </div>
                     </div>";
         }
-        if(in_array($this->type,["simple-counter"]))
+        if(in_array($this->type,["trend-counter"]))
         {
             return  "<div class='".$this->width()." mb-3'>
                         <div class='card p-3 h-100'>
@@ -51,7 +51,7 @@ class Metric
                         </div>
                     </div>";
         }
-        if(in_array($this->type,["trend-graph"]))
+        if(in_array($this->type,["trend-chart"]))
         {
             return  "<div class='".$this->width()." mb-3'>
                         <div class='card p-0 h-100'>
@@ -79,14 +79,14 @@ class Metric
             case 'custom-content':
                 return $this->customContent();
                 break;
-            case 'group-graph':
-                return $this->groupGraphContent();
+            case 'group-chart':
+                return $this->groupChartContent();
                 break;
-            case 'simple-counter':
-                return $this->simpleCounterContent();
+            case 'trend-counter':
+                return $this->trendCounterContent();
                 break;
-            case 'trend-graph':
-                return $this->trendGrapContent();
+            case 'trend-chart':
+                return $this->trendChartContent();
                 break;
             default:
                 return $this->type;
@@ -94,7 +94,7 @@ class Metric
         }
     }
 
-    private function groupGraphContent()
+    private function groupChartContent()
     {
         return "<metric-piechart :time='time' :route='calculate_route'>
                     <template slot='label'>".$this->label()."</template>
@@ -110,14 +110,14 @@ class Metric
                 </metric-custom-content>";
     }
 
-    private function trendGrapContent()
+    private function trendChartContent()
     {
-        return "<metric-trend-graph :ranges='ranges' :time='time' :route='calculate_route'>".$this->label()."</metric-trend-graph>";
+        return "<metric-trendchart :ranges='ranges' :time='time' :route='calculate_route'>".$this->label()."</metric-trendchart>";
     }
 
-    private function simpleCounterContent()
+    private function trendCounterContent()
     {
-        return "<metric-simple-counter :ranges='ranges' :time='time' :route='calculate_route'>".$this->label()."</metric-simple-counter>";
+        return "<metric-trend-counter :ranges='ranges' :time='time' :route='calculate_route'>".$this->label()."</metric-trend-counter>";
     }
 
     public function ranges()

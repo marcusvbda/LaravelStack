@@ -6,7 +6,7 @@ use App\Http\Models\Car;
 
 class CarsMetricPerActive extends Metric
 {
-    public $type   = "group-graph";
+    public $type   = "group-chart";
     public function calculate(Request $request)
     {
         return [

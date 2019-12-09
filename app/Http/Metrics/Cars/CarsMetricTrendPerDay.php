@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class CarsMetricTrendPerDay extends Metric
 {
-    public $type   = "trend-graph";
+    public $type   = "trend-chart";
     public function calculate(Request $request)
     {
         return $this->getResult($request["range"]);

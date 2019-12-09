@@ -147,4 +147,9 @@ class Cars extends Resource
     {
         return Auth::user()->hasRole("user");  //true
     }
+
+    public function canCustomizeMetrics()
+    {
+        return Auth::user()->hasRole("user");  //true
+    }
 }

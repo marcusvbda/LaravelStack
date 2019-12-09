@@ -174,6 +174,16 @@ class Resource
         return true;
     }
 
+    public function canCustomizeMetrics()
+    {
+        return false;
+    }
+
+    public function customMetricsButtonText()
+    {
+        return "Editar Cards Customizados";
+    }
+    
     public function getValidationRule()
     {
         $validation_rules = [];

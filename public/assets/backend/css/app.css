@@ -10271,6 +10271,11 @@ body {
   cursor: not-allowed;
 }
 
+.breadcrumb {
+  padding-bottom: 0;
+  margin-bottom: 0.25rem !important;
+}
+
 .resource-table.table-striped tbody tr {
   background-color: white;
 }

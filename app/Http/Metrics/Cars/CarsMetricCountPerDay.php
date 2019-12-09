@@ -8,7 +8,7 @@ use DB;
 
 class CarsMetricCountPerDay extends Metric
 {
-    public $type   = "simple-counter";
+    public $type   = "trend-counter";
     public function calculate(Request $request)
     {
         return [
