@@ -55,7 +55,7 @@
                         <td>
                             <div class="d-flex flex-column">
                                 <div>
-                                    <custom-resource-metric class="pl-0" :metric="{{json_encode($row)}}"></custom-resource-metric>
+                                    <preview-resource-card :metric="{{json_encode($row)}}" :key="{{$row->id}}" />
                                 </div>
                                 <?php
                                     $crud_buttons = [

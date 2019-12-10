@@ -18,7 +18,7 @@
             </resource-metric>
         @endforeach
         @foreach($cusomMetrics as $metric)
-            <custom-resource-metric :metric="{{json_encode($metric)}}"></custom-resource-metric>
+            <custom-resource-metric :metric="{{json_encode($metric)}}" calculate_route="{{$resource->route()."/custom-metric-calculate/".$metric->code}}" ></custom-resource-metric>
         @endforeach
     </div>
 @endif

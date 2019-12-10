@@ -10233,6 +10233,10 @@ body {
   padding-top: 0;
 }
 
+.btn:disabled {
+  cursor: not-allowed;
+}
+
 body {
   color: #7c858e;
   font-size: 14px;

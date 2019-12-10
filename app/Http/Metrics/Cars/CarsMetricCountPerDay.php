@@ -13,7 +13,7 @@ class CarsMetricCountPerDay extends Metric
     {
         return [
             "value" => $this->getQty($request["range"]),
-            "average" => $this->getOverage()
+            "compare" => $this->getOverage()
         ];
     }
     

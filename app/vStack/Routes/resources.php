@@ -14,6 +14,7 @@ Route::group(['prefix' => "admin"], function () {
         Route::post('{resource}/custom-cards/store', '\App\vStack\Controllers\ResourceController@customCardStore')->name("resource.customcard.store");
         Route::delete('{resource}/custom-cards/{code}/destroy', '\App\vStack\Controllers\ResourceController@customCardDestroy')->middleware(['hashids:code'])->name("resource.customcard.destroy");
         Route::get('{resource}/custom-cards/{code}/edit', '\App\vStack\Controllers\ResourceController@customCardEdit')->middleware(['hashids:code'])->name("resource.customcard.edit");
+        Route::post('{resource}/custom-metric-calculate/{code}', '\App\vStack\Controllers\ResourceController@customMetricCalculate')->middleware(['hashids:code'])->name("resource.customcard.calculate");
 
         Route::get('{resource}/{code}', '\App\vStack\Controllers\ResourceController@view')->middleware(['hashids:code'])->name("resource.view");
         Route::get('{resource}/{code}/edit', '\App\vStack\Controllers\ResourceController@edit')->middleware(['hashids:code'])->name("resource.edit");

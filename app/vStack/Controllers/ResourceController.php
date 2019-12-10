@@ -9,6 +9,8 @@ use Response;
 use App\vStack\Services\Messages;
 use App\vStack\Models\CustomResourceCard;
 use Auth;
+use DB;
+use Carbon\Carbon;
 
 class ResourceController extends Controller
 {
@@ -308,6 +310,43 @@ class ResourceController extends Controller
         return view("vStack::resources.custom_cards_crud", compact("resource","card","data"));
     }
 
+    public function customMetricCalculate($resource, $code,Request $request)
+    {
+        $resource = ResourcesHelpers::find($resource);
+        if (!$resource->canCustomizeMetrics()) abort(403);
+        $card = CustomResourceCard::where("resource_id",$resource->id)->where("id",$code)->firstOrFail();
+        if($card->type == "trend-counter") return $this->customTrendCounterCalculate($resource,$request["range"]);
+    }
+
+    private function customTrendCounterCalculate($resource,$range)
+    {
+        $total = $resource->model->count();
+        if($total<=0) return ["value"=>0,"average"=>0];
+        $startDate = Carbon::create($range[0])->format("Y-m-d 00:00:00");
+        $endDate   = Carbon::create($range[1])->format("Y-m-d 00:00:00");
+        $results = $resource->model->whereRaw(DB::raw("DATE(created_at) >='$startDate'" . " and " ."DATE(created_at) <='$endDate'" ))
+                    ->select(DB::raw('DATE_FORMAT(created_at,"%d/%m/%Y") as formated_date, count(*) as qty'))
+                    ->groupBy("formated_date")
+                ->pluck('qty','formated_date');
+        $value = 0;
+        if(count($results)>0) {
+            foreach($results as $result) $value+=$result;
+            $value = $value/count($results);
+        }
+        $total_results = $resource->model->select(DB::raw('DATE_FORMAT(created_at,"%d/%m/%Y") as formated_date, count(*) as qty'))
+                ->groupBy("formated_date")
+                ->pluck('qty','formated_date');
+        $average = 0;
+        if(count($total_results)>0) {
+            foreach($total_results as $result) $average+=$result;
+            $average = $average/count($total_results);
+        }
+        return [
+            "value"   => $value,
+            "compare" => $average
+        ];
+    }
+    
     public function customCardCreate($resource)
     {
         $resource = ResourcesHelpers::find($resource);
@@ -325,7 +364,17 @@ class ResourceController extends Controller
         $data = $request->all();
         $card = @$data["id"] ? CustomResourceCard::findOrFail($data["id"]) : new CustomResourceCard();
         $data["resource_id"] = $resource->id;
-        if($data["type"]=="custom-content") $card->fill($data);
+        if($data["type"]=="custom-content") 
+        {
+            unset($data["update_interval"]);
+            $card->fill($data);
+        }
+        if($data["type"]=="trend-counter") 
+        {
+            unset($data["subtitle"]);
+            unset($data["content"]);
+            $card->fill($data);
+        }
         Messages::send("success", "Card Customizado Adicionado com Sucesso !!!");
         $card->save();
         return ["success" => true];
