@@ -91,6 +91,11 @@ class Resource
         return "<h4>Nada cadastrado ainda...<h4>";
     }
 
+    public function nothingStoredSubText() 
+    {
+        return "<span>Clique no botão abaixo para adicionar o primeiro registro ...</span>";
+    }
+
     public function fields()
     {
         $fields = [];

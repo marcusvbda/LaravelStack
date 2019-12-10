@@ -16,14 +16,18 @@
 
 @include("vStack::resources.partials._metrics")
 
-<div class="row mb-3">
+<div class="row mb-3 mt-2">
     <div class="col-12 d-flex flex-row align-items-center">
         <h4 class="mb-1">{!! @$resource->indexLabel() !!}</h4>
         <div class="d-flex flex-row">
             @if($resource->canCreate())
-                <a class="btn btn-primary btn-sm-block btn-sm cursor-pointer ml-4 px-3 pr-4" href="{{route('resource.create',['resource'=>$resource->id])}}">
-                    {!! $resource->storeButtonLabel() !!}
-                </a>
+                <div class="ml-4">
+                    @if($resource->model->count()>0)
+                        <a class="btn btn-primary btn-sm-block btn-sm cursor-pointer px-3 pr-4" href="{{route('resource.create',['resource'=>$resource->id])}}">
+                            {!! $resource->storeButtonLabel() !!}
+                        </a>
+                    @endif
+                </div>
                 @if($resource->canImport())
                     <a class="btn btn-outline-secondary btn-sm-block btn-sm cursor-pointer pr-3 ml-2" href="{{route('resource.import',['resource'=>$resource->id])}}">
                         {!! $resource->importButtonlabel() !!}
@@ -43,7 +47,6 @@
 
 @if($resource->model->count()>0)
     @include("vStack::resources.partials._filter")
-
     <div class="row d-flex align-items-end mb-2">
         <div class="col-md-9 col-sm-12">
             @if($resource->lenses())
@@ -89,9 +92,10 @@
             <h4 class="text-center mt-5">
                 <h1 style="opacity: .3;font-size: 250px;">{!!$resource->icon()!!}</h1>
                 <div>{!! $resource->nothingStoredText() !!}</div>
+                <div>{!! $resource->nothingStoredSubText() !!}</div>
             </h4>
             @if($resource->canCreate())
-                <a class="btn btn-primary btn-sm-block cursor-pointer mb-3 mt-2" href="{{route('resource.create',['resource'=>$resource->id])}}">
+                <a class="btn btn-primary btn-sm-block cursor-pointer mb-3 mt-3" href="{{route('resource.create',['resource'=>$resource->id])}}">
                     {!! $resource->storeButtonLabel() !!}
                 </a>
             @endif

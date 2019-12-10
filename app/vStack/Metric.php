@@ -30,7 +30,7 @@ class Metric
         if(in_array($this->type,["custom-content"]))
         {
             return  "<div class='".$this->width()." mb-3'>
-                        <div class='card p-3 h-100'>
+                        <div class='card d-flex flex-column justify-content-between p-3 h-100 h-100'>
                             __content__here__
                         </div>
                     </div>";
@@ -38,7 +38,7 @@ class Metric
         if(in_array($this->type,["group-chart"]))
         {
             return  "<div class='".$this->width()." mb-3'>
-                        <div class='card p-3 h-100'>
+                        <div class='card d-flex flex-column justify-content-between p-3 h-100 h-100'>
                             __content__here__
                         </div>
                     </div>";
@@ -46,7 +46,7 @@ class Metric
         if(in_array($this->type,["trend-counter"]))
         {
             return  "<div class='".$this->width()." mb-3'>
-                        <div class='card p-3 h-100'>
+                        <div class='card d-flex flex-column justify-content-between p-3 h-100 h-100'>
                             __content__here__
                         </div>
                     </div>";
@@ -54,7 +54,7 @@ class Metric
         if(in_array($this->type,["trend-chart"]))
         {
             return  "<div class='".$this->width()." mb-3'>
-                        <div class='card p-0 h-100'>
+                        <div class='card d-flex flex-column justify-content-between p-0 h-100 h-100'>
                             __content__here__
                         </div>
                     </div>";

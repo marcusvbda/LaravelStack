@@ -1,6 +1,6 @@
 <template>
     <div class="h-100 d-flex align-items-center" >
-        <div class="w-100"  ref="content" style="display:none;">
+        <div class="w-100 h-100"  ref="content" style="display:none;">
             <div class='d-flex flex-row justify-content-between align-items-center mb-2'>
                 <slot name='label'></slot>
                 <slot name='sublabel'></slot>

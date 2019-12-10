@@ -1,5 +1,5 @@
 <template>
-    <v-runtime-template :ranges="ranges" :template="view" :time="time"></v-runtime-template>
+    <v-runtime-template :ranges="ranges" :template="view" :time="time" />
 </template>
 <script>
 import VRuntimeTemplate from "v-runtime-template"

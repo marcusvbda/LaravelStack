@@ -3,7 +3,7 @@
         <template v-for="(filter,key) in data.filters" >
             <div class="col-md-3 col-sm-12 mb-3">
                 <label class="mb-0" style="font-size:14px;"><span v-html="filter.label"></span></label>
-                <v-runtime-template :key="key" :template="filter.view"></v-runtime-template>
+                <v-runtime-template :key="key" :template="filter.view" />
             </div>
         </template>
     </div>

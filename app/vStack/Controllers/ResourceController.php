@@ -7,6 +7,7 @@ use ResourcesHelpers;
 use Illuminate\Http\Request;
 use Response;
 use App\vStack\Services\Messages;
+use App\vStack\Models\CustomResourceCard;
 use Auth;
 
 class ResourceController extends Controller
@@ -274,12 +275,60 @@ class ResourceController extends Controller
         return ["success" => true, "route" => route('resource.index', ["resource" => $resource->id])];
     }
 
+    public function customCard($resource)
+    {
+        $resource = ResourcesHelpers::find($resource);
+        if (!$resource->canCustomizeMetrics()) abort(403);
+        $query = CustomResourceCard::where("resource_id",$resource->id);
+        $cards = $query->paginate($resource->resultsPerPage());
+        return view("vStack::resources.custom_cards_index", compact("resource", "cards"));
+    }
+
+    public function customCardDestroy($resource, $code)
+    {
+        $resource = ResourcesHelpers::find($resource);
+        if (!$resource->canCustomizeMetrics()) abort(403);
+        $content = CustomResourceCard::where("resource_id",$resource->id)->where("id",$code)->firstOrFail();
+        if ($content->delete()) {
+            Messages::send("success", "Registro excluido com sucesso !!");
+            return ["success" => true, "route" => $resource->route()."/custom-cards"];
+        }
+        Messages::send("error", " Erro ao excluir com " . $resource->singularLabel() . " !!");
+        return ["success" => false,  "route" => $resource->route()];
+    }
+
+    public function customCardEdit($resource, $code)
+    {
+        $resource = ResourcesHelpers::find($resource);
+        if (!$resource->canCustomizeMetrics()) abort(403);
+        $card = CustomResourceCard::where("resource_id",$resource->id)->where("id",$code)->firstOrFail();
+        $data = [
+            "page_type" => "Edição"
+        ];
+        return view("vStack::resources.custom_cards_crud", compact("resource","card","data"));
+    }
+
+    public function customCardCreate($resource)
+    {
+        $resource = ResourcesHelpers::find($resource);
+        if (!$resource->canCustomizeMetrics()) abort(403);
+        $data = [
+            "page_type" => "Cadastro"
+        ];
+        return view("vStack::resources.custom_cards_crud", compact("resource","data"));
+    }
+
     public function customCardStore($resource, Request $request)
     {
         $resource = ResourcesHelpers::find($resource);
         if (!$resource->canCustomizeMetrics()) abort(403);
         $data = $request->all();
-        dd($resource, $data);
+        $card = @$data["id"] ? CustomResourceCard::findOrFail($data["id"]) : new CustomResourceCard();
+        $data["resource_id"] = $resource->id;
+        if($data["type"]=="custom-content") $card->fill($data);
+        Messages::send("success", "Card Customizado Adicionado com Sucesso !!!");
+        $card->save();
+        return ["success" => true];
     }
 
     public function option_list(Request $request)

@@ -4,7 +4,7 @@
             <form class="needs-validation m-0" novalidate v-on:submit.prevent="submit" >
                 
                 <template v-for="(card,i) in data.fields">
-                    <v-runtime-template :key="i" :template="card.view"></v-runtime-template>
+                    <v-runtime-template :key="i" :template="card.view" />
                 </template>
                     
                 <div class="row">

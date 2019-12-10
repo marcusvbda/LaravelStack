@@ -23,7 +23,7 @@
 		<div class="d-flex align-items-center flex-row">
 			<span class="el-icon-warning mr-2" v-if="alert.data._type=='warning'"></span>
 			<span class="el-icon-success mr-2" v-if="alert.data._type=='success'"></span>
-			<span class="el-icon-error mr-2" v-if="alert.data._type=='error'"></span>
+			<span class="el-icon-danger mr-2" v-if="alert.data._type=='error'"></span>
 			<span class="el-icon-info mr-2" v-if="alert.data._type=='info'"></span>
 			<span v-html="alert.data.message"></span>
 		</div>

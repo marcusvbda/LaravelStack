@@ -1,5 +1,12 @@
 <template>
-    <codemirror v-model="text" :options="cmOptions" />
+    <div>
+        <div class="form-group row mb-3">
+            <label class="col-sm-2 col-form-label" v-if="label"><span v-html="label ? label : ''"></span></label>
+            <div class="col-sm-10" v-bind:class="{'col-sm-10' : label,'col-sm-12':!label}">
+                <codemirror v-model="text" :options="cmOptions" />
+            </div>
+        </div>
+    </div>
 </template>
 <script>
 import { codemirror } from 'vue-codemirror'
@@ -8,7 +15,7 @@ import 'codemirror/theme/ambiance.css'
 import'codemirror/addon/selection/active-line.js'
 import'codemirror/addon/edit/closetag.js'
 export default {
-    props : ["mode"],
+    props : ["mode","height","label"],
     data() {
         return {
             text : "",
@@ -24,6 +31,7 @@ export default {
     },
     mounted() {
         this.text = this.$attrs.value
+        $(".Codemirror").height(this.height)
     },
     watch : {
         text(val) {

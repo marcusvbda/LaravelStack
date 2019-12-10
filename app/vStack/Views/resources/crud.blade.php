@@ -14,7 +14,7 @@
         </nav>
     </div>
 </div>
-<div class="row">
+<div class="row mt-2">
     <div class="col-12">
         <div class="d-flex flex-row justify-content-between mb-3">
             <h4>{!! @$resource->icon() !!} {{$data["page_type"]}} de {{$resource->singularLabel()}}</h4>
