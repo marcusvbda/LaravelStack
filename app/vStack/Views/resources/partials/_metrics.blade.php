@@ -5,8 +5,11 @@
     </div>
 </div>
 @endif
-<?php $metrics = $resource->metrics(); ?>
-@if($metrics)
+<?php 
+    $metrics = $resource->metrics(); 
+    $cusomMetrics = \App\vStack\Models\CustomResourceCard::where("resource_id",$resource->id)->get();
+?>
+@if($metrics || $cusomMetrics)
     <div class="row d-flex flex-row flex-wrap">
         @foreach($metrics as $metric)
             <resource-metric :time="{{$metric->updateTime()}}" :ranges="{{json_encode($metric->ranges())}}" 
@@ -14,7 +17,7 @@
                 :view="{{json_encode($metric->view)}}">
             </resource-metric>
         @endforeach
-        @foreach(\App\vStack\Models\CustomResourceCard::where("resource_id",$resource->id)->get() as $metric)
+        @foreach($cusomMetrics as $metric)
             <custom-resource-metric :metric="{{json_encode($metric)}}"></custom-resource-metric>
         @endforeach
     </div>
