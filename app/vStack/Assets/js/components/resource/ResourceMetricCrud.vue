@@ -10,7 +10,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row d-flex justify-content-center mb-3">
+                            <div class="row d-flex justify-content-center mb-5">
                                 <div class="col-md-10 col-sm-12">
                                     <h4>Step 1</h4>
                                 </div>
@@ -22,7 +22,7 @@
                             </div>
                             <template v-if="wizard_step>=1">
                                 <hr>
-                                <div class="row d-flex justify-content-center my-3">
+                                <div class="row d-flex justify-content-center mb-5">
                                     <div class="col-md-10 col-sm-12">
                                         <h4>Etapa 2</h4>
                                     </div>
@@ -46,7 +46,7 @@
                             </div>
                             <template v-if="wizard_step>=2">
                                 <hr>
-                                <div class="row d-flex justify-content-center my-3">
+                                <div class="row d-flex justify-content-center mb-5">
                                     <div class="col-md-10 col-sm-12">
                                         <h4>Etapa 3</h4>
                                     </div>
@@ -57,8 +57,8 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="preview mt-5" v-if="wizard_step>0">
-                                    <div class="row d-flex justify-content-center mb-3">
+                                <div class="preview" v-if="wizard_step>0">
+                                    <div class="row d-flex justify-content-center mb-5">
                                         <div class="col-md-10 col-sm-12">
                                             <h4>Preview</h4>
                                         </div>
