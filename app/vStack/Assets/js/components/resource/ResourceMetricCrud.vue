@@ -12,14 +12,22 @@
                         <div class="card-body">
                             <div class="row d-flex justify-content-center mb-3">
                                 <div class="col-md-10 col-sm-12">
-                                    <h4>Informações do Card</h4>
+                                    <h4>Step 1</h4>
                                 </div>
                             </div>
                             <div class="row d-flex justify-content-center">
                                 <div class="col-md-10 col-sm-12" v-if="wizard_step>=0">
                                     <v-select :label="`<b>Tipo do Card</b>`" v-model='frm.type' :optionlist="type_list" />
                                 </div>
-                                <template v-if="wizard_step>=1">
+                            </div>
+                            <template v-if="wizard_step>=1">
+                                <hr>
+                                <div class="row d-flex justify-content-center my-3">
+                                    <div class="col-md-10 col-sm-12">
+                                        <h4>Etapa 2</h4>
+                                    </div>
+                                </div>
+                                <div class="row d-flex justify-content-center">
                                     <div class="col-md-10 col-sm-12" >
                                         <v-select :label="`<b>Tamanho</b>`" v-model='frm.width' :optionlist="width_list" withoutBlank />
                                     </div>
@@ -29,27 +37,33 @@
                                     <div class="col-md-10 col-sm-12">
                                         <v-input :label="`<b>SubTítulo</b>`" v-model='frm.subtitle' />
                                     </div>
-                                </template>
-                            </div>
+                                </div>
+                            </template>
                             <div class="row d-flex justify-content-center mt-4" v-if="wizard_step==1">
                                 <div class="col-md-3 text-center">
                                     <button class="btn btn-sm-block btn-outline-primary" @click="wizard_step=2">Ir Para Etapa 3</button>
                                 </div>
                             </div>
                             <template v-if="wizard_step>=2">
+                                <hr>
+                                <div class="row d-flex justify-content-center my-3">
+                                    <div class="col-md-10 col-sm-12">
+                                        <h4>Etapa 3</h4>
+                                    </div>
+                                </div>
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-md-10 col-sm-12" v-if="frm.type=='custom-content'">
                                         <v-codemirror :label="`<b>Conteúdo</b>`" v-model="frm.content" height="150px" />
                                     </div>
                                 </div>
+                                <hr>
                                 <div class="preview mt-5" v-if="wizard_step>0">
-                                    <hr>
                                     <div class="row d-flex justify-content-center mb-3">
                                         <div class="col-md-10 col-sm-12">
-                                            <h4>Informações do Card</h4>
+                                            <h4>Preview</h4>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-center">
+                                    <div class="d-flex justify-content-center mb-4">
                                         <div :class="`col-md-${frm.width ? frm.width : '4'} col-sm-12 px-0`">
                                             <div class="card p-3 h-100">
                                                 <div class="h-100">
