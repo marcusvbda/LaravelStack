@@ -21,6 +21,7 @@ class Text extends Field
         $prepend        = @$this->options["prepend"];
         $type           = $this->options["type"];
         $field          = $this->options["field"];
+        $mask           = json_encode($this->options["mask"]);
         $placeholder    = $this->options["placeholder"];
         $disabled       = @$this->options["disabled"] ? "true" : "false";
         if (!@$this->options["hide"])
@@ -29,6 +30,8 @@ class Text extends Field
                         label='$label'                                                                   
                         prepend='$prepend'                                                               
                         append='$append'                                                               
+                        append='$append' 
+                        :mask='$mask'                                                              
                         type='$type'                                                                     
                         v-model='form.$field'                                                            
                         placeholder='$placeholder'                                                       

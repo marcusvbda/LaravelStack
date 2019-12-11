@@ -37,7 +37,7 @@ class Brands extends Resource
             new Card("Informações",[
                 new Text([
                     "label" => "Nome", "field" => "name", "required" => true,
-                    "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255"
+                    "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255",
                 ])
             ])
         ];

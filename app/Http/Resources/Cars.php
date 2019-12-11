@@ -64,7 +64,8 @@ class Cars extends Resource
             new Card("<span class='el-icon-s-order mr-2'></span>Section Card 1",[
                 new Text([
                     "label" => "Nome", "field" => "name", "required" => true,
-                    "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255"
+                    "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255",
+                    // "mask" => ['(##) ####-####', '(##) #####-####']
                 ]),
                 new TextArea([
                     "label" => "Descrição", "field" => "description",
