@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use marcusvbda\vstack\Resource;
 use App\Http\Filters\Cars\{CarsFilterByName, CarsFilterByBrand, CarsFilterByDate, CarsFilterByRangeDate};
-use marcusvbda\vstack\Fields\{Text, TextArea, Check, BelongsTo};
+use marcusvbda\vstack\Fields\{Text, TextArea, Check, BelongsTo, Summernote};
 use marcusvbda\vstack\Fields\Card;
 use App\Http\Metrics\Cars\{CarsMetricCustom,CarsMetricPerBrand,CarsMetricCountPerDay,CarsMetricPerActive,CarsMetricTrendPerDay};
 
@@ -64,12 +64,15 @@ class Cars extends Resource
             new Card("<span class='el-icon-s-order mr-2'></span>Section Card 1",[
                 new Text([
                     "label" => "Nome", "field" => "name", "required" => true,
-                    "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255",
-                    // "mask" => ['(##) ####-####', '(##) #####-####']
+                    "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255"
                 ]),
-                new TextArea([
+                // new TextArea([
+                //     "label" => "Descrição", "field" => "description",
+                //     "placeholder" => "Digite o texto aqui ...",
+                // ]),
+                new Summernote([
                     "label" => "Descrição", "field" => "description",
-                    "placeholder" => "Digite o texto aqui ...",
+                    "placeholder" => "Digite o texto aqui ..."
                 ]),
             ]),
             new Card("Section Card 2",[
@@ -111,6 +114,20 @@ class Cars extends Resource
             new CarsMetricPerBrand,
             new CarsMetricPerActive,
             new CarsMetricCountPerDay,
+        ];
+    }
+
+    public function customMetricOptions()
+    {
+        return [
+            "group-chart" => [
+                ["name"=>"Marca","id"=>"brand->name","key"=>"brand_id"],
+                ["name"=>"Atividade","id"=>"active"]
+            ],
+            "trend-chart" => [
+                ["name"=>"Data de Criação","id"=>"created_at"],
+                ["name"=>"Data de Alteração","id"=>"updated_at"]
+            ]
         ];
     }
 

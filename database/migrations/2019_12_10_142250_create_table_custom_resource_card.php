@@ -22,6 +22,7 @@ class CreateTableCustomResourceCard extends Migration
             $table->string('title')->nullable();
             $table->longtext('content')->nullable();
             $table->integer('update_interval')->nullable();
+            $table->string('group_by')->nullable();
             $table->string('resource_id');
             $table->string('type');
             $table->integer('width');

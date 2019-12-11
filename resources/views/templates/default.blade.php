@@ -6,8 +6,8 @@
 			window.laravel = {
 				csrf_token : '{{ csrf_token() }}',
 				root_url : '{{ url('') }}',
-				pusher_key : '{{env("PUSHER_APP_KEY","")}}',
-				pusher_cluster : '{{env("PUSHER_APP_CLUSTER","")}}',
+				pusher_key : '{{config("broadcasting.connections.pusher.key")}}',
+				pusher_cluster : '{{config("broadcasting.connections.pusher.options.cluster")}}',
 				@if(Auth::check())
 					<?php $user =  Auth::user(); ?>
 					user : {

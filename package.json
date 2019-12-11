@@ -32,6 +32,7 @@
         "popper.js": "^1.11.0",
         "pusher-js": "^5.0.3",
         "remove": "^0.1.5",
+        "summernote": "^0.8.12",
         "v-runtime-template": "^1.10.0",
         "vue": "^2.6.10",
         "vue-chartkick": "^0.6.0",
