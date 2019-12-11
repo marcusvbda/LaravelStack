@@ -2,7 +2,7 @@
 
 namespace App\Http\Filters\Motorcycles;
 
-use  App\vStack\Filter;
+use  marcusvbda\vstack\Filter;
 
 class MotorcyclesFilterByActive extends Filter
 {

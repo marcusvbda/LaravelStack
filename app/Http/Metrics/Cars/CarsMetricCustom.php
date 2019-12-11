@@ -2,7 +2,7 @@
 
 namespace App\Http\Metrics\Cars;
 
-use App\vStack\Metric;
+use marcusvbda\vstack\Metric;
 use App\Http\Models\Brand;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

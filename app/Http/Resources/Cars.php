@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources;
 
-use App\vStack\Resource;
+use marcusvbda\vstack\Resource;
 use App\Http\Filters\Cars\{CarsFilterByName, CarsFilterByBrand, CarsFilterByDate, CarsFilterByRangeDate};
-use App\vStack\Fields\{Text, TextArea, Check, BelongsTo};
-use App\vStack\Fields\Card;
+use marcusvbda\vstack\Fields\{Text, TextArea, Check, BelongsTo};
+use marcusvbda\vstack\Fields\Card;
 use App\Http\Metrics\Cars\{CarsMetricCustom,CarsMetricPerBrand,CarsMetricCountPerDay,CarsMetricPerActive,CarsMetricTrendPerDay};
 
 use Auth;

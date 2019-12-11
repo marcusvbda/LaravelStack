@@ -2,7 +2,7 @@
 
 namespace App\Http\Filters\Cars;
 
-use  App\vStack\Filter;
+use  marcusvbda\vstack\Filter;
 use App\Http\Models\Brand;
 
 class CarsFilterByBrand extends Filter

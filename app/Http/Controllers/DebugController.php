@@ -13,6 +13,6 @@ class DebugController extends Controller
 
     private function testNotification()
     {
-        \App\vStack\Services\Messages::notify("success","test 1234",1);
+        \marcusvbda\vstack\Services\Messages::notify("success","test 1234",1);
     }
 }

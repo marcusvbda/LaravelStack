@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Models;
-use App\vStack\Models\DefaultModel;
+use marcusvbda\vstack\Models\DefaultModel;
 
 class Tenant extends DefaultModel
 {

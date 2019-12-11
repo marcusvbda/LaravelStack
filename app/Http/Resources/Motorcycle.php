@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources;
 
-use App\vStack\Resource;
+use marcusvbda\vstack\Resource;
 use App\Http\Filters\Motorcycles\{MotorcyclesFilterByBrand, MotorcyclesFilterByActive};
-use App\vStack\Fields\{Text, TextArea, Check, BelongsTo};
-use App\vStack\Fields\Card;
+use marcusvbda\vstack\Fields\{Text, TextArea, Check, BelongsTo};
+use marcusvbda\vstack\Fields\Card;
 use Auth;
 
 class Motorcycle extends Resource

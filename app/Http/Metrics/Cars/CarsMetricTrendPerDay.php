@@ -1,6 +1,6 @@
 <?php 
 namespace App\Http\Metrics\Cars;
-use  App\vStack\Metric;
+use  marcusvbda\vstack\Metric;
 use Illuminate\Http\Request;
 use App\Http\Models\{Car,Brand};
 use DB;

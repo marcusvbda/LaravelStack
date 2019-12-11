@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\vStack\Services\SendMail;
+use marcusvbda\vstack\Services\SendMail;
 use App\User;
 use App\Http\Models\Tenant;
-use App\vStack\Services\Messages;
+use marcusvbda\vstack\Services\Messages;
 use Auth;
 
 class RegisterController extends Controller

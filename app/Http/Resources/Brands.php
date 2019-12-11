@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\vStack\Resource;
-use App\vStack\Fields\Text;
-use App\vStack\Fields\Card;
+use marcusvbda\vstack\Resource;
+use marcusvbda\vstack\Fields\Text;
+use marcusvbda\vstack\Fields\Card;
 
 class Brands extends Resource
 {

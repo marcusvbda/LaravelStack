@@ -2,7 +2,7 @@
 
 namespace App\Http\Models;
 
-use App\vStack\Models\DefaultTenantModel;
+use marcusvbda\vstack\Models\DefaultTenantModel;
 use Motorcycles;
 
 class Brand extends DefaultTenantModel

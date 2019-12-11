@@ -2,7 +2,7 @@
 
 namespace App\Http\Filters\Cars;
 
-use  App\vStack\Filter;
+use  marcusvbda\vstack\Filter;
 use DB;
 
 class CarsFilterByDate extends Filter
