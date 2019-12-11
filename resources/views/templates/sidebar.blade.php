@@ -47,6 +47,6 @@ $('[data-toggle=collapse]').click(function(){
     return $(icon).addClass("el-icon-arrow-down")
 })
 $(".nav-item.active").parent().parent().toggleClass("show")
-$(".nav-item.active").parent().parent().parent().find(".menu-arrow").find(".icon").toggleClass("el-icon-arrow-down")
+$(".nav-item.active").parent().parent().parent().find(".nav-link").find(".menu-title").find(".menu-arrow").find(".icon").toggleClass("el-icon-arrow-down")
 </script>
 @endsection
