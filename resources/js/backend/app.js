@@ -12,7 +12,13 @@ import Vue from 'vue'
 Vue.config.productionTip = false
 const vue = new Vue({
     el: '#vue_app',
+    data() {
+        return {
+            sidebarCollapse: false
+        }
+    },
     mounted() {
+        this.sidebarCollapse = Cookies.get("sidebarCollapse") == 1
         if (laravel.user) {
             this.$http.post(`${laravel.root_url}/admin/vstack/notifications/${laravel.user.code}`, {}).then(res => {
                 res = res.data

@@ -81,6 +81,11 @@ class Motorcycle extends Resource
         return "Automotores";
     }
 
+    public function menuIcon()
+    {
+        return "el-icon-s-promotion";
+    }
+
     public function search()
     {
         return ["name"];

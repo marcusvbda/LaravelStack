@@ -1,8 +1,8 @@
 <template>
     <transition name="fade">
         <div v-bind:class="{'has-logo':logo}" class="sidebar" v-if="showing" >
-            <logo v-if="!isCollapse" :logo="logo"  />
-            <el-menu :collapse="isCollapse" class="h-100" :default-active="activeMenu"
+            <logo v-if="!$root.sidebarCollapse" :logo="logo"  />
+            <el-menu :collapse="$root.sidebarCollapse" class="h-100" :default-active="activeMenu"
                 :background-color="bgColor"
                 active-text-color="white!important"
                 text-color="#ffffff94"
@@ -11,7 +11,7 @@
                     <template v-if="m.items">
                         <el-submenu :index="String(i)">
                             <template slot="title">
-                                <i class="el-icon-menu"></i>
+                                <i :class="`${m.icon} mb-1`"></i>
                                 <span v-html="m.label"></span>
                             </template>
                             <template v-for="(item,y) in m.items">
@@ -44,16 +44,12 @@ export default {
     props : ["menu","logo"],
     data() {
         return {
-            isCollapse : false,
             showing : true,
             activeMenu : ""
         }
     },
     components : {
         "logo" : require("./partials/-logo.vue").default
-    },
-    mounted() {
-        console.log(this.logo)
     },
     computed : {
         bgColor() {

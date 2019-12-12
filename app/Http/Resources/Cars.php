@@ -38,6 +38,11 @@ class Cars extends Resource
     {
         return "Automotores";
     }
+    
+    public function menuIcon()
+    {
+        return "el-icon-s-promotion";
+    }
 
     public function table()
     {
