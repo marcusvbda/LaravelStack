@@ -225,7 +225,7 @@ export default {
 @media (max-width: 768px) {
     .sidebar {
         position: fixed;
-        max-height: calc(100vh - 56px);
+        // max-height: calc(100vh - 56px);
         top: 61px;
         bottom: 0;
         overflow: auto;
@@ -234,9 +234,13 @@ export default {
         -o-transition: all 0.25s ease-out;
         transition: all 0.25s ease-out;
         &.active {
-            position:absolute;
             left: 0;
             z-index: 999;
+            position: fixed;
+            // height: calc(100vh + 61px);
+            &.no-overflow {
+                overflow:  !important;
+            }
             .el-menu {
                 width : 100%;
             }
@@ -249,6 +253,9 @@ export default {
         .sidebar-logo-container {
             display : none;
         }
+    }
+    .no-overflow {
+        overflow-y : hidden;
     }
 }
 </style>

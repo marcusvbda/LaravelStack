@@ -21,7 +21,7 @@
 		</script>
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<link rel="stylesheet" href="{{ mix('assets/backend/css/app.css') }}">
-		<link rel="icon" type="image/png" href="{{ URL::asset('/assets/images/favicon.png') }}" />
+		<link rel="icon" type="image/png" href="{{ URL::asset('/assets/images/small_logo.png') }}" />
 		<title>{{config("app.name")}} - @yield("title")</title>
 	</head>
 	<body>
