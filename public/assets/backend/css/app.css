@@ -11363,7 +11363,32 @@ body {
 }
 
 .sidebar .nav .nav-item.active {
-  background: #191E23;
+  background-color: #0073aa;
+}
+
+.sidebar .nav .nav-item.active .nav-link .menu-title {
+  color: white;
+}
+
+.sidebar .nav .nav-item.active .nav-link:hover {
+  background-color: #0073aa;
+}
+
+.sidebar .nav .nav-item.active .nav-link:hover .menu-title {
+  color: white;
+}
+
+.sidebar .nav .nav-item.active .nav-link:after {
+  right: 0;
+  border: solid 8px transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-right-color: #f1f1f1;
+  top: 50%;
+  margin-top: -8px;
 }
 
 .sidebar .nav .nav-item .sub-menu {

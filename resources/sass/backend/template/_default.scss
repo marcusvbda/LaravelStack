@@ -96,7 +96,30 @@ body {
                 }
             }
             &.active {
-                background: $tertiary;
+                background-color:$primary;
+                .nav-link {
+                    .menu-title {
+                        color : white;
+                    }
+                    &:hover {
+                        background-color: $primary;
+                        .menu-title {
+                            color : white;
+                        }
+                    }
+                    &:after {
+                        right: 0;
+                        border: solid 8px transparent;
+                        content: " ";
+                        height: 0;
+                        width: 0;
+                        position: absolute;
+                        pointer-events: none;
+                        border-right-color: #f1f1f1;
+                        top: 50%;
+                        margin-top: -8px;
+                    }
+                }
             }
             .sub-menu {
                 background-color:$quaternary;
