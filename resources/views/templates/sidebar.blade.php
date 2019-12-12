@@ -1,51 +1,16 @@
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
-    <ul class="nav">
-        <li class="nav-item @if(Menu::isActive('admin.home')) active @endif">
-            <a class="nav-link" href="{{route('admin.home')}}">
-                <span class="menu-title"><i class="el-icon-s-home mr-2"></i> Dashboard</span>
-            </a>
-        </li>
-        <?php $resource_groups = ResourcesHelpers::all(); ?>
-        @foreach($resource_groups as $group=>$resources)
-            <li class="nav-item">
-                <?php $_aux = uniqid(); ?>
-                <a class="nav-link" data-toggle="collapse" href="#ui-advanced_{{$_aux}}" aria-expanded="false" aria-controls="ui-advanced_{{$_aux}}">
-                    <span class="menu-title d-flex align-items-center">
-                        {!! $group !!}
-                    </span>
-                </a>
-                <div class="collapse" id="ui-advanced_{{$_aux}}" >
-                    <ul class="nav flex-column sub-menu">
-                        @foreach($resources as $resource)
-                            @if($resource->canViewList())
-                                <li class="nav-item @if(Menu::ResourceIsActive($resource->id)) active @endif">
-                                    <a class="nav-link my-0 py-2" href="{{$resource->route()}}">
-                                        <div class="d-flex flex-row flex-wrap align-items-center">{!! $resource->icon() !!} {{$resource->label()}}</div>
-                                    </a>
-                                </li>
-                            @endif
-                        @endforeach
-                    </ul>
-                </div>
-            </li>
-        @endforeach
-    </ul>
-</nav>
-
-@section("scripts")
-<script>
-$('[data-toggle=collapse]').click(function(){
-    let icon = $(this).find(".icon")
-    if($(icon).hasClass("el-icon-arrow-down")) {
-        $(icon).removeClass("el-icon-arrow-down")
-        return $(icon).addClass("el-icon-arrow-up")
+<?php 
+$menu = [];
+$menu[] = ["label"=>"Dashboard","icon"=>"el-icon-s-home","url"=>route('admin.home'), "active" => Menu::isActive('admin.home')];
+foreach(ResourcesHelpers::all() as $group=>$resources)
+{
+    $groups = ["label"=>$group,"items" => []];
+    foreach($resources as $resource)
+    {
+        if($resource->canViewList())
+            $groups["items"][] = ["active"=>Menu::ResourceIsActive($resource->id),"url"=>$resource->route(),"icon"=>$resource->icon(),"label"=>$resource->label()];
     }
-    $(icon).removeClass("el-icon-arrow-up")
-    return $(icon).addClass("el-icon-arrow-down")
-})
-$(".nav-item.active").parent().parent().toggleClass("show")
-$(".nav-item.active").parent().parent().parent().children(".nav-link").toggleClass("active")
-$(".nav-item.active").parent().parent().parent().children(".nav-link").children(".menu-title").children(".menu-arrow").children(".icon").toggleClass("el-icon-arrow-down")
-
-</script>
-@endsection
+    $menu[] = $groups;
+}
+$logo = ["src"=>asset('assets/images/logo.png'),"href"=>route('admin.home')];
+?>
+<template-sidebar :logo="{{json_encode($logo)}}" :menu="{{json_encode($menu)}}"></template-sidebar>

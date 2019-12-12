@@ -21,7 +21,7 @@ class Brands extends Resource
 
     public function icon()
     {
-        return "<span class='el-icon-picture-outline-round mr-2'></span>";
+        return "el-icon-picture-outline-round";
     }
 
     public function table()

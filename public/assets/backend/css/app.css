@@ -11257,7 +11257,7 @@ a.text-dark:focus {
 }
 
 body {
-  background-color: #F1F2F7;
+  background-color: #E3E3E3;
 }
 
 .el-switch .el-switch__label span {
@@ -11278,176 +11278,19 @@ body {
   text-decoration: underline;
 }
 
-.sidebar {
-  z-index: 9999;
-  color: #d6d6d6;
-  min-height: calc(100vh - 56px);
-  background: #23282d;
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  padding: 0;
-  width: 185px;
-  z-index: 11;
-  transition: width 0.25s ease, background 0.25s ease;
-  -webkit-transition: width 0.25s ease, background 0.25s ease;
-  -moz-transition: width 0.25s ease, background 0.25s ease;
-  -ms-transition: width 0.25s ease, background 0.25s ease;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  -ms-box-shadow: none;
+.fade-enter-active,
+.fade-leave-active {
+  -webkit-transition: opacity .2s;
+  transition: opacity .2s;
 }
 
-.sidebar .nav {
-  overflow: hidden;
-  flex-wrap: nowrap;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-          flex-direction: column;
-}
-
-.sidebar .nav .nav-item {
-  -webkit-transition: .5s;
-  transition: .5s;
-  -webkit-transition-duration: 0.25s;
-  transition-duration: 0.25s;
-  transition-property: background;
-  -webkit-transition-property: background;
-}
-
-.sidebar .nav .nav-item .nav-link {
-  padding: 15px;
-  position: relative;
-  border-radius: .125rem;
-}
-
-.sidebar .nav .nav-item .nav-link:hover {
-  background-color: #191E23;
-}
-
-.sidebar .nav .nav-item .nav-link .menu-title {
-  color: #d6d6d6;
-  display: inline-block;
-  font-size: 0.875rem;
-  line-height: 1;
-  vertical-align: middle;
-}
-
-.sidebar .nav .nav-item .nav-link .menu-title:hover {
-  -webkit-transition: .5s;
-  transition: .5s;
-  color: #0073aa;
-}
-
-.sidebar .nav .nav-item .nav-link.active .menu-title {
-  color: white;
-  font-weight: bolder;
-}
-
-.sidebar .nav .nav-item .nav-link.active {
-  margin-right: 0px;
-  background-color: #0073aa;
-}
-
-.sidebar .nav .nav-item .nav-link.active:after {
-  right: 0;
-  border: solid 8px transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border-right-color: #f1f1f1;
-  top: 50%;
-  margin-top: -8px;
-}
-
-.sidebar .nav .nav-item.active {
-  background-color: #0073aa;
-}
-
-.sidebar .nav .nav-item.active .nav-link .menu-title {
-  color: white;
-}
-
-.sidebar .nav .nav-item.active .nav-link:hover {
-  background-color: #0073aa;
-}
-
-.sidebar .nav .nav-item.active .nav-link:hover .menu-title {
-  color: white;
-}
-
-.sidebar .nav .nav-item.active .nav-link:after {
-  right: 0;
-  border: solid 8px transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border-right-color: #f1f1f1;
-  top: 50%;
-  margin-top: -8px;
-}
-
-.sidebar .nav .nav-item .sub-menu {
-  background-color: #32373C;
-}
-
-.sidebar .nav .nav-item .sub-menu .nav-item.active {
-  background-color: #32373C;
-  color: #ffffff6e;
-}
-
-.sidebar .nav .nav-item .sub-menu .nav-item.active:hover {
-  -webkit-transition: .5s;
-  transition: .5s;
-  color: white;
-}
-
-.sidebar .nav .nav-item .sub-menu .nav-item.active .nav-link {
-  color: white !important;
-  font-weight: bolder;
-}
-
-.sidebar .nav .nav-item .sub-menu .nav-item .nav-link {
-  color: #ffffff6e;
-  font-size: 14px;
-}
-
-.sidebar .nav .nav-item .sub-menu .nav-item .nav-link:hover {
-  background-color: #32373C;
-  -webkit-transition: .5s;
-  transition: .5s;
-  color: white;
-}
-
-@media screen and (max-width: 991px) {
-  .sidebar-offcanvas {
-    z-index: 9999;
-    position: fixed;
-    max-height: calc(100vh - 56px);
-    top: 56px;
-    bottom: 0;
-    overflow: auto;
-    right: -235px;
-    -webkit-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out;
-  }
-
-  .sidebar-offcanvas.active {
-    right: 0;
-    width: 100%;
-  }
-}
-
-.navbar .input-search {
-  margin-left: 100px;
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 
 .page-body-wrapper {
-  min-height: calc(100vh - 70px);
+  min-height: 100vh;
   display: -webkit-box;
   display: flex;
   -webkit-box-orient: horizontal;
@@ -11461,7 +11304,7 @@ body {
   -webkit-transition: width 0.25s ease, margin 0.25s ease;
   transition: width 0.25s ease, margin 0.25s ease;
   width: calc(100% - 235px);
-  min-height: calc(100vh - 70px);
+  min-height: 100vh;
   display: -webkit-box;
   display: flex;
   -webkit-box-orient: vertical;
@@ -11470,7 +11313,7 @@ body {
 }
 
 .page-body-wrapper .main-panel .content-wrapper {
-  background: #f1f2f7;
+  background: #E3E3E3;
   padding: 1.5rem 2.5rem;
   width: 100%;
   -webkit-box-flex: 1;

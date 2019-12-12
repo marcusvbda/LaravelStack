@@ -29,7 +29,7 @@ class Motorcycle extends Resource
 
     public function icon()
     {
-        return "<b class='el-icon-s-open mr-2'></b>";
+        return "el-icon-s-open";
     }
 
     public function table()
@@ -78,7 +78,7 @@ class Motorcycle extends Resource
 
     public function menu()
     {
-        return "<span class='el-icon-menu mr-2'></span> Automotores";
+        return "Automotores";
     }
 
     public function search()
