@@ -24,13 +24,14 @@ body {
 }
 
 .sidebar {
+    z-index : 9999;
     color : #d6d6d6;
     min-height: calc(100vh - 56px);
     background: $secondary;   
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     padding: 0;
-    width: 235px;
+    width: 185px;
     z-index: 11;
     transition: width 0.25s ease, background 0.25s ease;
     -webkit-transition: width 0.25s ease, background 0.25s ease;
@@ -53,36 +54,72 @@ body {
             transition-property: background;
             -webkit-transition-property: background;
             .nav-link {
+                padding : 15px;
+                position :relative;
                 border-radius: .125rem;
-                margin: .75rem;
+                &:hover {
+                    background-color: $tertiary;
+                }
                 .menu-title {
                     color: #d6d6d6;
                     &:hover {
                         transition :.5s;
-                        color : white;
+                        color : $primary;
                     }
                     display: inline-block;
                     font-size: 0.875rem;
                     line-height: 1;
                     vertical-align: middle;
                 }
+                &.active {
+                    .menu-title {
+                        color : white;
+                        font-weight: bolder;
+                    }
+                }
+                &.active {
+                    margin-right: 0px;
+                    background-color:$primary;
+                    
+                    &:after {
+                        right: 0;
+                        border: solid 8px transparent;
+                        content: " ";
+                        height: 0;
+                        width: 0;
+                        position: absolute;
+                        pointer-events: none;
+                        border-right-color: #f1f1f1;
+                        top: 50%;
+                        margin-top: -8px;
+                    }
+                }
             }
             &.active {
                 background: $tertiary;
             }
-            .menu-arrow {
-                color: #d6d6d6;
-            }
             .sub-menu {
-                background-color:$secondary;
+                background-color:$quaternary;
                 .nav-item {
-                    .nav-link {
-                        color: #d6d6d6;
+                    &.active {
+                        background-color : $quaternary;
+                        color: #ffffff6e;
                         &:hover {
                             transition :.5s;
                             color : white;
                         }
-                        margin-left: 30px;
+                        .nav-link {
+                            color : white!important;
+                            font-weight: bolder;
+                        }
+                    }
+                    .nav-link {
+                        color: #ffffff6e;
+                        &:hover {
+                            background-color : $quaternary;
+                            transition :.5s;
+                            color : white;
+                        }
                         font-size:14px;
                     }
                 }
@@ -93,6 +130,7 @@ body {
 
 @media screen and (max-width: 991px){
     .sidebar-offcanvas {
+        z-index : 9999;
         position: fixed;
         max-height: calc(100vh - 56px);
         top: 56px;
@@ -104,6 +142,7 @@ body {
         transition: all 0.25s ease-out;
         &.active {
             right: 0;
+            width: 100%;
         }
     }
 }

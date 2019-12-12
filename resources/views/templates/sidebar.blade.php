@@ -12,9 +12,6 @@
                 <a class="nav-link" data-toggle="collapse" href="#ui-advanced_{{$_aux}}" aria-expanded="false" aria-controls="ui-advanced_{{$_aux}}">
                     <span class="menu-title d-flex align-items-center">
                         {!! $group !!}
-                        <i class="ml-auto menu-arrow">
-                            <span class="icon @if(strpos(Route::current()->getName(),"resource")===0) el-icon-arrow-up @else el-icon-arrow-down  @endif "></i>
-                        </i>
                     </span>
                 </a>
                 <div class="collapse" id="ui-advanced_{{$_aux}}" >
@@ -22,7 +19,7 @@
                         @foreach($resources as $resource)
                             @if($resource->canViewList())
                                 <li class="nav-item @if(Menu::ResourceIsActive($resource->id)) active @endif">
-                                    <a class="nav-link my-0" href="{{$resource->route()}}">
+                                    <a class="nav-link my-0 py-2" href="{{$resource->route()}}">
                                         <div class="d-flex flex-row flex-wrap align-items-center">{!! $resource->icon() !!} {{$resource->label()}}</div>
                                     </a>
                                 </li>
@@ -47,6 +44,7 @@ $('[data-toggle=collapse]').click(function(){
     return $(icon).addClass("el-icon-arrow-down")
 })
 $(".nav-item.active").parent().parent().toggleClass("show")
+$(".nav-item.active").parent().parent().parent().children(".nav-link").toggleClass("active")
 $(".nav-item.active").parent().parent().parent().children(".nav-link").children(".menu-title").children(".menu-arrow").children(".icon").toggleClass("el-icon-arrow-down")
 
 </script>

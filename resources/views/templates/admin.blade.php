@@ -4,7 +4,7 @@
     @include('templates.navbar')
     <div class="container-fluid page-body-wrapper">
         @include("templates.sidebar")
-        <div class="main-panel w-100">
+        <div class="main-panel w-100" >
             <div class="content-wrapper pt-3">
                 @include("templates.alerts")
                 @yield('content')
