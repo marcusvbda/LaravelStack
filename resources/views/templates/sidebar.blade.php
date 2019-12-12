@@ -15,5 +15,6 @@ foreach(ResourcesHelpers::all() as $group=>$resources)
     $menu[] = $groups;
 }
 $logo = ["src"=>asset('assets/images/logo.png'),"href"=>route('admin.home')];
+$smalllogo = ["src"=>asset('assets/images/small_logo.png'),"href"=>route('admin.home')];
 ?>
-<template-sidebar :logo="{{json_encode($logo)}}" :menu="{{json_encode($menu)}}"></template-sidebar>
+<template-sidebar  :logo="{{json_encode($logo)}}"  :smalllogo="{{json_encode($smalllogo)}}" :menu="{{json_encode($menu)}}"></template-sidebar>

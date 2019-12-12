@@ -1,15 +1,18 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between align-items-center p-0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between align-items-center">
         <div class="collapse navbar-collapse d-flex align-items-center">
-            <a href="#" @click.prevent="setCollapse" class="collapse-btn">
+            <a href="#" @click.prevent="setCollapse" class="collapse-btn d-none d-lg-block">
                 <span class="el-icon-s-unfold" v-if="$root.sidebarCollapse"></span>
                 <span class="el-icon-s-fold" v-else></span>
             </a>
-            <div class="ml-2">
+             <button class="navbar-toggler" type="button" data-toggle="collapse" @click="toggleActiveResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="ml-2 d-none d-none d-lg-block">
                 <slot name="breadcrumb"></slot>
             </div>
-            <custom-global-search :route="routeglobalsearch"></custom-global-search>
-            <ul class="navbar-nav">
+            <custom-global-search class="d-none d-none d-lg-block" :route="routeglobalsearch"></custom-global-search>
+            <ul class="navbar-nav d-none d-none d-lg-block">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle d-flex align-items-center flex-row" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <b class="mr-2">{{user.email}}</b>
@@ -34,6 +37,10 @@ export default {
         setCollapse() {
             this.$root.sidebarCollapse = !this.$root.sidebarCollapse
             Cookies.set("sidebarCollapse",this.$root.sidebarCollapse ? 1 : 0)
+        },
+        toggleActiveResponsive() 
+        {
+            $('#sidebar').toggleClass('active')
         }
     }
 }
@@ -45,5 +52,18 @@ export default {
         font-size: 25px;
         color: $secondary;
         text-decoration: unset;
+    }
+    .navbar {
+        padding-top:0px;
+        padding-bottom :0px;
+    }
+    @media (max-width: 768px) {
+        .breadcrumb {
+            display:none;
+        }
+        .navbar {
+            padding-top:10px;
+            padding-bottom :10px;
+        }
     }
 </style>

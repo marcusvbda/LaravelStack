@@ -1,7 +1,7 @@
 <template>
     <transition name="fade">
-        <div v-bind:class="{'has-logo':logo}" class="sidebar" v-if="showing" >
-            <logo v-if="!$root.sidebarCollapse" :logo="logo"  />
+        <div v-bind:class="{'has-logo':logo || smalllogo}" class="sidebar" id="sidebar" v-if="showing" >
+            <logo :logo="logo" :smalllogo="smalllogo"   />
             <el-menu :collapse="$root.sidebarCollapse" class="h-100" :default-active="activeMenu"
                 :background-color="bgColor"
                 active-text-color="white!important"
@@ -27,7 +27,7 @@
                         </el-submenu>
                     </template>
                     
-                    <el-menu-item v-else :index="`${m.label}'_'${String(i)}`" :active="setActive(`${m.label}'_'${String(i)}`,m.active)" @click="goTo(m.url)">
+                    <el-menu-item v-else :index="`${m.label}_${String(i)}`" :active="setActive(`${m.label}_${String(i)}`,m.active)" @click="goTo(m.url)">
                         <a @click="goTo(m.url)" style="text-decoration:unset!important;">
                             <i :class="`${m.icon} mb-1`"></i>
                             <span>{{m.label}}</span>
@@ -41,7 +41,7 @@
 <script>
 import variables from '../../../../sass/backend/_variables.scss'
 export default {
-    props : ["menu","logo"],
+    props : ["menu","logo","smalllogo"],
     data() {
         return {
             showing : true,
@@ -74,6 +74,23 @@ export default {
     .el-menu-item-group {
         .el-menu-item-group__title {
             padding : 0!important;
+        }
+    }
+}
+.el-menu {
+    &.el-menu--popup{
+        &.el-menu--popup-right-start {
+            background-color : $quaternary!important;
+            .el-menu-item {
+               background-color : $quaternary!important; 
+               &:hover {
+                   i {
+                       transition :.5s;
+                       color : white!important;
+                   }
+                   color : white!important;
+               }
+            }
         }
     }
 }
@@ -202,6 +219,35 @@ export default {
                     }
                 }
             }
+        }
+    }
+}
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        max-height: calc(100vh - 56px);
+        top: 61px;
+        bottom: 0;
+        overflow: auto;
+        right: -235px;
+        -webkit-transition: all 0.25s ease-out;
+        -o-transition: all 0.25s ease-out;
+        transition: all 0.25s ease-out;
+        &.active {
+            position:absolute;
+            left: 0;
+            z-index: 999;
+            .el-menu {
+                width : 100%;
+            }
+            .el-menu {
+                .el-menu--inline {
+                    width : 100%;
+                }
+            }
+        }
+        .sidebar-logo-container {
+            display : none;
         }
     }
 }

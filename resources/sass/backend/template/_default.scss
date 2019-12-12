@@ -1,6 +1,7 @@
 @import 'loginPage';
 body {
     background-color:$bgColor;
+    max-width: 100%;
 }
 .el-switch{
     .el-switch__label{
