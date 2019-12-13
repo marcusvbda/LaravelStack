@@ -19,6 +19,7 @@ class Cars extends Migration
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('name');
+            $table->text('simple_description')->nullable();
             $table->text('description')->nullable();
             $table->boolean('active')->default(true);
             $table->unsignedBigInteger('brand_id');
@@ -43,6 +44,6 @@ class Cars extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('example');
+        Schema::dropIfExists('cars');
     }
 }

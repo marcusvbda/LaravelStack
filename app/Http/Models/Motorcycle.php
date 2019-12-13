@@ -2,14 +2,18 @@
 
 namespace App\Http\Models;
 
-use marcusvbda\vstack\Models\DefaultTenantModel;
+use marcusvbda\vstack\Models\DefaultModel;
 
-class Motorcycle extends DefaultTenantModel
+class Motorcycle extends DefaultModel
 {
     protected $table = "motorcycles";
     // public $cascadeDeletes = [];
     // public $restrictDeletes = [];
-    
+    // public static function hasTenant() //default true
+    // {
+    //     return true;
+    // }
+
     public $appends = ["f_created_at", "f_active", "last_update"];
 
     protected  $casts = [

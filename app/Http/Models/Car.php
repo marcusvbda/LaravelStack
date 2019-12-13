@@ -2,14 +2,18 @@
 
 namespace App\Http\Models;
 
-use marcusvbda\vstack\Models\DefaultTenantModel;
+use marcusvbda\vstack\Models\DefaultModel;
 
-class Car extends DefaultTenantModel
+class Car extends DefaultModel
 {
     protected $table = "cars";
     // public $cascadeDeletes = [];
     // public $restrictDeletes = [];
-    
+    // public static function hasTenant() //default true
+    // {
+    //     return true;
+    // }
+
     public $appends = ["f_created_at", "f_active", "last_update"];
 
     protected  $casts = [
@@ -36,5 +40,15 @@ class Car extends DefaultTenantModel
     public function brand()
     {
         return $this->belongsTo(Brand::class);
+    }
+
+    public function setColorsAttribute($values)
+    {
+        $this->colors()->sync($values);
+    }
+
+    public function colors()
+    {
+        return $this->belongsToMany(Color::class);
     }
 }

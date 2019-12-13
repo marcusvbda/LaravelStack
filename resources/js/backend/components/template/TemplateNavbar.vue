@@ -41,7 +41,6 @@ export default {
         toggleActiveResponsive() 
         {
             $('#sidebar').toggleClass('active')
-            console.log($(".sidebar").has(".active"))
             if($(".sidebar").has(".active")){
                 $("body").toggleClass("no-overflow");
             }

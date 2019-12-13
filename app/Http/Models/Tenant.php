@@ -7,6 +7,11 @@ class Tenant extends DefaultModel
     protected $table = "tenants";
     // public $cascadeDeletes = [];
     public $restrictDeletes = ["brands","cars","motorcycles"];
+    
+    public static function hasTenant() //default true
+    {
+        return false;
+    }
 
     public static function ignoreTenant()
     {

@@ -2,14 +2,18 @@
 
 namespace App\Http\Models;
 
-use marcusvbda\vstack\Models\DefaultTenantModel;
+use marcusvbda\vstack\Models\DefaultModel;
 use Motorcycles;
 
-class Brand extends DefaultTenantModel
+class Brand extends DefaultModel
 {
     protected $table = "brands";
     // public $cascadeDeletes = [];
     public $restrictDeletes = ['cars', "motorcycles"];
+    // public static function hasTenant() //default true
+    // {
+    //     return true;
+    // }
 
     public function cars()
     {

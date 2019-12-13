@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('confirmation_token')->nullable();
+            $table->string('avatar')->nullable();
             $table->string('recovery_token')->nullable();
             $table->unsignedBigInteger('tenant_id');
             $table->foreign('tenant_id')

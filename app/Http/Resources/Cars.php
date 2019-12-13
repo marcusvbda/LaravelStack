@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use marcusvbda\vstack\Resource;
 use App\Http\Filters\Cars\{CarsFilterByName, CarsFilterByBrand, CarsFilterByDate, CarsFilterByRangeDate};
-use marcusvbda\vstack\Fields\{Text, TextArea, Check, BelongsTo, Summernote};
+use marcusvbda\vstack\Fields\{Text, TextArea, Check, BelongsTo, BelongsToMany, Summernote};
 use marcusvbda\vstack\Fields\Card;
 use App\Http\Metrics\Cars\{CarsMetricCustom,CarsMetricPerBrand,CarsMetricCountPerDay,CarsMetricPerActive,CarsMetricTrendPerDay};
 
@@ -71,12 +71,12 @@ class Cars extends Resource
                     "label" => "Nome", "field" => "name", "required" => true,
                     "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255"
                 ]),
-                // new TextArea([
-                //     "label" => "Descrição", "field" => "description",
-                //     "placeholder" => "Digite o texto aqui ...",
-                // ]),
+                new TextArea([
+                    "label" => "Descrição Simples", "field" => "simple_description",
+                    "placeholder" => "Digite o texto aqui ...",
+                ]),
                 new Summernote([
-                    "label" => "Descrição", "field" => "description",
+                    "label" => "Descrição Completa", "field" => "description",
                     "placeholder" => "Digite o texto aqui ..."
                 ]),
             ]),
@@ -90,7 +90,13 @@ class Cars extends Resource
                     "label" => "Marca", "field" => "brand_id",
                     "placeholder" => "Selecione a marca",
                     "model" => "App\Http\Models\Brand",
-                    "rules" => "required"
+                    "rules" => "required",
+                ]),
+                new BelongsToMany([
+                    "label" => "Cores Disponíveis" , "model" => "App\Http\Models\Color",
+                    "field" => "colors",
+                    "placeholder" => "Selecione as cores disponíveis",
+                    "rules" => "required|max:255"
                 ])
             ])
         ];

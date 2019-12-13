@@ -92,7 +92,7 @@ class RegisterController extends Controller
 
     public function profile(User $user)
     {
-        $user = Auth::user()->only(["name", "email"]);
+        $user = Auth::user()->only(["name", "email","avatar"]);
         return view("admin.account.index", compact("user"));
     }
 
@@ -103,7 +103,7 @@ class RegisterController extends Controller
         ]);
         $user = Auth::user();
         $data = $request->all();
-        $user->name = $data["name"];
+        $user->fill($data);
         $user->save();
         return ["success" => true];
     }
