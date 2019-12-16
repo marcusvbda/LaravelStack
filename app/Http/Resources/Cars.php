@@ -77,7 +77,7 @@ class Cars extends Resource
                 ]),
                 new Summernote([
                     "label" => "Descrição Completa", "field" => "description",
-                    "placeholder" => "Digite o texto aqui ..."
+                    "placeholder" => "Digite o texto aqui ...",
                 ]),
             ]),
             new Card("Section Card 2",[
@@ -95,8 +95,7 @@ class Cars extends Resource
                 new BelongsToMany([
                     "label" => "Cores Disponíveis" , "model" => "App\Http\Models\Color",
                     "field" => "colors",
-                    "placeholder" => "Selecione as cores disponíveis",
-                    "rules" => "required|max:255"
+                    "placeholder" => "Selecione as cores disponíveis"
                 ])
             ])
         ];

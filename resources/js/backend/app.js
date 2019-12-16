@@ -19,16 +19,18 @@ const vue = new Vue({
     },
     mounted() {
         this.sidebarCollapse = Cookies.get("sidebarCollapse") == 1
-        if (laravel.user.code) {
-            this.$http.post(`${laravel.general.root_url}/admin/vstack/notifications/${laravel.user.code}`, {}).then(res => {
-                res = res.data
-                if (res.notifications) this.alerts = res.notifications
-            })
-            if (laravel.user.code && laravel.chat.pusher_key) {
-                Echo.private(`App.User.${laravel.user.id}`).notification(n => {
-                    this.$message({ showClose: true, message: n.message, type: n._type })
-                    this.$http.delete(`${laravel.general.root_url}/admin/vstack/notifications/${laravel.user.code}/${n.id}/destroy`, {})
+        if (laravel.user) {
+            if (laravel.user.code) {
+                this.$http.post(`${laravel.general.root_url}/admin/vstack/notifications/${laravel.user.code}`, {}).then(res => {
+                    res = res.data
+                    if (res.notifications) this.alerts = res.notifications
                 })
+                if (laravel.user.code && laravel.chat.pusher_key) {
+                    Echo.private(`App.User.${laravel.user.id}`).notification(n => {
+                        this.$message({ showClose: true, message: n.message, type: n._type })
+                        this.$http.delete(`${laravel.general.root_url}/admin/vstack/notifications/${laravel.user.code}/${n.id}/destroy`, {})
+                    })
+                }
             }
         }
     }
