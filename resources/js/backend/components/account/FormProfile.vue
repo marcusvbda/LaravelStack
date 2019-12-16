@@ -83,7 +83,7 @@ export default {
             editing_form : {},
             user_dialog_visible : false,
             header : {"X-CSRF-TOKEN":laravel.general.csrf_token ? laravel.general.csrf_token : ""},
-            uploadRoute : laravel.general.default_upload_route ? laravel.general.default_upload_route : ""
+            uploadRoute : laravel.vstack.default_upload_route ? laravel.vstack.default_upload_route : ""
         }
     },
     components : {
@@ -96,13 +96,15 @@ export default {
                 cancelButtonText: "Não",
                 type: 'warning'
             }).then(() => {
-                this.user.avatar = null
-                this.submit(this.user)
+                this.editing_form = Object.assign({},this.user)
+                this.editing_form.avatar = null
+                this.submit()
             }).catch( () => false)
         },
         handleAvatarSuccess(res, file) {
-            this.user.avatar = file.response.path
-            this.submit(this.user)
+            this.editing_form = Object.assign({},this.user)
+            this.editing_form.avatar = file.response.path
+            this.submit()
         },
         beforeAvatarUpload(file) {
             const isImage = file.type.includes('image')
@@ -114,9 +116,8 @@ export default {
             this.editing_form = Object.assign({},this.user)
             this.user_dialog_visible = true
         },
-        submit(data) {
-            this.loading = true
-            this.$http.post("",data ? data : this.editing_form).then( res => {
+        submit() {
+            this.$http.post("",this.editing_form).then( res => {
                 let data = res.data
                 if(data.message) this.$message({showClose: true, message : data.message.text,type: data.message.type})
                 window.location.reload()

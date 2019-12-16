@@ -8,8 +8,8 @@ class CarsFilterByName extends Filter
 {
     public $component   = 'text-filter';
     public $label       = 'Nome :';
-    public $index       = 'name';
     public $placeholder = 'Filtre por nome ...';
+    public $index = "name";
 
     public function apply($query, $value)
     {

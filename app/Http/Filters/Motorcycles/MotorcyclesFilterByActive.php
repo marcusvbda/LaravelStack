@@ -8,12 +8,12 @@ class MotorcyclesFilterByActive extends Filter
 {
     public $component     = 'check-filter';
     public $label         = 'Ativo :';
-    public $index         = 'active';
     public $text          = 'Mostrar Apenas Ativos';
+    public $index         = "active";
 
     public function apply($query, $value)
     {
-        $query = $query->where($this->index, $value == "true");
+        $query = $query->where("active", $value == "true");
         return $query;
     }
 }

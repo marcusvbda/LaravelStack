@@ -3,16 +3,33 @@
 namespace App\Http\Resources;
 
 use marcusvbda\vstack\Resource;
-use App\Http\Filters\Cars\{CarsFilterByName, CarsFilterByBrand, CarsFilterByDate, CarsFilterByRangeDate};
-use marcusvbda\vstack\Fields\{Text, TextArea, Check, BelongsTo, BelongsToMany, Summernote};
+use App\Http\Filters\Cars\{
+    CarsFilterByName, 
+    CarsFilterByDate, 
+    CarsFilterByRangeDate
+};
+use marcusvbda\vstack\Fields\{
+    Text, 
+    TextArea, 
+    Check, 
+    BelongsTo, 
+    BelongsToMany, 
+    Summernote
+};
 use marcusvbda\vstack\Fields\Card;
-use App\Http\Metrics\Cars\{CarsMetricCustom,CarsMetricPerBrand,CarsMetricCountPerDay,CarsMetricPerActive,CarsMetricTrendPerDay};
+use App\Http\Metrics\Cars\{
+    CarsMetricCustom,
+    CarsMetricPerBrand,
+    CarsMetricCountPerDay,
+    CarsMetricTrendPerDay,
+    CarsMetricBarChart
+};
 
 use Auth;
 
 class Cars extends Resource
 {
-    public $model = "App\Http\Models\Car";
+    public $model = \App\Http\Models\Car::class;
 
     public function singularLabel()
     {
@@ -68,35 +85,43 @@ class Cars extends Resource
         return [
             new Card("<span class='el-icon-s-order mr-2'></span>Section Card 1",[
                 new Text([
-                    "label" => "Nome", "field" => "name", "required" => true,
-                    "placeholder" => "Digite o nome aqui ...", "rules" => "required|max:255"
+                    "label" => "Nome", 
+                    "field" => "name", 
+                    "required" => true,
+                    "placeholder" => "Digite o nome aqui ...", 
+                    "rules" => "required|max:255"
                 ]),
                 new TextArea([
-                    "label" => "Descrição Simples", "field" => "simple_description",
+                    "label" => "Descrição Simples", 
+                    "field" => "simple_description",
                     "placeholder" => "Digite o texto aqui ...",
                 ]),
                 new Summernote([
-                    "label" => "Descrição Completa", "field" => "description",
+                    "label" => "Descrição Completa", 
+                    "field" => "description",
                     "placeholder" => "Digite o texto aqui ...",
                 ]),
             ]),
             new Card("Section Card 2",[
                 new Check([
-                    "label" => "Ativo", "field" => "active"
+                    "label" => "Ativo", 
+                    "field" => "active"
                 ])
             ]),
             new Card("Section Card 3",[
                 new BelongsTo([
                     "label" => "Marca", "field" => "brand_id",
                     "placeholder" => "Selecione a marca",
-                    "model" => "App\Http\Models\Brand",
+                    "model" => \App\Http\Models\Brand::class,
                     "rules" => "required",
                 ]),
                 new BelongsToMany([
-                    "label" => "Cores Disponíveis" , "model" => "App\Http\Models\Color",
+                    "label" => "Cores Disponíveis" , 
+                    "model" => \App\Http\Models\Color::class,
                     "field" => "colors",
-                    "placeholder" => "Selecione as cores disponíveis"
-                ])
+                    "placeholder" => "Selecione as cores disponíveis",
+                    "rules" => "required",
+                ]),
             ])
         ];
     }
@@ -105,7 +130,6 @@ class Cars extends Resource
     {
         return [
             new CarsFilterByName,
-            new CarsFilterByBrand,
             new CarsFilterByDate,
             new CarsFilterByRangeDate
         ];
@@ -122,61 +146,39 @@ class Cars extends Resource
             new CarsMetricCustom,
             new CarsMetricTrendPerDay,
             new CarsMetricPerBrand,
-            new CarsMetricPerActive,
             new CarsMetricCountPerDay,
+            new CarsMetricBarChart
         ];
     }
 
+    //parametros para custom metric card
     public function customMetricOptions()
     {
         return [
             "group-chart" => [
-                ["name"=>"Marca","id"=>"brand->name","key"=>"brand_id"],
-                ["name"=>"Atividade","id"=>"active"]
+                ["name" => "Marca","id"=>"brand->name","key"=>"brand_id"],
+                ["name" => "Atividade","id"=>"active"]
             ],
             "trend-chart" => [
+                ["name"=>"Data de Criação","id"=>"created_at"],
+                ["name"=>"Data de Alteração","id"=>"updated_at"]
+            ],
+            "bar-chart" => [
                 ["name"=>"Data de Criação","id"=>"created_at"],
                 ["name"=>"Data de Alteração","id"=>"updated_at"]
             ]
         ];
     }
 
-    public function canViewList()
-    {
-        return Auth::user()->hasRole("user"); //true
-    }
+    // public function canViewList() //default true
+    // public function canView()  //default true
+    // public function canCreate() //default true
+    // public function canExport() //default true
+    // public function canImport() //default true
+    // public function canUpdate() //default true
+    // public function canDelete() //default true
 
-    public function canView()
-    {
-        return Auth::user()->hasRole("user"); //true
-    }
-
-    public function canCreate()
-    {
-        return Auth::user()->hasRole("user");  //true
-    }
-
-    public function canExport()
-    {
-        return Auth::user()->hasRole("user");  //true
-    }
-
-    public function canImport()
-    {
-        return Auth::user()->hasRole("user");  //true
-    }
-
-    public function canUpdate()
-    {
-        return Auth::user()->hasRole("user");  //true
-    }
-
-    public function canDelete()
-    {
-        return Auth::user()->hasRole("user");  //true
-    }
-
-    public function canCustomizeMetrics()
+    public function canCustomizeMetrics() //default false
     {
         return true;
     }

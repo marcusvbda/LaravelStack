@@ -9,8 +9,8 @@ class MotorcyclesFilterByBrand extends Filter
 {
     public $component   = 'select-filter';
     public $label       = 'Marca :';
-    public $index       = 'brand_id';
     public $placeholder = 'Filtre por marca ...';
+    public $index = "brand_id";
 
     public function __construct()
     {
@@ -20,7 +20,7 @@ class MotorcyclesFilterByBrand extends Filter
 
     public function apply($query, $value)
     {
-        $query = $query->where($this->index, $value);
+        $query = $query->where("brand_id", $value);
         return $query;
     }
 }

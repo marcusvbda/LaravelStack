@@ -42,11 +42,6 @@ class Car extends DefaultModel
         return $this->belongsTo(Brand::class);
     }
 
-    public function setColorsAttribute($values)
-    {
-        $this->colors()->sync($values);
-    }
-
     public function colors()
     {
         return $this->belongsToMany(Color::class);

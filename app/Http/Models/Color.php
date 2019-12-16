@@ -10,4 +10,9 @@ class Color extends DefaultModel
     // {
     //     return true;
     // }
+
+    public function cars()
+    {
+        return $this->hasMany(Car::class);
+    }
 }
