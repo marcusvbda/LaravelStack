@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Models;
 use marcusvbda\vstack\Models\DefaultModel;
-class Color extends DefaultModel
+class Image extends DefaultModel
 {
-    protected $table = "colors";
+    protected $table = "images";
     // public $cascadeDeletes = [];
     // public $restrictDeletes = [];
 

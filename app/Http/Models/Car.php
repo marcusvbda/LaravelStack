@@ -44,6 +44,11 @@ class Car extends DefaultModel
 
     public function colors()
     {
-        return $this->belongsToMany(Color::class);
+        return $this->morphMany(Color::class,"model");
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class,"model");
     }
 }

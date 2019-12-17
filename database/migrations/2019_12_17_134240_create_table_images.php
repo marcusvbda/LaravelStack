@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableCarColors extends Migration
+class CreateTableImages extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,14 @@ class CreateTableCarColors extends Migration
      */
     public function up()
     {
-        Schema::create('car_color', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('car_id');
-            $table->foreign('car_id')
-                ->references('id')
-                ->on('cars')
-                ->onDelete('restrict');
-            $table->unsignedBigInteger('color_id');
-            $table->foreign('color_id')
-                ->references('id')
-                ->on('colors')
-                ->onDelete('restrict');
+            $table->string('value');
+            $table->morphs('model');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -39,6 +32,6 @@ class CreateTableCarColors extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('car_color');
+        Schema::dropIfExists('images');
     }
 }

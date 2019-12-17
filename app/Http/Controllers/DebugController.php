@@ -8,6 +8,8 @@ class DebugController extends Controller
 {
     public function index()
     {
+        // dd(\App\Http\Models\Car::first()->images);
+
         // $this->testNotification();
     }
 

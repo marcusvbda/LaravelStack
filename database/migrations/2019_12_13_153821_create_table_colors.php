@@ -18,12 +18,8 @@ class CreateTableColors extends Migration
             $table->collation = 'utf8_unicode_ci';
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->unsignedBigInteger('tenant_id');
-            $table->foreign('tenant_id')
-                ->references('id')
-                ->on('tenants')
-                ->onDelete('restrict');
+            $table->string('value');
+            $table->morphs('model');
             $table->softDeletes();
             $table->timestamps();
         });
