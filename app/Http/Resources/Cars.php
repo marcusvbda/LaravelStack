@@ -125,8 +125,9 @@ class Cars extends Resource
                 //     "rules" => "required",
                 // ]),
                 new MorphsMany([
-                    "label" => "Cores Disponíveis" , 
-                    "field" => "colors",
+                    "label"  => "Cores Disponíveis" , 
+                    "field"  => "colors",
+                    // "unique" => false, //default true
                     "placeholder" => "Selecione as cores disponíveis",
                 ]),
             ]),

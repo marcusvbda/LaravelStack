@@ -7,7 +7,8 @@ use marcusvbda\vstack\Models\DefaultModel;
 class Car extends DefaultModel
 {
     protected $table = "cars";
-    // public $cascadeDeletes = [];
+    public $cascadeDeletes = ["images"];
+    
     // public $restrictDeletes = [];
     // public static function hasTenant() //default true
     // {
