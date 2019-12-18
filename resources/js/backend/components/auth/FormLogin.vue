@@ -35,7 +35,16 @@
                         </div>
                     </div>
                     <button class="btn btn-secondary btn-block mt-4 mb-2" type="submit">Login</button>
-                    <div class="text-center">Não possui cadastro ?<a href="signup" class="link ml-2">Cadastre-se</a></div>
+                    <template v-if="sociallogin.facebook.client_id || sociallogin.google.client_id">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="button" @click="socialLoginRedirect('google')" class="loginBtn loginBtn--google" v-bind:class="{'mr-2':sociallogin.facebook.client_id}" 
+                                v-if="sociallogin.google.client_id">Google</button>
+                                <button type="button" @click="socialLoginRedirect('facebook')" class="loginBtn loginBtn--facebook" v-if="sociallogin.facebook.client_id">Facebook</button>
+                            </div>
+                        </div>
+                    </template>
+                    <div class="text-center mt-3">Não possui cadastro ?<a href="signup" class="link ml-2">Cadastre-se</a></div>
                 </form>
             </div>
         </div>
@@ -43,6 +52,7 @@
 </template>
 <script>
 export default {
+    props : ["sociallogin"],
     data() {
         return {
             loading : false,
@@ -55,6 +65,9 @@ export default {
         }
     },
     methods : {
+        socialLoginRedirect(provider) {
+            window.location.href = `${laravel.general.root_url}/admin/auth/login/social/${provider}`
+        },
         submit() {
             this.loading = true
             this.$http.post("",this.frm).then( res => {

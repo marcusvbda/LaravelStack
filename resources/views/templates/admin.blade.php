@@ -13,3 +13,16 @@
     </div>
 @endsection
 
+@section("scripts")
+<script type="text/javascript">
+    if (window.location.hash === "#_=_"){
+    if (history.replaceState) {
+        var cleanHref = window.location.href.split("#")[0];
+        history.replaceState(null, null, cleanHref);
+    } else {
+        window.location.hash = "";
+    }
+}
+</script>
+@endsection
+

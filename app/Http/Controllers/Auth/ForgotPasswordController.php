@@ -42,7 +42,12 @@ class ForgotPasswordController extends Controller
         $this->validate($request, [
             'email'    => 'required|email|exists:users',
         ]);
-        $user = User::where("email", $request["email"])->first();
+        $user = User::where("email", $request["email"])->where("provider",null)->first();
+        if(!$user) 
+        {
+            Messages::send("danger", "Email não encontrado");
+            return ["success" => true, "route" => route("auth.login.index")];
+        }
         $this->sendRecoveryEmail($user);
         Messages::send("success", "Um email com o processidemento de renovação de senha foi enviado, verifique seu inbox");
         return ["success" => true, "route" => route("auth.login.index")];

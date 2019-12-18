@@ -3,6 +3,11 @@ Route::group(['prefix' => "auth"], function () {
     Route::group(['prefix' => "login"], function () {
         Route::get('', 'Auth\LoginController@index')->name("auth.login.index");
         Route::post('', 'Auth\LoginController@signin')->name("auth.signin.post");
+        $login_social = [
+            "facebook" => config("services.facebook"),
+            "google"   => config("services.google"),
+        ];
+        if($login_social["facebook"]["client_id"] || $login_social["google"]["client_id"])  require("socialite.php");
     });
     Route::group(['prefix' => "signup"], function () {
         Route::get('', 'Auth\RegisterController@index')->name("auth.signup.index");
