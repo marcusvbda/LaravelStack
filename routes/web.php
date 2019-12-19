@@ -1,7 +1,12 @@
 <?php
+Route::domain('{subdomain}.' . parse_url(config('app.url'), PHP_URL_HOST))->group(function ($subdomain) {
+    Route::get('/', function ($subdomain) {
+        return "landing Page usuario ".$subdomain;
+    });
+});
 
 Route::get('/', function () {
-    return view('welcome');
+    return "landing Page Principal ";
 });
 Route::group(['prefix' => "admin"], function () {
     require "partials/auth.php";
