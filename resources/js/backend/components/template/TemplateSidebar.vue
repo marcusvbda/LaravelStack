@@ -11,14 +11,14 @@
                     <template v-if="m.items">
                         <el-submenu :index="String(i)">
                             <template slot="title">
-                                <i :class="`${m.icon} mb-1`"></i>
+                                <i :class="`${m.icon}`"></i>
                                 <span v-html="m.label"></span>
                             </template>
                             <template v-for="(item,y) in m.items">
                                 <el-menu-item-group>
                                     <a  @click="goTo(item.url)" style="text-decoration:unset!important;">
                                         <el-menu-item :index="`${item.label}_${i}-${y}`" :active="setActive(`${item.label}_${i}-${y}`,item.active)">
-                                            <i :class="`${item.icon} mb-1`"></i>
+                                            <i :class="`${item.icon}`"></i>
                                             <span slot="title">{{item.label}}</span>
                                         </el-menu-item>
                                     </a>
@@ -29,7 +29,7 @@
                     
                     <el-menu-item v-else :index="`${m.label}_${String(i)}`" :active="setActive(`${m.label}_${String(i)}`,m.active)" @click="goTo(m.url)">
                         <a @click="goTo(m.url)" style="text-decoration:unset!important;">
-                            <i :class="`${m.icon} mb-1`"></i>
+                            <i :class="`${m.icon}`"></i>
                             <span>{{m.label}}</span>
                         </a>
                     </el-menu-item>
