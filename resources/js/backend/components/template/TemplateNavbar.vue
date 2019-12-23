@@ -18,7 +18,7 @@
                         <b class="mr-2">{{user.email}}</b>
                         <img v-if="user.avatar"  class="img-profile" :src="user.avatar" />
                         <span v-else class="text img-profile d-flex align-items-center text-center justify-content-center color">
-                            {{user.name.slice(0,-2).toUpperCase()}}
+                            {{user.name.slice(0,2).toUpperCase()}}
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
