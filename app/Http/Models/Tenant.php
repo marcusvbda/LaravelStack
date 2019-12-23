@@ -13,11 +13,6 @@ class Tenant extends DefaultModel
         return false;
     }
 
-    public static function ignoreTenant()
-    {
-        return true;
-    }
-
     public function brands()
     {
         return $this->hasMany(Car::class);
