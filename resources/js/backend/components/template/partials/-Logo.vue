@@ -18,12 +18,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '../../../../../sass/backend/_variables.scss';
   .sidebar-logo-container {
       position: relative;
       width: 100%;
       padding: 10px;
       line-height: 50px;
-      background: #2b2f3a;
+      background: $secondary;
       text-align: center;
       overflow: hidden;
   }
