@@ -28,7 +28,7 @@ class RegisterController extends Controller
             'password_confirmation' => 'required',
         ]);
         $data = $request->except(["_token", "password_confirmation"]);
-        $data["password"] = bcrypt($data["password"]);
+        $data["password"] = $data["password"];
         $data["tenant_id"] = $this->createTenant()->id;
         $user = User::create($data);
         $user->assignRole("user");
@@ -74,20 +74,6 @@ class RegisterController extends Controller
         $user->save();
         Messages::send("success", "Obrigado, sua conta foi ativada !!");
         return redirect(route("auth.login.index"));
-    }
-
-    public function setPassword($token, Request $request)
-    {
-        Auth::logout();
-        $this->validate($request, [
-            'password' => 'required|confirmed',
-            'password_confirmation' => 'required',
-        ]);
-        $user = User::where("recovery_token", $token)->firstOrFail();
-        $user->recovery_token = null;
-        $user->password = bcrypt($request["password"]);
-        $user->save();
-        return redirect(route("laravelstack.login"))->with(['type' => "success", 'message' => "Sua senha foi alterada com sucesso !!"]);
     }
 
     public function profile(User $user)

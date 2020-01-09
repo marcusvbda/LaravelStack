@@ -69,7 +69,7 @@ class ForgotPasswordController extends Controller
         ]);
         $user = User::where("recovery_token", $token)->firstOrFail();
         $user->recovery_token = null;
-        $user->password = bcrypt($request["password"]);
+        $user->password = $request["password"];
         $user->save();
         Messages::send("success", "Sua senha foi alterada com sucesso !!");
         return ["success" => true, "route" => route("auth.login.index")];

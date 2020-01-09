@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             "name"     => "admin",
             "email"    => "admin@admin.com",
             "email"    => "admin@admin.com",
-            "password" => bcrypt("admin"),
+            "password" => "admin",
             "email_verified_at" => date("Y-m-d H:i:s"),
             "tenant_id" => 1
         ]);

@@ -24,4 +24,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return 'App.User.'.$this->id;
     }
+
+    public function setPasswordAttribute($val)
+    {
+        $this->attributes["password"] = bcrypt($val);
+    }
 }
