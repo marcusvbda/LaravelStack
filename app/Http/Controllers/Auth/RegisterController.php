@@ -28,7 +28,6 @@ class RegisterController extends Controller
             'password_confirmation' => 'required',
         ]);
         $data = $request->except(["_token", "password_confirmation"]);
-        $data["password"] = $data["password"];
         $data["tenant_id"] = $this->createTenant()->id;
         $user = User::create($data);
         $user->assignRole("user");
