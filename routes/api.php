@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => "app"], function () {
-    Route::group(['prefix' => "auth"], function () {
-        Route::post('login', 'AppController@login')->name("app.auth.login");
+    Route::group(['middleware' => 'api_basic_auth'], function () {
+        Route::post('login', 'AppController@login');
     });
 });
