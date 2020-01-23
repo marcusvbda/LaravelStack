@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             "email_verified_at" => date("Y-m-d H:i:s"),
             "tenant_id" => 1
         ]);
-        $user->assignRole("user");
+        $user->assignRole("super-admin");
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

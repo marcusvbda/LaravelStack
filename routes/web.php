@@ -14,5 +14,6 @@ Route::group(['prefix' => "admin"], function () {
         Route::get('debug', 'DebugController@index')->name("debug.index");
         Route::get('', 'HomeController@index')->name("admin.home");
         require "partials/account.php";
+        require "partials/users.php";
     });
 });

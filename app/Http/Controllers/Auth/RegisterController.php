@@ -9,6 +9,7 @@ use App\User;
 use App\Http\Models\Tenant;
 use marcusvbda\vstack\Services\Messages;
 use Auth;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -23,7 +24,7 @@ class RegisterController extends Controller
         Auth::logout();
         $this->validate($request, [
             'name'     => 'required',
-            'email'    => 'required|email|unique:users',
+            'email'    =>  ['required','email',Rule::unique('users')->whereNull('deleted_at')],
             'password' => 'required|confirmed',
             'password_confirmation' => 'required',
         ]);

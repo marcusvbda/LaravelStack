@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('provider')->nullable();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
