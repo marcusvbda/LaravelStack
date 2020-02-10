@@ -24,7 +24,7 @@ class RegisterController extends Controller
         Auth::logout();
         $this->validate($request, [
             'name'     => 'required',
-            'email'    =>  ['required','email',Rule::unique('users')->whereNull('deleted_at')],
+            'email'    =>  ['required', 'email', Rule::unique('users')->whereNull('deleted_at')],
             'password' => 'required|confirmed',
             'password_confirmation' => 'required',
         ]);
@@ -41,7 +41,7 @@ class RegisterController extends Controller
     {
         $tenant = Tenant::create([
             "name" => uniqid()
-        ]);  
+        ]);
         return $tenant;
     }
 
@@ -54,15 +54,13 @@ class RegisterController extends Controller
         $link = route("auth.signup.confirm", ["token" => $user->confirmation_token]);
         $appName = Config("app.name");
 
-        dispatch(function () use ($user, $link, $appName) {
-            $html = "
+        $html = "
                 <p>Olá {$user->name},</p>
                 <p>Obrigado por cadastrar-se. Sua conta foi criada com successo e está pendente de confirmação.</p>
                 <p>Para ativa-la, basta clicar no link abaixo</p>
                 <a href='{$link}' target='_BLANK'>{$link}</a>
                 <p style='margin-top:30px'>Obrigado, {$appName}";
-            SendMail::to($user->email, "Confirme sua conta", $html);
-        })->onQueue("mail");
+        SendMail::to($user->email, "Confirme sua conta", $html);
     }
 
     public function confirmAccount($token)
@@ -78,7 +76,7 @@ class RegisterController extends Controller
 
     public function profile(User $user)
     {
-        $user = Auth::user()->only(["name", "email","avatar"]);
+        $user = Auth::user()->only(["name", "email", "avatar"]);
         return view("admin.account.index", compact("user"));
     }
 

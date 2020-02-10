@@ -25,15 +25,13 @@ class ForgotPasswordController extends Controller
         $appName = Config("app.name");
         $user->save();
         $user->refresh();
-        dispatch(function () use ($user, $link, $appName) {
-            $html = "
+        $html = "
                 <p>Olá {$user->name},</p>
                 <p>Esqueceu sua senha ? Sem problemas! </p>
                 <p>Clique no link abaixo e renove-a</p>
                 <a href='{$link}' target='_BLANK'>{$link}</a>
                 <p style='margin-top:30px'>Obrigado, {$appName}";
-            SendMail::to($user->email, "Renove sua senha", $html);
-        })->onQueue("mail");
+        SendMail::to($user->email, "Renove sua senha", $html);
     }
 
     public function resetPassword(Request $request)
@@ -42,9 +40,8 @@ class ForgotPasswordController extends Controller
         $this->validate($request, [
             'email'    => 'required|email|exists:users',
         ]);
-        $user = User::where("email", $request["email"])->where("provider",null)->first();
-        if(!$user) 
-        {
+        $user = User::where("email", $request["email"])->where("provider", null)->first();
+        if (!$user) {
             Messages::send("danger", "Email não encontrado");
             return ["success" => true, "route" => route("auth.login.index")];
         }

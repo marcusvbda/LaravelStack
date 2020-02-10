@@ -27,7 +27,7 @@
             <pre>//os tipos de metrics custom-content, group-chart, trend-counter, bar-chart, trend-chart</pre>
             
             <pre>//para executar as filas do vstack</pre>
-            <code>php artisan queue:work --queue=mail,resource-import,alert-broadcasts</code>
+            <code>php artisan queue:work --queue=resource-import,alert-broadcasts</code>
     </div>
 </div>
 @endsection
