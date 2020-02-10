@@ -30,15 +30,19 @@ return [
     ],
 
     'facebook' => [
-        'client_id'     => env('FACEBOOK_CLIENT_ID',''),
-        'client_secret' => env('FACEBOOK_CLIENT_SECRET',''),
-        'redirect'      => env('FACEBOOK_CLIENT_REDIRECT','/admin/auth/login/social/facebook/callback')
+        'client_id'     => env('FACEBOOK_CLIENT_ID', ''),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET', ''),
+        'redirect'      => env('FACEBOOK_CLIENT_REDIRECT', '/admin/auth/login/social/facebook/callback')
     ],
 
     'google' => [
-      'client_id'     =>  env('GOOGLE_CLIENT_ID',''),
-      'client_secret' =>  env('GOOGLE_CLIENT_SECRET',''),
-      'redirect'      =>  env('GOOGLE_CLIENT_REDIRECT','/admin/auth/login/social/google/callback')
+        'client_id'     =>  env('GOOGLE_CLIENT_ID', ''),
+        'client_secret' =>  env('GOOGLE_CLIENT_SECRET', ''),
+        'redirect'      =>  env('GOOGLE_CLIENT_REDIRECT', '/admin/auth/login/social/google/callback')
+    ],
+
+    'sendgrid' => [
+        'api_key' => env('SENDGRID_API_KEY')
     ],
 
 
