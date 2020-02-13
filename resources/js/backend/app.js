@@ -17,7 +17,11 @@ const vue = new Vue({
             sidebarCollapse: false
         }
     },
+    created() {
+        this.$pace.start()
+    },
     mounted() {
+        this.$pace.stop()
         this.sidebarCollapse = Cookies.get("sidebarCollapse") == 1
         if (laravel.user) {
             if (laravel.user.code) {
